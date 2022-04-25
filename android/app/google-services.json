@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "411845066985",
+    "project_id": "hfu-app",
+    "storage_bucket": "hfu-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411845066985:android:714b7a9c6ba2ea6b327078",
+        "android_client_info": {
+          "package_name": "com.example.hfu_app2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411845066985-3e8edkngk2h46c9ttfja2j0qrhsgug91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtE36yamxbnBQs1IuSsWex_321N08RkIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411845066985-3e8edkngk2h46c9ttfja2j0qrhsgug91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

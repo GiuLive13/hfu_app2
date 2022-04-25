@@ -45,12 +45,12 @@ class AddEntry extends StatelessWidget {
 
       await marketEntry.set(json);
 
-      Map<String, dynamic> toJson() {
+    /*  Map<String, dynamic> toJson() {
         'id': id,
         'Titel': title,
         'Kontaktdaten': userContact,
         'Beschreibung': description,
-      };
+      }; */
   }
 
 }

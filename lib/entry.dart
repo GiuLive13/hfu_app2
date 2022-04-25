@@ -12,9 +12,9 @@ class Entry {
   });
 
   Map<String, dynamic> toJson() {
-    'id': id,
-    'Titel': title,
-    'Kontaktdaten': userContact,
-    'Beschreibung': description,
+    'id': id;
+    'Titel': title;
+    'Kontaktdaten': userContact;
+    'Beschreibung': description;
   };
 }
