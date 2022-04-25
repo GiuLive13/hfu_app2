@@ -41,9 +41,9 @@ class AddEntry extends StatelessWidget {
           userContact: userContact,
           description: description,
       );
-      final json = entry.toJson();
+   /*   final json = entry.toJson();
 
-      await marketEntry.set(json);
+      await marketEntry.set(json); */
 
     /*  Map<String, dynamic> toJson() {
         'id': id,

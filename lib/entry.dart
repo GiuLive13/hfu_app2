@@ -11,10 +11,10 @@ class Entry {
     required this.description
   });
 
-  Map<String, dynamic> toJson() {
+ /* Map<String, dynamic> toJson() {
     'id': id;
     'Titel': title;
     'Kontaktdaten': userContact;
     'Beschreibung': description;
-  };
+  };*/
 }
