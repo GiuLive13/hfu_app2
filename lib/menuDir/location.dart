@@ -11,23 +11,48 @@ class Location extends StatelessWidget {
           title: const Text('Standorte'),
         ),
         body: ListView(
+          scrollDirection: Axis.vertical,
           children: [
             Row(
               children: const [
                 Text("Furtwangen"),
+                SizedBox(height: 30),
               ],
             ),
             Row(
-              children: const [
-                Text("Villingen-Schwenningen"),
+              children: [
+                Card(
+                  elevation: 4.0,
+                  child: Text("Adresse: "),
+                )
               ],
             ),
             Row(
               children: const [
                 Text("Tuttlingen"),
+                SizedBox(height: 30),
               ],
-            )
+            ),
+            Row(children: [
+              Card(
+                elevation: 4.0,
+                child: Text("Adresse: "),
+              ),
+            ]),
+            Row(
+              children: const [
+                Text("Villingen-Schwenningen"),
+                SizedBox(height: 30),
+              ],
+            ),
+            Row(children: [
+              Card(
+                elevation: 4.0,
+                child: Text("Adresse: "),
+              ),
+            ])
           ],
-        ));
+        )
+    );
   }
 }

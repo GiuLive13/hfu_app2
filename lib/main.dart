@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hfu_app2/userController/authPage.dart';
 import 'package:hfu_app2/userController/utils.dart';
@@ -9,7 +10,6 @@ import 'dropdownDir/settings.dart';
 import 'home.dart';
 import 'menu.dart';
 import 'userController/utils.dart';
-
 
 
 Future<void> main() async {
@@ -40,18 +40,19 @@ class HfuApp extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 print('You have an error! ${snapshot.error.toString()}');
-                return Text('Something went wrong!');
+                return const Text('Something went wrong!');
               } else if (snapshot.hasData) {
                 return HomeScreen();
               } else {
-                return Center(
+                return const Center(
                     child: SizedBox(
-                  width: 30,
-                  height: 30,
-                  child: CircularProgressIndicator(),
-                ));
+                      width: 30,
+                      height: 30,
+                      child: CircularProgressIndicator(),
+                    ));
               }
-            }));
+            })
+    );
   }
 }
 

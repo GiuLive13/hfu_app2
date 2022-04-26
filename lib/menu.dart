@@ -116,9 +116,9 @@ class Menu extends StatelessWidget {
                   //  trailing: Icon(Icons.launch),
                 ),
                 SizedBox(
-                  height: 140.0,
+                  height: 110.0,
                   child: Image.asset(
-                    'assets/images/beispiel.png', // Mapstyle-Bild
+                    'assets/images/locations.jpg', // Mapstyle-Bild
                   ),
                 ),
                 Container(
