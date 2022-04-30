@@ -1,5 +1,3 @@
-
-
 class Entry {
   String id;
   final String title;
@@ -12,10 +10,19 @@ class Entry {
     required this.userContact,
     required this.description
   });
+
   Map<String, dynamic> toJson() => {
     'id': id,
-    'Titel': title,
-    'Kontaktdaten': userContact,
-    'Beschreibung': description,
+    'title': title,
+    'userContact': userContact,
+    'description': description
   };
+
+  static Entry fromJson(Map<String, dynamic> json) => Entry(
+    id: json['id'],
+    title: json['title'],
+    userContact: json['userContact'],
+    description: json['description']
+  );
+
 }

@@ -58,22 +58,9 @@ class Home extends StatelessWidget {
                 child: const Text('AlfaView',
                     style: TextStyle(
                       fontSize: 30,
-                    ))),
-            /*  ElevatedButton(
-                      onPressed: ( ) {
-                        launch('https://www.hs-furtwangen.de/');
-                      },
-                      child: const Text('Webseite',
-                          style: TextStyle(
-                            fontSize: 30,
-                          ))
-                  ), Link zur Website */
-            /*  const Image(
-                alignment: Alignment.bottomRight,
-                  width: 40,
-                  height: 100,
-                image: NetworkImage('https://www.binder-world.com/var/plain_site/storage/images/international/home/news-presse/presse/pressemitteilungen/kooperation-mit-hfu-campus-tuttlingen/1528847-1-ger-DE/Kooperation-mit-HFU-Campus-Tuttlingen_large.jpg'))
-    */
+                    )
+                )
+            ),
           ],
         ),
       ),

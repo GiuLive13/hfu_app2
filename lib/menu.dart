@@ -15,7 +15,7 @@ class Menu extends StatelessWidget {
       body: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          Card(
+          Card( // Lizenzfreie Bilder
               elevation: 4.0,
               child: Column(
                 children: [
@@ -33,7 +33,7 @@ class Menu extends StatelessWidget {
                   SizedBox(
                     height: 140.0,
                     child: Image.asset(
-                      'assets/images/beispiel.png', // Dokumentbild
+                      'assets/images/document.jpg', // Dokumentbild
                     ),
                   ),
                   Container(
@@ -205,7 +205,7 @@ class Menu extends StatelessWidget {
                 SizedBox(
                   height: 140.0,
                   child: Image.asset(
-                    'assets/images/beispiel.png', //
+                    'assets/images/events.jpeg', //
                   ),
                 ),
                 Container(
