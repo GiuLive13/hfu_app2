@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart'; // Dependency für URL Links
+import 'package:hfu_app2/homeDir/timetable.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'homeDir/alfaview.dart';
+import 'homeDir/felix.dart';
+import 'homeDir/mail.dart';
+import 'homeDir/studiPortal.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,7 +26,6 @@ class Home extends StatelessWidget {
         height: height,
         width: width,
         child: ListView(
-          // interne Webansicht umsetzen
           padding: const EdgeInsets.only(top: 80, right: 30, left: 30),
           scrollDirection: Axis.vertical,
           children: [
@@ -28,24 +33,42 @@ class Home extends StatelessWidget {
             // children: [
             ElevatedButton(
                 onPressed: () {
-                  launch('https://felix.hs-furtwangen.de/dmz/');
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => FelixPortal()
+                  ));
                 },
                 child: const Text('FELIX',
                     style: TextStyle(
                       fontSize: 30,
-                    ))),
+                    ))
+            ),
             ElevatedButton(
               onPressed: () {
-                launch('https://webmail.hs-furtwangen.de/');
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => StudiPortal()
+                ));
               },
-              child: const Text('HFU Mail',
+              child: const Text('Studi-Portal',
+                  style: TextStyle(
+                    fontSize: 30,
+                  )),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => Mail()
+                ));
+              },
+              child: const Text('Mail',
                   style: TextStyle(
                     fontSize: 30,
                   )),
             ),
             ElevatedButton(
                 onPressed: () {
-                  launch('https://stundenplan.hs-furtwangen.de/');
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => Timetable()
+                  ));
                 },
                 child: const Text('Stundenplan',
                     style: TextStyle(
@@ -53,27 +76,16 @@ class Home extends StatelessWidget {
                     ))),
             ElevatedButton(
                 onPressed: () {
-                  launch('https://howto.hs-furtwangen.de/aview/');
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => Aview()
+                  ));
                 },
                 child: const Text('AlfaView',
                     style: TextStyle(
                       fontSize: 30,
-                    ))),
-            /*  ElevatedButton(
-                      onPressed: ( ) {
-                        launch('https://www.hs-furtwangen.de/');
-                      },
-                      child: const Text('Webseite',
-                          style: TextStyle(
-                            fontSize: 30,
-                          ))
-                  ), Link zur Website */
-            /*  const Image(
-                alignment: Alignment.bottomRight,
-                  width: 40,
-                  height: 100,
-                image: NetworkImage('https://www.binder-world.com/var/plain_site/storage/images/international/home/news-presse/presse/pressemitteilungen/kooperation-mit-hfu-campus-tuttlingen/1528847-1-ger-DE/Kooperation-mit-HFU-Campus-Tuttlingen_large.jpg'))
-    */
+                    )
+                )
+            ),
           ],
         ),
       ),

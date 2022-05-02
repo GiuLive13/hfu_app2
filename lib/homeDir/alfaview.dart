@@ -4,12 +4,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class Mail extends StatefulWidget {
+class Aview extends StatefulWidget {
   @override
-  _MailState createState() => _MailState();
+  _AviewState createState() => _AviewState();
 }
 
-class _MailState extends State<Mail> {
+class _AviewState extends State<Aview> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
   void initState(){
     super.initState();
@@ -20,10 +20,10 @@ class _MailState extends State<Mail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text ('HFU Mail'),
+        title: const Text ('Alfaview Räume'),
       ),
       body: WebView(
-          initialUrl: 'https://webmail.hs-furtwangen.de/',
+          initialUrl: 'https://howto.hs-furtwangen.de/aview/',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _webController.complete(webViewController);
@@ -32,4 +32,3 @@ class _MailState extends State<Mail> {
     );
   }
 }
-
