@@ -48,6 +48,7 @@ dependencies:
 
   # Webansicht
   url_launcher: ^6.0.20
+  webview_flutter: ^3.0.2
 
 dev_dependencies:
   flutter_test:

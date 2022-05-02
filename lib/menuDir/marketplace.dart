@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 import 'package:hfu_app2/addEntry.dart';
 import 'package:hfu_app2/entry.dart';
 
@@ -45,8 +46,7 @@ class _MarketplaceState extends State<Marketplace> {
 Stream<List<Entry>> readEntry() => FirebaseFirestore.instance
     .collection('entries')
     .snapshots()
-    .map((snapshot) =>
-        snapshot.docs.map((doc) => Entry.fromJson(doc.data())).toList());
+    .map((snapshot) => snapshot.docs.map((doc) => Entry.fromJson(doc.data())).toList());
 
 // Customizen
 Widget buildEntry(Entry entry) => ListTile(

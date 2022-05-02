@@ -1,15 +1,15 @@
-
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class FelixPortal extends StatefulWidget {
+class StudiPortal extends StatefulWidget {
   @override
-  _FelixPortalState createState() => _FelixPortalState();
+  _StudiPortalState createState() => _StudiPortalState();
 }
 
-class _FelixPortalState extends State<FelixPortal> {
+class _StudiPortalState extends State<StudiPortal> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
   void initState(){
     super.initState();
@@ -20,10 +20,10 @@ class _FelixPortalState extends State<FelixPortal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text ('FELIX'),
+        title: const Text ('Studi-Portal'),
       ),
       body: WebView(
-          initialUrl: 'https://felix.hs-furtwangen.de/dmz/',
+          initialUrl: 'https://studi-portal.hs-furtwangen.de/',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _webController.complete(webViewController);
