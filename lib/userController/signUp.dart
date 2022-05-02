@@ -2,9 +2,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:hfu_app2/userController/utils.dart';
 
+import 'package:hfu_app2/userController/utils.dart';
 import '../main.dart';
 
 class SignUpWidget extends StatefulWidget {
@@ -23,7 +22,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final passwordSameController = TextEditingController();
+  final sameValueController = TextEditingController();
 
   bool _obscureTextFirst = true;
   bool _obscureTextSecond = true;
@@ -105,7 +104,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               color: Colors.grey,
             ))),
             child: TextFormField(
-              controller: passwordSameController,
+              controller: sameValueController,
               textInputAction: TextInputAction.done,
               obscureText: _obscureTextSecond,
               decoration: InputDecoration(
@@ -147,7 +146,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           SizedBox(height: 24),
           RichText(
               text: TextSpan(
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
                   text: 'Account vorhanden? ',
@@ -172,7 +171,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
+        builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
     try {

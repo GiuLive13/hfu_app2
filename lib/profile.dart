@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hfu_app2/userController/authPage.dart';
 
+import 'package:hfu_app2/userController/authPage.dart';
 import 'userProfile.dart';
 
 class Profile extends StatelessWidget {
@@ -24,7 +23,9 @@ class Profile extends StatelessWidget {
               } else {
                 return AuthPage();
               }
-            }));
+            }
+            )
+    );
   }
 }
 

@@ -1,15 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+
 import 'package:hfu_app2/userController/authPage.dart';
 import 'package:hfu_app2/userController/utils.dart';
-
-
 import 'dropdownDir/contact.dart';
 import 'dropdownDir/settings.dart';
 import 'home.dart';
 import 'menu.dart';
-import 'userController/utils.dart';
 
 
 Future<void> main() async {
@@ -17,19 +15,17 @@ Future<void> main() async {
   runApp(HfuApp());
 }
 
-final messengerKey = GlobalKey<ScaffoldMessengerState>();
 final navigatorKey = GlobalKey<NavigatorState>();
 
 class HfuApp extends StatelessWidget {
   final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
-
   HfuApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        scaffoldMessengerKey: Utils.messengerKey,
         navigatorKey: navigatorKey,
-      //  scaffoldMessengerKey: Utils.messengerKey,
         title: 'HFU App',
         theme: ThemeData(
           primarySwatch: Colors.green,

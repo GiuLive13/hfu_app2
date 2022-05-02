@@ -3,6 +3,8 @@ import 'package:hfu_app2/userController/login.dart';
 import 'package:hfu_app2/userController/signUp.dart';
 
 class AuthPage extends StatefulWidget {
+  const AuthPage({Key? key}) : super(key: key);
+
   @override
   _AuthPageState createState() => _AuthPageState();
 }
