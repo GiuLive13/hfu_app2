@@ -1,50 +1,79 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'entry.dart';
 
-class AddEntry extends StatelessWidget {
+class AddEntry extends StatefulWidget {
   const AddEntry({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  State<AddEntry> createState() => _AddEntryState();
+}
+
+  class _AddEntryState extends State<AddEntry> {
+    final titleController = TextEditingController();
+    final userContactController = TextEditingController();
+    final descriptionController = TextEditingController();
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
         appBar: AppBar(
           title: const Text('Ich biete ... '),
         ),
-      body: ListView(
-        padding: EdgeInsets.all(16),
-        children: <Widget>[
-          TextField(
-          ),
-          SizedBox(height: 10),
-          TextField(
-          ),
-          SizedBox(height: 10),
-          TextField(
-          ),
-        ],
-    ),
-
-
-    );
-  }
-    Future createEntry({
-      required String title, required String userContact, required String description
-    }) async {
-      final marketEntry = FirebaseFirestore.instance.collection('Marktplatz').doc();
-
-      final entry = Entry(
-          id: marketEntry.id,
-          title: title,
-          userContact: userContact,
-          description: description,
+        body: ListView(
+          padding: const EdgeInsets.all(16),
+          children: <Widget>[
+             TextField(
+              controller: titleController,
+              decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Titel',
+                  hintStyle: TextStyle(fontWeight: FontWeight.bold)
+              ),
+            ),
+            const SizedBox(height: 10),
+             TextField(
+              controller: userContactController,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Kontaktdaten',
+              ),
+            ),
+            const SizedBox(height: 10),
+             TextField(
+              controller: descriptionController,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Beschreibung',
+              ),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton.icon(
+                onPressed: () {
+                  final entry = Entry(
+                      title: titleController.text,
+                      userContact: userContactController.text,
+                      description: descriptionController.text,
+                  );
+                  createEntry(entry);
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.add, size: 25),
+                label: const Text('Angebot hochladen',
+                style: TextStyle(fontSize: 20),)
+            ),
+          ],
+        ),
       );
+    }
+
+    Future createEntry(Entry entry) async {
+      final marketEntry = FirebaseFirestore.instance.collection('entries').doc();
+      entry.id = marketEntry.id;
+
       final json = entry.toJson();
-
       await marketEntry.set(json);
-
+    }
   }
 
-}
