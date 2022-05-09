@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hfu_app2">
    <application
-        android:label="hfu_app2"
+        android:label="HFU Mobile"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/hfu_app_icon_circle">
         <activity
             android:name=".MainActivity"
             android:exported="true"

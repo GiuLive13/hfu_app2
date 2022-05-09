@@ -96,7 +96,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                   : null,
             ),
           ),
-          Container(
+         /* Container(                                        Passwort bestätigen fixen
             padding: const EdgeInsets.all(16),
             decoration: const BoxDecoration(
                 border: Border(
@@ -127,7 +127,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                   ? 'Passwort muss übereinstimmen'
                   : null,
             ),
-          ),
+          ), */
           SizedBox(height: 40),
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(

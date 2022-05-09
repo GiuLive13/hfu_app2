@@ -19,12 +19,13 @@ class Location extends StatelessWidget {
                 SizedBox(height: 30),
               ],
             ),
-            Row(
+            Column(
               children: [
                 Card(
                   elevation: 4.0,
                   child: Text("Adresse: "),
-                )
+                ),
+                Text("Mensa")
               ],
             ),
             Row(
@@ -45,11 +46,12 @@ class Location extends StatelessWidget {
                 SizedBox(height: 30),
               ],
             ),
-            Row(children: [
+            Column(children: [
               Card(
                 elevation: 4.0,
                 child: Text("Adresse: "),
               ),
+              Text("Mensa")
             ])
           ],
         )

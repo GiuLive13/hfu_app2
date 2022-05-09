@@ -10,10 +10,12 @@ class UserProfile extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser!;
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Userprofil'),
-        ),
-        body: Container(
+        body:/* ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+
+          ],
+        )*/  Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -37,6 +39,7 @@ class UserProfile extends StatelessWidget {
               )
             ],
           ),
-        ));
+        )
+    );
   }
 }

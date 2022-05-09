@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hfu_app2/menuDir/dates_deadlines.dart';
 import 'package:hfu_app2/menuDir/document.dart';
 import 'package:hfu_app2/menuDir/events.dart';
 import 'package:hfu_app2/menuDir/faculty.dart';
 import 'package:hfu_app2/menuDir/location.dart';
 import 'package:hfu_app2/menuDir/marketplace.dart';
 import 'package:hfu_app2/menuDir/news.dart';
+
+import '../menuDir/reftreff.dart';
 
 class Menu extends StatelessWidget {
   const Menu({Key? key}) : super(key: key);
@@ -59,6 +62,48 @@ class Menu extends StatelessWidget {
                   )
                 ],
               )),
+          Card(
+            elevation: 4.0,
+            child: Column(children: [
+              const ListTile(
+                title: Text(
+                  "Termine und Fristen",
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green),
+                ),
+                subtitle: Text("Von Deadlines bis Prüfungsplänen"),
+                //  trailing: Icon(Icons.launch),
+              ),
+              SizedBox(
+                height: 140.0,
+                child: Image.asset(
+                  'assets/images/beispiel.png', // HFU-Flagge
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 16, top: 10, bottom: 2),
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                    "Das müsst ihr wissen für das aktuelle Semester"
+                ),
+              ),
+              ButtonBar(
+                children: [
+                  TextButton(
+                    child: const Text(
+                      "Hier anschauen",
+                      style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => DatesAndDeadlines())),
+                  ),
+                ],
+              ),
+            ]),
+          ),
           Card(
             elevation: 4.0,
             child: Column(children: [
@@ -205,7 +250,7 @@ class Menu extends StatelessWidget {
                 SizedBox(
                   height: 140.0,
                   child: Image.asset(
-                    'assets/images/events.jpeg', //
+                    'assets/images/beispiel.png', //
                   ),
                 ),
                 Container(
@@ -266,6 +311,49 @@ class Menu extends StatelessWidget {
                       ),
                       onPressed: () => Navigator.push(context,
                           MaterialPageRoute(builder: (context) => News())),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Card(
+            elevation: 4.0,
+            child: Column(
+              children: [
+                const ListTile(
+                  title: Text(
+                    "Reftreff",
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green),
+                  ),
+                  subtitle: Text("Freizeitaktivitäten an deinem Campus"),
+                  //  trailing: Icon(Icons.launch),
+                ),
+                SizedBox(
+                  height: 100.0,
+                  child: Image.asset(
+                    'assets/images/reftreff.jpg', // Alert Icon
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 16, top: 10, bottom: 2),
+                  alignment: Alignment.centerLeft,
+                  child:
+                  const Text("Jetzt aktiv werden und neue Leute treffen"),
+                ),
+                ButtonBar(
+                  children: [
+                    TextButton(
+                      child: const Text(
+                        "Hier anschauen",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 17),
+                      ),
+                      onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Reftreff())),
                     ),
                   ],
                 ),

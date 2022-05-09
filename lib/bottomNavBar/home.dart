@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:hfu_app2/homeDir/alfaview.dart';
 import 'package:hfu_app2/homeDir/felix.dart';
 import 'package:hfu_app2/homeDir/mail.dart';
 import 'package:hfu_app2/homeDir/studiPortal.dart';
 import 'package:hfu_app2/homeDir/timetable.dart';
-import 'package:url_launcher/url_launcher.dart'; // Dependency für URL Links
+
+import '../homeDir/hfu_website.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -18,21 +20,12 @@ class _HomeState extends State<Home>{
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        label: const Text("HFU-Website"), // HFU Logo einbauen
-        onPressed: () {
-
-        },
-      ),
       body: SizedBox(
         height: height,
         width: width,
         child: ListView(
           padding: const EdgeInsets.only(top: 80, right: 30, left: 30),
-          scrollDirection: Axis.vertical,
           children: [
-            //Column(
-            // children: [
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -94,11 +87,25 @@ class _HomeState extends State<Home>{
                     )
                 )
             ),
+           const SizedBox(height: 100),
+            Container(
+              padding: EdgeInsets.only(left: 188),
+              child: Row(
+                children: [
+                InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(
+                              builder: (context) => HfuWebsite()));
+                    },
+                    child: Image.asset('assets/images/hfu_website_bigger.png')
+                ),
+              ],
+              ),
+            )
           ],
         ),
       ),
     );
   }
-
-
 }

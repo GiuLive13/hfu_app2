@@ -1,12 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hfu_app2/bottomNavBar/profile.dart';
 
 import 'package:hfu_app2/userController/authPage.dart';
 import 'package:hfu_app2/userController/utils.dart';
 import 'dropdownDir/contact.dart';
 import 'dropdownDir/settings.dart';
-import 'home.dart';
-import 'menu.dart';
+import 'bottomNavBar/home.dart';
+import 'bottomNavBar/menu.dart';
 
 
 Future<void> main() async {
@@ -60,7 +61,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HfuApp extends State<HomeScreen> {
   int _selectedIndex = 1;
-  static final List<Widget> _pages = <Widget>[AuthPage(), Home(), Menu()];
+  static final List<Widget> _pages = <Widget>[Profile(), Home(), Menu()];
 
   @override
   Widget build(BuildContext context) {

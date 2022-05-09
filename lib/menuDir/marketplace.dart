@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'package:hfu_app2/addEntry.dart';
-import 'package:hfu_app2/entry.dart';
+import 'package:hfu_app2/marketplace/addEntry.dart';
+import 'package:hfu_app2/marketplace/entry.dart';
 
 class Marketplace extends StatefulWidget {
   const Marketplace({Key? key}) : super(key: key);

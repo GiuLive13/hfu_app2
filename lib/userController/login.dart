@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hfu_app2/userController/utils.dart';
+import 'package:hfu_app2/userProfile.dart';
 
 import '../main.dart';
 
@@ -103,7 +104,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   style: const TextStyle(
                     color: Colors.black,
                   ),
-                  text: 'Noch kein Account? ',
+                  text: 'Noch keinen Account? ',
                   children: [
                 TextSpan(
                     recognizer: TapGestureRecognizer()
