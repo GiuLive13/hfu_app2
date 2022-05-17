@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hfu_app2/marketplace/addEntry.dart';
+import 'package:hfu_app2/marketplace/entry-view.dart';
 import 'package:hfu_app2/marketplace/entry.dart';
 
 class Marketplace extends StatefulWidget {
@@ -48,16 +50,59 @@ Stream<List<Entry>> readEntry() => FirebaseFirestore.instance
     .snapshots()
     .map((snapshot) => snapshot.docs.map((doc) => Entry.fromJson(doc.data())).toList());
 
-// Customizen
-Widget buildEntry(Entry entry) => ListTile(
-      leading: ConstrainedBox(
-          constraints: const BoxConstraints(
-            minWidth: 44,
-            maxWidth: 64,
-            minHeight: 44,
-            maxHeight: 64,
+Widget buildEntry(Entry entry) => Card(
+  margin: EdgeInsets.all(15),
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            leading: const Icon(Icons.account_circle, size: 32),
+            title: Text(
+              entry.title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: Text(entry.userContact),
           ),
-          child: Icon(Icons.accessibility_new)),
-      title: Text(entry.title + ' von ' + entry.userContact),
-      subtitle: Text(entry.description),
+        Row(
+            children: [
+              SizedBox(
+                  width: 12,
+              ),
+              Text(entry.description,
+                style: const TextStyle(
+                fontSize: 17
+                ),
+              ),
+            ]
+          ),
+          Container(
+            height: 130,
+            decoration: const BoxDecoration(
+              image: DecorationImage(image: AssetImage('assets/images/hfu_website_adaptive_fore.png'))
+            )
+          ),
+          ButtonBar(
+            alignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                  onPressed: () => _clickEntry,
+                  child: const Text("Eintrag anschauen",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  )
+              ),
+            ],
+          )
+        ],
+      ),
     );
+
+// Geht nicht
+void _clickEntry(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => EntryView()));
+}

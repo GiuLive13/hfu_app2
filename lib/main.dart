@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hfu_app2/bottomNavBar/profile.dart';
+import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
-import 'package:hfu_app2/userController/authPage.dart';
+import 'package:hfu_app2/bottomNavBar/homeV2.dart';
+import 'package:hfu_app2/bottomNavBar/profile.dart';
 import 'package:hfu_app2/userController/utils.dart';
 import 'dropdownDir/contact.dart';
 import 'dropdownDir/settings.dart';
@@ -24,11 +25,13 @@ class HfuApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        darkTheme: ThemeData.dark(),
         scaffoldMessengerKey: Utils.messengerKey,
         navigatorKey: navigatorKey,
         title: 'HFU App',
         theme: ThemeData(
           primarySwatch: Colors.green,
+          brightness: Brightness.light,
           //  splashColor: Colors.black
         ),
         home: FutureBuilder(
@@ -42,10 +45,11 @@ class HfuApp extends StatelessWidget {
               } else {
                 return const Center(
                     child: SizedBox(
-                      width: 30,
-                      height: 30,
+                      width: 100,
+                      height: 100,
                       child: CircularProgressIndicator(),
-                    ));
+                    )
+                );
               }
             })
     );
@@ -66,7 +70,22 @@ class _HfuApp extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      extendBody: true,
+      appBar: NewGradientAppBar(
+        gradient: LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          stops: [
+            0.3,
+            0.4,
+            1
+          ],
+          colors: [
+            Colors.green.shade600,
+            Colors.lightGreen.shade500,
+            Colors.white30,
+          ]
+        ),
         centerTitle: false,
         title: const Text(
           'HFU Mobile',
@@ -113,21 +132,23 @@ class _HfuApp extends State<HomeScreen> {
                         width: 1,
                       ),
                     ],
-                  )),
+                  )
+              ),
             ],
             onSelected: (item) => _selectedItem(context, item),
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
       body: Center(
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         iconSize: 30,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_sharp),
+            icon: Icon(Icons.account_circle_rounded),
             label: 'Profil',
           ),
           BottomNavigationBarItem(icon: Icon(Icons.weekend), label: 'Home'),

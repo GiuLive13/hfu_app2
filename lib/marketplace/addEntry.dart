@@ -24,27 +24,30 @@ class AddEntry extends StatefulWidget {
         body: ListView(
           padding: const EdgeInsets.all(16),
           children: <Widget>[
-             TextField(
+             TextFormField(
               controller: titleController,
               decoration: const InputDecoration(
-                  border: InputBorder.none,
+                //  border: InputBorder.none,
                   hintText: 'Titel',
                   hintStyle: TextStyle(fontWeight: FontWeight.bold)
               ),
             ),
             const SizedBox(height: 10),
-             TextField(
+             TextFormField(
               controller: userContactController,
               decoration: const InputDecoration(
-                border: InputBorder.none,
+             //   border: InputBorder.none,
                 hintText: 'Kontaktdaten',
               ),
             ),
             const SizedBox(height: 10),
              TextField(
+               maxLines: 5,
+              minLines: 1,
               controller: descriptionController,
               decoration: const InputDecoration(
-                border: InputBorder.none,
+                fillColor: Colors.white54 ,
+            //    border: InputBorder.none,
                 hintText: 'Beschreibung',
               ),
             ),

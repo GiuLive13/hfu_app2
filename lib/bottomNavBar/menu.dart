@@ -79,7 +79,7 @@ class Menu extends StatelessWidget {
               SizedBox(
                 height: 140.0,
                 child: Image.asset(
-                  'assets/images/beispiel.png', // HFU-Flagge
+                  'assets/images/hfu_website_adaptive_fore.png', // HFU-Flagge
                 ),
               ),
               Container(
@@ -121,7 +121,7 @@ class Menu extends StatelessWidget {
               SizedBox(
                 height: 140.0,
                 child: Image.asset(
-                  'assets/images/beispiel.png', // HFU-Flagge
+                  'assets/images/hfu_website_adaptive_fore.png', // HFU-Flagge
                 ),
               ),
               Container(
@@ -206,13 +206,13 @@ class Menu extends StatelessWidget {
                 SizedBox(
                   height: 140.0,
                   child: Image.asset(
-                    'assets/images/beispiel.png', // passendes Bild suchen
+                    'assets/images/hfu_website_adaptive_fore.png', // passendes Bild suchen
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 16, top: 10, bottom: 2),
                   alignment: Alignment.centerLeft,
-                  child: const Text("Marktplatz HFU"),
+                  child: const Text("Suchst du eine neue WG oder Nachhilfe?"),
                 ),
                 ButtonBar(
                   children: [
@@ -250,7 +250,7 @@ class Menu extends StatelessWidget {
                 SizedBox(
                   height: 140.0,
                   child: Image.asset(
-                    'assets/images/beispiel.png', //
+                    'assets/images/hfu_website_adaptive_fore.png',
                   ),
                 ),
                 Container(
@@ -292,7 +292,7 @@ class Menu extends StatelessWidget {
                 SizedBox(
                   height: 140.0,
                   child: Image.asset(
-                    'assets/images/beispiel.png', // Alert Icon
+                    'assets/images/hfu_website_adaptive_fore.png', // Alert Icon
                   ),
                 ),
                 Container(

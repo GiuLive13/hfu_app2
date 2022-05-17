@@ -38,6 +38,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Registrieren"),
+      ),
         body: Form(
       key: formKey,
       child: Column(
