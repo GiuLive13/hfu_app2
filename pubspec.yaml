@@ -45,6 +45,9 @@ dependencies:
   # User Interaction
   image_picker: ^0.8.5+3
 
+  # Media Download
+  flutter_downloader: ^1.7.4 # iOS enable Background Mode
+
   # Location
   google_maps_flutter: ^2.1.5
 
@@ -53,8 +56,10 @@ dependencies:
   new_gradient_app_bar: ^0.2.0
   font_awesome_flutter: ^10.1.0
 
-  # Webansicht
+  # Web
   webview_flutter: ^3.0.2
+  http: ^0.13.4
+  html: ^0.15.0
 
 dev_dependencies:
   flutter_test:

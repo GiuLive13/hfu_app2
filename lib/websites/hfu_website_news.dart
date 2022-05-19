@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:html/dom.dart' as dom;
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter/material.dart';
 
-class Reftreff extends StatefulWidget {
-  const Reftreff({Key? key}) : super(key: key);
 
+class HfuWebsiteNews extends StatefulWidget {
   @override
-  _ReftreffState createState() => _ReftreffState();
+  _HfuWebsiteNewsState createState() => _HfuWebsiteNewsState();
 }
 
-class _ReftreffState extends State<Reftreff> {
+class _HfuWebsiteNewsState extends State<HfuWebsiteNews> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
   void initState(){
@@ -22,10 +23,10 @@ class _ReftreffState extends State<Reftreff> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text ('Reftreff'),
+        title: const Text ('Aktuelles'),
       ),
       body: WebView(
-          initialUrl: 'https://reftreff.hs-furtwangen.de/',
+          initialUrl: 'https://www.hs-furtwangen.de/aktuelles/?tx_solr%5Bfilter%5D%5B0%5D=publishedBy%3ApressOffice',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _webController.complete(webViewController);

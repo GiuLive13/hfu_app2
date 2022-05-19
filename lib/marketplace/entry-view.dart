@@ -15,5 +15,4 @@ class EntryView extends StatelessWidget{
       )
     );
   }
-
 }

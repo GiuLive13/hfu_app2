@@ -80,7 +80,7 @@ Widget buildEntry(Entry entry) => Card(
             ]
           ),
           Container(
-            height: 130,
+            height: 80,
             decoration: const BoxDecoration(
               image: DecorationImage(image: AssetImage('assets/images/hfu_website_adaptive_fore.png'))
             )

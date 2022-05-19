@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/material.dart';
+
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter/material.dart';
 
-class Reftreff extends StatefulWidget {
-  const Reftreff({Key? key}) : super(key: key);
 
+class Business extends StatefulWidget {
   @override
-  _ReftreffState createState() => _ReftreffState();
+  _BusinessState createState() => _BusinessState();
 }
 
-class _ReftreffState extends State<Reftreff> {
+class _BusinessState extends State<Business> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
   void initState(){
@@ -22,10 +22,10 @@ class _ReftreffState extends State<Reftreff> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text ('Reftreff'),
+        title: const Text ('Wirtschaft'),
       ),
       body: WebView(
-          initialUrl: 'https://reftreff.hs-furtwangen.de/',
+          initialUrl: 'https://www.hs-furtwangen.de/fakultaeten/wirtschaft/',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _webController.complete(webViewController);

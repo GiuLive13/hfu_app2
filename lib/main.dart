@@ -5,6 +5,7 @@ import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:hfu_app2/bottomNavBar/homeV2.dart';
 import 'package:hfu_app2/bottomNavBar/profile.dart';
 import 'package:hfu_app2/userController/utils.dart';
+import 'dropdownDir/about-project.dart';
 import 'dropdownDir/contact.dart';
 import 'dropdownDir/settings.dart';
 import 'bottomNavBar/home.dart';
@@ -115,7 +116,8 @@ class _HfuApp extends State<HomeScreen> {
                         width: 1,
                       ),
                     ],
-                  )),
+                  )
+              ),
               PopupMenuItem<int>(
                   value: 1,
                   child: Row(
@@ -127,6 +129,24 @@ class _HfuApp extends State<HomeScreen> {
                         color: Colors.black,
                         onPressed: () => Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Contact())),
+                      ),
+                      const SizedBox(
+                        width: 1,
+                      ),
+                    ],
+                  )
+              ),
+              PopupMenuItem<int>(
+                  value: 2,
+                  child: Row(
+                    children: [
+                      const Text('About         ', textAlign: TextAlign.left),
+                      IconButton(
+                        alignment: Alignment.centerRight,
+                        icon: const Icon(Icons.announcement),
+                        color: Colors.black,
+                        onPressed: () => Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => AboutProject())),
                       ),
                       const SizedBox(
                         width: 1,
@@ -175,6 +195,10 @@ class _HfuApp extends State<HomeScreen> {
       case 1:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => Contact()));
+        break;
+      case 2:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => AboutProject()));
         break;
     }
   }

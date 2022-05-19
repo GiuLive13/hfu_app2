@@ -267,7 +267,7 @@ class Menu extends StatelessWidget {
                             fontWeight: FontWeight.bold, fontSize: 17),
                       ),
                       onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Events())),
+                          MaterialPageRoute(builder: (context) => Event())),
                     ),
                   ],
                 ),

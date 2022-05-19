@@ -5,7 +5,7 @@ import 'package:hfu_app2/homeDir/felix.dart';
 import 'package:hfu_app2/homeDir/mail.dart';
 import 'package:hfu_app2/homeDir/studiPortal.dart';
 import 'package:hfu_app2/homeDir/timetable.dart';
-import '../homeDir/hfu_website.dart';
+import '../websites/hfu_website.dart';
 
 class Home extends StatelessWidget {
 
@@ -19,8 +19,8 @@ class Home extends StatelessWidget {
                 end: Alignment.bottomRight,
                 stops: [
                   0.1,
-                  0.4,
-                  0.8,
+                  0.7,
+                  0.9,
                 ],
                 colors: [
                   Colors.white,

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Location extends StatelessWidget {
@@ -10,50 +9,8 @@ class Location extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Standorte'),
         ),
-        body: ListView(
-          scrollDirection: Axis.vertical,
-          children: [
-            Row(
-              children: const [
-                Text("Furtwangen"),
-                SizedBox(height: 30),
-              ],
-            ),
-            Column(
-              children: [
-                Card(
-                  elevation: 4.0,
-                  child: Text("Adresse: "),
-                ),
-                Text("Mensa")
-              ],
-            ),
-            Row(
-              children: const [
-                Text("Tuttlingen"),
-                SizedBox(height: 30),
-              ],
-            ),
-            Row(children: [
-              Card(
-                elevation: 4.0,
-                child: Text("Adresse: "),
-              ),
-            ]),
-            Row(
-              children: const [
-                Text("Villingen-Schwenningen"),
-                SizedBox(height: 30),
-              ],
-            ),
-            Column(children: [
-              Card(
-                elevation: 4.0,
-                child: Text("Adresse: "),
-              ),
-              Text("Mensa")
-            ])
-          ],
+        body: Container(
+
         )
     );
   }
