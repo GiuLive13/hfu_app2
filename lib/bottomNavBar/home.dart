@@ -13,14 +13,15 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                stops: [
+                stops: const [
                   0.1,
-                  0.7,
                   0.9,
+                  1.3,
                 ],
                 colors: [
                   Colors.white,
@@ -29,73 +30,164 @@ class Home extends StatelessWidget {
                 ]
             )
         ),
-        child: ListView(
-          padding: const EdgeInsets.only(top: 80, right: 30, left: 30),
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FelixPortal()));
-                },
-                child: const Text('FELIX',
-                    style: TextStyle(
-                      fontSize: 30,
-                    ))
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StudiPortal()));
-                },
-                child: const Text('Studi-Portal',
-                    style: TextStyle(
-                      fontSize: 30,
-                    )
-                )
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Mail()));
-              },
-              child: const Text('HFU Mail',
-                  style: TextStyle(
-                    fontSize: 30,
-                  )),
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Timetable()));
-                },
-                child: const Text('Stundenplan',
-                    style: TextStyle(
-                      fontSize: 30,
-                    ))),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Aview()));
-                },
-                child: const Text('AlfaView',
-                    style: TextStyle(
-                      fontSize: 30,
-                    )
-                )
-            ),
-            const SizedBox(height: 100),
+          child: ListView(
+            padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+
+            children: [
             Container(
-              child: Row(
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)
+                ),
+              color: Colors.green.shade800,
+                child: Column(
+                  children: [
+                     const ListTile(
+                      title: Text(
+                        'FELIX',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => FelixPortal()));
+                              },
+                              icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)
+                          ),
+                        ]
+                    ),
+                  ],
+                ),
+              ),
+            ),
+              Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)
+                ),
+                color: Colors.green.shade800,
+                child: Column(
+                  children: [
+                    const ListTile(
+                      title: Text(
+                        'Studi-Portal',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => StudiPortal()));
+                              },
+                              icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)
+                          ),
+                        ]
+                    ),
+                  ],
+                ),
+              ),
+              Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)
+                ),
+                color: Colors.green.shade800,
+                child: Column(
+                  children: [
+                    const ListTile(
+                      title: Text(
+                        'Mail',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Mail()));
+                              },
+                              icon: Icon(Icons.arrow_forward_ios, color: Colors.white,)
+                          ),
+                        ]
+                    ),
+                  ],
+                ),
+              ),
+              Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)
+                ),
+                color: Colors.green.shade800,
+                child: Column(
+                  children: [
+                    const ListTile(
+                      title: Text(
+                        'Stundenplan',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Timetable()));
+                              },
+                              icon: Icon(Icons.arrow_forward_ios, color: Colors.white,)
+                          ),
+                        ]
+                    ),
+                  ],
+                ),
+              ),
+              Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)
+                ),
+                color: Colors.green.shade800,
+                child: Column(
+                  children: [
+                    const ListTile(
+                      title: Text(
+                        'AlfaView',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Aview()));
+                              },
+                              icon: Icon(Icons.arrow_forward_ios, color: Colors.white,)
+                          ),
+                        ]
+                    ),
+                  ],
+                ),
+              ),
+          /*    const SizedBox(height: 100),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   InkWell(
@@ -107,10 +199,8 @@ class Home extends StatelessWidget {
                       child: Image.asset('assets/images/hfu_website.png')
                   ),
                 ],
-              ),
-            )
-          ],
-        ),
+              ) */
+        ]),
       ),
     );
   }

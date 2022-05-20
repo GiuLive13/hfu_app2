@@ -10,8 +10,10 @@ class Aview extends StatefulWidget {
 }
 
 class _AviewState extends State<Aview> {
-  final Completer<WebViewController> _webController = Completer<WebViewController>();
-  void initState(){
+  final Completer<WebViewController> _webController =
+      Completer<WebViewController>();
+
+  void initState() {
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
@@ -19,16 +21,16 @@ class _AviewState extends State<Aview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text ('Alfaview Räume'),
-      ),
-      body: WebView(
-          initialUrl: 'https://howto.hs-furtwangen.de/aview/',
-          javascriptMode: JavascriptMode.unrestricted,
-          onWebViewCreated: (WebViewController webViewController) {
-            _webController.complete(webViewController);
-          }
-      ),
-    );
+        extendBodyBehindAppBar: true,
+        body: Container(
+          decoration: const BoxDecoration(color: Colors.white),
+          padding: const EdgeInsets.only(top: 25),
+          child: WebView(
+              initialUrl: 'https://howto.hs-furtwangen.de/aview/',
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (WebViewController webViewController) {
+                _webController.complete(webViewController);
+              }),
+        ));
   }
 }

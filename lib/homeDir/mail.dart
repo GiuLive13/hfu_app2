@@ -19,15 +19,19 @@ class _MailState extends State<Mail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text ('HFU Mail'),
-      ),
-      body: WebView(
-          initialUrl: 'https://webmail.hs-furtwangen.de/',
-          javascriptMode: JavascriptMode.unrestricted,
-          onWebViewCreated: (WebViewController webViewController) {
-            _webController.complete(webViewController);
-          }
+      extendBodyBehindAppBar: true,
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.green.shade400
+        ),
+        padding: EdgeInsets.only(top:15),
+        child: WebView(
+              initialUrl: 'https://webmail.hs-furtwangen.de/',
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (WebViewController webViewController) {
+                _webController.complete(webViewController);
+              }
+          ),
       ),
     );
   }

@@ -28,7 +28,6 @@ class Profile extends StatelessWidget {
 
 /*
  Change password,
- Login/ Logout,
  Delete Account,
  Profilbild ?
  */

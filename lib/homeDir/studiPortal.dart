@@ -19,16 +19,20 @@ class _StudiPortalState extends State<StudiPortal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text ('Studi-Portal'),
-      ),
-      body: WebView(
+        extendBodyBehindAppBar: true,
+        body: Container(
+        decoration: BoxDecoration(
+        color: Colors.lightGreen.shade400
+    ),
+    padding: EdgeInsets.only(top:24),
+    child: WebView(
           initialUrl: 'https://studi-portal.hs-furtwangen.de/',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _webController.complete(webViewController);
           }
       ),
+    )
     );
   }
 }

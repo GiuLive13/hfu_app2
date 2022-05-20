@@ -11,6 +11,7 @@ class Timetable extends StatefulWidget {
 
 class _TimetableState extends State<Timetable> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
@@ -19,16 +20,20 @@ class _TimetableState extends State<Timetable> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text ('HFU Stundenplan'),
-      ),
-      body: WebView(
+        extendBodyBehindAppBar: true,
+        body: Container(
+        decoration: const BoxDecoration(
+        color: Colors.grey
+    ),
+    padding: const EdgeInsets.only(top:25),
+    child: WebView(
           initialUrl: 'https://stundenplan.hs-furtwangen.de/splan/',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _webController.complete(webViewController);
           }
       ),
+    )
     );
   }
 }

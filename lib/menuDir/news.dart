@@ -43,8 +43,6 @@ class _NewsState extends State<News> {
         .map((element) => 'https://www.hs-furtwangen.de/aktuelles/${element.attributes['href']}')
         .toList();
 
-    print('Count: ${titles.length}');
-
     setState(() {
       newsArticles = List.generate(
           titles.length,
@@ -71,17 +69,22 @@ class _NewsState extends State<News> {
             final newsArticle = newsArticles[index];
 
             return Card(
+              color: Colors.green.shade800,
               child: Column(
                 children: [
                   ListTile(
                     title: Text(
                         newsArticle.title,
                       style: const TextStyle(
-                        fontWeight: FontWeight.bold
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white
                       ),
                     ),
                     subtitle: Text(
-                        newsArticle.subtitle
+                        newsArticle.subtitle,
+                      style: const TextStyle(
+                        color: Colors.white
+                      ),
                     ),
                   ),
                   ButtonBar(
@@ -90,7 +93,7 @@ class _NewsState extends State<News> {
                           onPressed: () {
                      //       Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteNews()));
                           },
-                          icon: Icon(Icons.arrow_forward_ios)
+                          icon: const Icon(Icons.arrow_forward_ios)
                       ),
                     ]
                   ),

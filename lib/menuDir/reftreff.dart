@@ -13,6 +13,7 @@ class Reftreff extends StatefulWidget {
 class _ReftreffState extends State<Reftreff> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
@@ -21,16 +22,20 @@ class _ReftreffState extends State<Reftreff> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text ('Reftreff'),
-      ),
-      body: WebView(
+        extendBodyBehindAppBar: true,
+        body: Container(
+        decoration: BoxDecoration(
+        color: Colors.black87
+    ),
+    padding: EdgeInsets.only(top:15),
+      child: WebView(
           initialUrl: 'https://reftreff.hs-furtwangen.de/',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _webController.complete(webViewController);
           }
       ),
+    ),
     );
   }
 }

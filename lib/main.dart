@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
-import 'package:hfu_app2/bottomNavBar/homeV2.dart';
 import 'package:hfu_app2/bottomNavBar/profile.dart';
 import 'package:hfu_app2/userController/utils.dart';
 import 'dropdownDir/about-project.dart';
