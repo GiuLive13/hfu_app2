@@ -95,7 +95,8 @@ class Menu extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green),
+                        color: Colors.green,
+                    ),
                   ),
                   subtitle: Text("Von Deadlines bis Prüfungsplänen"),
                   //  trailing: Icon(Icons.launch),
@@ -211,7 +212,7 @@ class Menu extends StatelessWidget {
                               fontWeight: FontWeight.bold, fontSize: 17),
                         ),
                         onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Location())),
+                            MaterialPageRoute(builder: (context) => Locations())),
                       ),
                     ],
                   ),

@@ -1,18 +1,28 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
-
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hfu_app2/bottomNavBar/profile.dart';
 import 'package:hfu_app2/userController/utils.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
+
+import 'bottomNavBar/home.dart';
+import 'bottomNavBar/menu.dart';
 import 'dropdownDir/about-project.dart';
 import 'dropdownDir/contact.dart';
 import 'dropdownDir/settings.dart';
-import 'bottomNavBar/home.dart';
-import 'bottomNavBar/menu.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(HfuApp());
 }
 
@@ -22,18 +32,26 @@ class HfuApp extends StatelessWidget {
   final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
   HfuApp({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         darkTheme: ThemeData.dark(),
         scaffoldMessengerKey: Utils.messengerKey,
         navigatorKey: navigatorKey,
         title: 'HFU App',
-        theme: ThemeData(
-          primarySwatch: Colors.green,
+        theme:// isDarkMode
+           // ?
+         ThemeData(
+          colorSchemeSeed: Colors.green.shade800,
           brightness: Brightness.light,
-          //  splashColor: Colors.black
-        ),
+          // splashColor: Colors.grey,
+                ),
+           /* : ThemeData(
+          colorSchemeSeed: Colors.green.shade800,
+          brightness: Brightness.dark,
+        ),*/
         home: FutureBuilder(
             future: _fbApp,
             builder: (context, snapshot) {
@@ -41,14 +59,21 @@ class HfuApp extends StatelessWidget {
                 print('You have an error! ${snapshot.error.toString()}');
                 return const Text('Something went wrong!');
               } else if (snapshot.hasData) {
-                return HomeScreen();
+                return const HomeScreen();
               } else {
                 return const Center(
                     child: SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: CircularProgressIndicator(),
-                    )
+                  height: 20,
+                  width: 250,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      child: LinearProgressIndicator(
+                        backgroundColor: Colors.white,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                        value: 0.7,
+                    ),
+                  ),
+                )
                 );
               }
             })
@@ -60,12 +85,23 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _HfuApp();
+  State<HomeScreen> createState() => _HomeScreen();
 }
 
-class _HfuApp extends State<HomeScreen> {
+class _HomeScreen extends State<HomeScreen> {
   int _selectedIndex = 1;
-  static final List<Widget> _pages = <Widget>[Profile(), Home(), Menu()];
+  static final List<Widget> _pages = <Widget>[Profile(), Home(), const Menu()];
+
+ /* @override
+  void initState() {
+    super.initState();
+    initialization();
+  }
+
+  void initialization() {
+    FlutterNativeSplash.remove();
+  } */
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,19 +109,18 @@ class _HfuApp extends State<HomeScreen> {
       extendBody: true,
       appBar: NewGradientAppBar(
         gradient: LinearGradient(
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
-          stops: [
-            0.3,
-            0.4,
-            1
-          ],
-          colors: [
-            Colors.green.shade600,
-            Colors.lightGreen.shade500,
-            Colors.white30,
-          ]
-        ),
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            stops: const [
+              0.3,
+              0.4,
+              1
+            ],
+            colors: [
+              Colors.green.shade600,
+              Colors.lightGreen.shade500,
+              Colors.white30,
+            ]),
         centerTitle: false,
         title: const Text(
           'HFU Mobile',
@@ -115,8 +150,7 @@ class _HfuApp extends State<HomeScreen> {
                         width: 1,
                       ),
                     ],
-                  )
-              ),
+                  )),
               PopupMenuItem<int>(
                   value: 1,
                   child: Row(
@@ -127,14 +161,13 @@ class _HfuApp extends State<HomeScreen> {
                         icon: const Icon(Icons.mail),
                         color: Colors.black,
                         onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Contact())),
+                            MaterialPageRoute(builder: (context) => const Contact())),
                       ),
                       const SizedBox(
                         width: 1,
                       ),
                     ],
-                  )
-              ),
+                  )),
               PopupMenuItem<int>(
                   value: 2,
                   child: Row(
@@ -144,8 +177,10 @@ class _HfuApp extends State<HomeScreen> {
                         alignment: Alignment.centerRight,
                         icon: const Icon(Icons.announcement),
                         color: Colors.black,
-                        onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => AboutProject())),
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AboutProject())),
                       ),
                       const SizedBox(
                         width: 1,
@@ -193,11 +228,12 @@ class _HfuApp extends State<HomeScreen> {
         break;
       case 1:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Contact()));
+            .push(MaterialPageRoute(builder: (context) => const Contact()));
         break;
       case 2:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => AboutProject()));
+            .push(
+            MaterialPageRoute(builder: (context) => const AboutProject()));
         break;
     }
   }

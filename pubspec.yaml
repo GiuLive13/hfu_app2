@@ -30,12 +30,15 @@ dependencies:
   flutter:
     sdk: flutter
 
+  meta: ^1.2.2
+
   # Settings
   settings_ui: ^2.0.2
 
   # Firebase
   firebase_core: ^1.14.0
   firebase_database: ^9.0.10
+  firebase_storage: ^10.2.16
   firebase_auth: ^3.3.4
   cloud_firestore: ^3.1.5
 
@@ -55,11 +58,18 @@ dependencies:
   cupertino_icons: ^1.0.2
   new_gradient_app_bar: ^0.2.0
   font_awesome_flutter: ^10.1.0
+  flutter_native_splash: ^2.2.1
 
   # Web
   webview_flutter: ^3.0.2
   http: ^0.13.4
   html: ^0.15.0
+  flutter_pdfview: ^1.2.2
+
+  # Path
+  file_picker: ^4.5.1
+  path:
+  path_provider: ^2.0.10
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +81,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -86,8 +97,6 @@ flutter:
      - assets/images/
   #   - images/a_dot_ham.jpeg
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages

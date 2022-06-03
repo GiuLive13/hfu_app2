@@ -1,8 +1,9 @@
-import 'package:hfu_app2/websites/hfu_website_news.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as parser;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+
+import '../websites/hfu_website_news.dart';
 
 
 
@@ -19,12 +20,12 @@ class _NewsState extends State<News> {
   @override
   void initState() {
     super.initState();
-    
+
     getWebsiteData();
   }
   
   Future getWebsiteData() async {
-    final url = Uri.parse('https://www.hs-furtwangen.de/aktuelles/?tx_solr%5Bfilter%5D%5B0%5D=publishedBy%3ApressOffice');
+    final url = Uri.parse('https://www.hs-furtwangen.de/aktuelles/');
     final response = await http.get(url);
     dom.Document html = dom.Document.html(response.body);
 
@@ -60,47 +61,65 @@ class _NewsState extends State<News> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Aktuelles'),
-        centerTitle: true,
       ),
-      body: ListView.builder(
-          padding: const EdgeInsets.all(20),
-          itemCount: newsArticles.length,
-          itemBuilder: (context, index) {
-            final newsArticle = newsArticles[index];
-
-            return Card(
-              color: Colors.green.shade800,
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text(
-                        newsArticle.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-                      ),
-                    ),
-                    subtitle: Text(
-                        newsArticle.subtitle,
-                      style: const TextStyle(
-                        color: Colors.white
-                      ),
-                    ),
-                  ),
-                  ButtonBar(
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                     //       Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteNews()));
-                          },
-                          icon: const Icon(Icons.arrow_forward_ios)
-                      ),
-                    ]
-                  ),
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: const [
+                  0.1,
+                  0.9,
+                  1.3,
                 ],
-              ),
-            );
-          },
+                colors: [
+                  Colors.white,
+                  Colors.lightGreen.shade600,
+                  Colors.green.shade900,
+                ]
+            )
+        ),
+        child: ListView.builder(
+          padding: const EdgeInsets.only(top: 6, left: 25, right: 25),
+            itemCount: newsArticles.length,
+            itemBuilder: (context, index) {
+              final newsArticle = newsArticles[index];
+
+              return Card(
+                color: Colors.green.shade800,
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text(
+                          newsArticle.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white
+                        ),
+                      ),
+                      subtitle: Text(
+                          newsArticle.subtitle,
+                        style: const TextStyle(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteNews()));
+                            },
+                            icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)
+                        ),
+                      ]
+                    ),
+                  ],
+                ),
+              );
+            },
+        ),
       ),
     );
   }

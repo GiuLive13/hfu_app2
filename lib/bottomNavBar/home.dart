@@ -1,76 +1,70 @@
 import 'package:flutter/material.dart';
-
 import 'package:hfu_app2/homeDir/alfaview.dart';
 import 'package:hfu_app2/homeDir/felix.dart';
 import 'package:hfu_app2/homeDir/mail.dart';
 import 'package:hfu_app2/homeDir/studiPortal.dart';
 import 'package:hfu_app2/homeDir/timetable.dart';
+
 import '../websites/hfu_website.dart';
 
 class Home extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: const [
-                  0.1,
-                  0.9,
-                  1.3,
-                ],
+              0.1,
+              0.9,
+              1.3,
+            ],
                 colors: [
-                  Colors.white,
-                  Colors.lightGreen.shade600,
-                  Colors.green.shade900,
-                ]
-            )
-        ),
-          child: ListView(
-            padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
-
+              Colors.white,
+              Colors.lightGreen.shade600,
+              Colors.green.shade900,
+            ])),
+        child: ListView(
             children: [
-            Container(
-              child: Card(
+              Card(
+                margin: const EdgeInsets.only(top: 6, left: 25, right: 25),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)
-                ),
-              color: Colors.green.shade800,
+                    borderRadius: BorderRadius.circular(15)),
+                color: Theme.of(context).colorScheme.primary,
                 child: Column(
                   children: [
-                     const ListTile(
+                    const ListTile(
                       title: Text(
                         'FELIX',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 40,
-                            color: Colors.white
-                        ),
+                            color: Colors.white),
                       ),
                     ),
-                    ButtonBar(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => FelixPortal()));
-                              },
-                              icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)
-                          ),
-                        ]
-                    ),
+                    ButtonBar(children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => FelixPortal()));
+                          },
+                          icon: const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                          )),
+                    ]),
                   ],
                 ),
               ),
-            ),
               Card(
+                margin: const EdgeInsets.only(top: 4, left: 25, right: 25),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                ),
-                color: Colors.green.shade800,
+                    borderRadius: BorderRadius.circular(15)),
+                color: Theme.of(context).colorScheme.primary,
                 child: Column(
                   children: [
                     const ListTile(
@@ -79,28 +73,30 @@ class Home extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 40,
-                            color: Colors.white
-                        ),
+                            color: Colors.white),
                       ),
                     ),
-                    ButtonBar(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => StudiPortal()));
-                              },
-                              icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)
-                          ),
-                        ]
-                    ),
+                    ButtonBar(children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => StudiPortal()));
+                          },
+                          icon: const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                          )),
+                    ]),
                   ],
                 ),
               ),
               Card(
+                margin: const EdgeInsets.only(top: 4, left: 25, right: 25),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                ),
-                color: Colors.green.shade800,
+                    borderRadius: BorderRadius.circular(15)),
+                color: Theme.of(context).colorScheme.primary,
                 child: Column(
                   children: [
                     const ListTile(
@@ -109,28 +105,30 @@ class Home extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 40,
-                            color: Colors.white
-                        ),
+                            color: Colors.white),
                       ),
                     ),
-                    ButtonBar(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Mail()));
-                              },
-                              icon: Icon(Icons.arrow_forward_ios, color: Colors.white,)
-                          ),
-                        ]
-                    ),
+                    ButtonBar(children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Mail()));
+                          },
+                          icon: const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                          )),
+                    ]),
                   ],
                 ),
               ),
               Card(
+                margin: const EdgeInsets.only(top: 4, left: 25, right: 25),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                ),
-                color: Colors.green.shade800,
+                    borderRadius: BorderRadius.circular(15)),
+                color: Theme.of(context).colorScheme.primary,
                 child: Column(
                   children: [
                     const ListTile(
@@ -139,28 +137,30 @@ class Home extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 40,
-                            color: Colors.white
-                        ),
+                            color: Colors.white),
                       ),
                     ),
-                    ButtonBar(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Timetable()));
-                              },
-                              icon: Icon(Icons.arrow_forward_ios, color: Colors.white,)
-                          ),
-                        ]
-                    ),
+                    ButtonBar(children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Timetable()));
+                          },
+                          icon: const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                          )),
+                    ]),
                   ],
                 ),
               ),
               Card(
+                margin: const EdgeInsets.only(top: 4, left: 25, right: 25, bottom: 5),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                ),
-                color: Colors.green.shade800,
+                    borderRadius: BorderRadius.circular(15)),
+                color: Theme.of(context).colorScheme.primary,
                 child: Column(
                   children: [
                     const ListTile(
@@ -169,24 +169,39 @@ class Home extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 40,
-                            color: Colors.white
-                        ),
+                            color: Colors.white),
                       ),
                     ),
-                    ButtonBar(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Aview()));
-                              },
-                              icon: Icon(Icons.arrow_forward_ios, color: Colors.white,)
-                          ),
-                        ]
-                    ),
+                    ButtonBar(children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Aview()));
+                          },
+                          icon: const Icon(Icons.arrow_forward_ios,
+                              color: Colors.white)),
+                    ]),
                   ],
                 ),
               ),
-          /*    const SizedBox(height: 100),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  foregroundColor: Colors.black,
+                  mini: true,
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HfuWebsite()));
+                  },
+                  child: const Icon(Icons.house_rounded, color: Colors.white, size: 30),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                ),
+              ),
+              /*    const SizedBox(height: 100),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -200,10 +215,9 @@ class Home extends StatelessWidget {
                   ),
                 ],
               ) */
-        ]),
+            ]),
+
       ),
     );
   }
 }
-
-

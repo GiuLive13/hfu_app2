@@ -15,31 +15,34 @@ class UserProfile extends StatelessWidget {
           children: [
 
           ],
-        )*/  Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('User: '),
-              SizedBox(height: 5),
-              Text(
-                user.email!,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+        )*/  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('User: '),
+            const SizedBox(height: 5),
+            Text(
+              user.email!,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 20),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size.fromHeight(50),
-                ),
-                icon: Icon(Icons.arrow_back, size: 32),
-                label: Text("Logout"),
-                onPressed: () => FirebaseAuth.instance.signOut(),
-              )
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(50),
+              ),
+              icon: Icon(Icons.arrow_back, size: 32),
+              label: Text("Logout"),
+              onPressed: () => FirebaseAuth.instance.signOut(),
+            )
+          ],
         )
     );
   }
 }
+/*
+ Change password,
+ Delete Account,
+ Profilbild ?
+ */

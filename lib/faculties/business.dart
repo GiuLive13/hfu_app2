@@ -21,16 +21,20 @@ class _BusinessState extends State<Business> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text ('Wirtschaft'),
-      ),
-      body: WebView(
+        extendBodyBehindAppBar: true,
+        body: Container(
+        decoration: const BoxDecoration(
+        color: Colors.white
+    ),
+    padding: const EdgeInsets.only(top:25),
+    child: WebView(
           initialUrl: 'https://www.hs-furtwangen.de/fakultaeten/wirtschaft/',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _webController.complete(webViewController);
           }
       ),
+    )
     );
   }
 }

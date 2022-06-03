@@ -12,9 +12,9 @@ class Profile extends StatelessWidget {
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
-                return Center(child: Text("Fehler aufgetreten"));
+                return const Center(child: Text("Fehler aufgetreten"));
               } else if (snapshot.hasData) {
                 return UserProfile();
               } else {
@@ -26,8 +26,3 @@ class Profile extends StatelessWidget {
   }
 }
 
-/*
- Change password,
- Delete Account,
- Profilbild ?
- */
