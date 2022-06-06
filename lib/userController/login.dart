@@ -68,7 +68,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             key: formKey,
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 30),
+                const SizedBox(height: 15),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(
@@ -112,7 +112,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         )),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 18),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),

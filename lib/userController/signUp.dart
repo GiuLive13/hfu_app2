@@ -50,7 +50,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         ),
         extendBodyBehindAppBar: true,
         body: Container(
-          padding: const EdgeInsets.only(top: 40),
+          padding: const EdgeInsets.only(top: 30),
           height: double.infinity,
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -70,7 +70,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             key: formKey,
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 30),
+                const SizedBox(height: 9),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(
@@ -154,7 +154,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     : null,
               ),
             ), */
-                const SizedBox(height: 40),
+                const SizedBox(height: 18),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),

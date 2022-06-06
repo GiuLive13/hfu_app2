@@ -19,11 +19,11 @@ class _MarketplaceState extends State<Marketplace> {
         title: const Text('Marktplatz'),
       ),
       floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).colorScheme.primary,
           //heroTag
           child: const Icon(Icons.add),
-          onPressed: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AddEntry())) //_addEntry,
-          ),
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AddEntry()))),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -65,11 +65,15 @@ Stream<List<Entry>> readEntry() => FirebaseFirestore.instance
     .map((snapshot) =>
         snapshot.docs.map((doc) => Entry.fromJson(doc.data())).toList());
 
-Widget buildEntry(Entry entry) =>
-    Container(
-      // decoration
+Widget buildEntry(Entry entry) => Center(
       child: Card(
-        margin: EdgeInsets.all(12),
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
+            side: const BorderSide(
+              color: Colors.green,
+            )),
+        margin: const EdgeInsets.only(top: 8, left: 10, right: 10, bottom: 10),
         clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,11 +91,14 @@ Widget buildEntry(Entry entry) =>
             ),
             Row(children: [
               const SizedBox(
-                width: 12,
+                width: 30,
               ),
-              Text(
-                entry.description,
-                style: const TextStyle(fontSize: 17),
+              Flexible(
+                child: Text(
+                  entry.description,
+                  style: const TextStyle(
+                      fontSize: 17, overflow: TextOverflow.ellipsis),
+                ),
               ),
             ]),
             Container(

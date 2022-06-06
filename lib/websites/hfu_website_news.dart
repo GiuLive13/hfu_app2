@@ -26,7 +26,7 @@ class _HfuWebsiteNewsState extends State<HfuWebsiteNews> {
         title: const Text ('Aktuelles'),
       ),
       body: WebView(
-          initialUrl: 'https://www.hs-furtwangen.de/aktuelles/?tx_solr%5Bfilter%5D%5B0%5D=publishedBy%3ApressOffice',
+          initialUrl: 'https://www.hs-furtwangen.de/aktuelles/',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _webController.complete(webViewController);

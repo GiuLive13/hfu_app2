@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -92,17 +93,6 @@ class _HomeScreen extends State<HomeScreen> {
   int _selectedIndex = 1;
   static final List<Widget> _pages = <Widget>[Profile(), Home(), const Menu()];
 
- /* @override
-  void initState() {
-    super.initState();
-    initialization();
-  }
-
-  void initialization() {
-    FlutterNativeSplash.remove();
-  } */
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -196,21 +186,18 @@ class _HomeScreen extends State<HomeScreen> {
       body: Center(
         child: _pages.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: CurvedNavigationBar(
+        height: 50,
         backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconSize: 30,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded),
-            label: 'Profil',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.weekend), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.apps), label: 'Menü')
+        color: Colors.white54,
+        items: const [
+          Icon(Icons.account_circle_rounded, size: 30,),
+          Icon(Icons.weekend, size: 30,),
+          Icon(Icons.apps, size: 30,)
         ],
-        currentIndex: _selectedIndex,
+        index: _selectedIndex,
         onTap: _tapedItem,
-      ),
+      )
     );
   }
 
@@ -224,7 +211,7 @@ class _HomeScreen extends State<HomeScreen> {
     switch (item) {
       case 0:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Settings()));
+            .push(MaterialPageRoute(builder: (context) => const Settings()));
         break;
       case 1:
         Navigator.of(context)

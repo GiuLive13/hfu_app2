@@ -25,7 +25,7 @@ class _NewsState extends State<News> {
   }
   
   Future getWebsiteData() async {
-    final url = Uri.parse('https://www.hs-furtwangen.de/aktuelles/');
+    final url = Uri.parse('https://www.hs-furtwangen.de/aktuelles/?tx_solr%5Bfilter%5D%5B0%5D=publishedBy%3ApressOffice');
     final response = await http.get(url);
     dom.Document html = dom.Document.html(response.body);
 
@@ -35,7 +35,7 @@ class _NewsState extends State<News> {
         .toList();
     
     final subtitles = html
-        .querySelectorAll('a > article > div > p')
+        .querySelectorAll('article > div > p')
         .map((element) => element.innerHtml.trim())
         .toList();
     

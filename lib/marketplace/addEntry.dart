@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'entry.dart';
 
@@ -19,7 +21,7 @@ class AddEntry extends StatefulWidget {
     Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Ich biete ... '),
+          title: const Text('Ich biete/ suche ... '),
         ),
         body: ListView(
           padding: const EdgeInsets.all(16),
@@ -62,7 +64,7 @@ class AddEntry extends StatefulWidget {
                   createEntry(entry);
                   Navigator.pop(context);
                 },
-                icon: const Icon(Icons.add, size: 25),
+                icon: const FaIcon(Icons.add, size: 25),
                 label: const Text('Angebot hochladen',
                 style: TextStyle(fontSize: 20),)
             ),

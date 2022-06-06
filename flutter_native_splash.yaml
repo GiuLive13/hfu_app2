@@ -1,4 +1,4 @@
 flutter_native_splash: #iOS Settings
 
   background_image: assets/images/background_splash.png
-  image: assets/images/hfu_splash.png
+ # image: assets/images/hfu_splash.png

@@ -3,12 +3,14 @@ class Entry {
   final String title;
   final String userContact;
   final String description;
+//  final DateTime uploadTime;
 
   Entry({
     this.id = '',
     required this.title,
     required this.userContact,
-    required this.description
+    required this.description,
+   // required this.uploadTime
   });
 
   Map<String, dynamic> toJson() => {
