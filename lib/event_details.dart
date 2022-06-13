@@ -47,13 +47,6 @@ class _EventDetailState extends State<EventDetail> {
   }
 
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-}
-
 class EventDetails {
   final String event;
   final String date;
