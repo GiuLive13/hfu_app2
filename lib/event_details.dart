@@ -1,6 +1,4 @@
-import 'package:hfu_app2/websites/hfu_website_news.dart';
 import 'package:html/dom.dart' as dom;
-import 'package:html/parser.dart' as parser;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -46,6 +44,12 @@ class _EventDetailState extends State<EventDetail> {
     });
   }
 
+
+  @override
+  Widget build(BuildContext context) {
+    throw UnimplementedError();
+  }
+}
 
 class EventDetails {
   final String event;
