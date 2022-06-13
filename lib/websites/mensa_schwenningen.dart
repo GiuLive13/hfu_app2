@@ -3,19 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class FelixPortal extends StatefulWidget {
+class MensaSchwenningen extends StatefulWidget {
   @override
-  _FelixPortalState createState() => _FelixPortalState();
+  _MensaSchwenningenState createState() => _MensaSchwenningenState();
 }
 
-class _FelixPortalState extends State<FelixPortal> {
+class _MensaSchwenningenState extends State<MensaSchwenningen> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
   @override
   void initState() {
     super.initState();
-
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
   @override
@@ -26,7 +24,7 @@ class _FelixPortalState extends State<FelixPortal> {
           decoration: const BoxDecoration(color: Colors.white),
           padding: const EdgeInsets.only(top: 25),
           child: WebView(
-              initialUrl: 'https://felix.hs-furtwangen.de/dmz/',
+              initialUrl: 'https://www.swfr.de/essen-trinken/speiseplaene/mensa-schwenningen/',
               javascriptMode: JavascriptMode.unrestricted,
               onWebViewCreated: (WebViewController webViewController) {
                 _webController.complete(webViewController);

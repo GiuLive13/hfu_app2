@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hfu_app2/userController/utils.dart';
 
 import '../main.dart';
-import 'newPassword.dart';
+import 'new_password.dart';
 
 class LoginWidget extends StatefulWidget {
   final Function() clickSignIn;

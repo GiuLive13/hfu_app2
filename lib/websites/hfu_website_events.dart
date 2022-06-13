@@ -6,18 +6,13 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
 
 
-class HfuWebsiteNews extends StatefulWidget {
-  HfuWebsiteNews(this.url, {Key? key}) : super(key: key);
-
-  String url;
-
+class HfuWebsiteEvents extends StatefulWidget {
   @override
-  _HfuWebsiteNewsState createState() => _HfuWebsiteNewsState();
+  _HfuWebsiteEventsState createState() => _HfuWebsiteEventsState();
 }
 
-class _HfuWebsiteNewsState extends State<HfuWebsiteNews> {
+class _HfuWebsiteEventsState extends State<HfuWebsiteEvents> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
-
 
   void initState(){
     super.initState();
@@ -28,10 +23,10 @@ class _HfuWebsiteNewsState extends State<HfuWebsiteNews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text ('Aktuelles'),
+        title: const Text ('Veranstaltungen'),
       ),
       body: WebView(
-          initialUrl: widget.url,
+          initialUrl: 'https://www.hs-furtwangen.de/veranstaltungen/?tx_solr%5Bfilter%5D%5B0%5D=publishedBy%3ApressOffice',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _webController.complete(webViewController);

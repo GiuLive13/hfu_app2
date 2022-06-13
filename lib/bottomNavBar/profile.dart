@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:hfu_app2/userController/authPage.dart';
-import '../userProfile.dart';
+import 'package:hfu_app2/userController/auth_page.dart';
+import '../userprofile.dart';
 
 class Profile extends StatelessWidget {
+  const Profile({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

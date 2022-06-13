@@ -1,12 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hfu_app2/main.dart';
 import 'package:hfu_app2/userController/login.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../userController/newPassword.dart';
+import '../userController/new_password.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
+  static const keyDarkMode = 'key-dark-mode';
+  static const keyLanguage = 'key-language';
 
   @override
   State<Settings> createState() => _SettingsState();
@@ -29,7 +32,7 @@ class _SettingsState extends State<Settings> {
                     value: const Text("Deutsch"),
                   ),
                   SettingsTile.switchTile(
-                    onToggle: (value) {},
+                    onToggle: (isDarkMode) {},
                     initialValue: true,
                     leading:
                     const Icon(Icons.format_paint, color: Colors.blueGrey),
@@ -48,7 +51,7 @@ class _SettingsState extends State<Settings> {
               SettingsTile.navigation(
                 leading: const Icon(Icons.logout, color: Colors.red),
                 title: const Text("Ausloggen"),
-                onPressed: (context) => FirebaseAuth.instance.signOut(),
+                onPressed: logOutUser,
               ),
               SettingsTile.navigation(
                   leading: const Icon(Icons.password, color: Colors.blueGrey),
@@ -70,4 +73,29 @@ class _SettingsState extends State<Settings> {
   deleteCurrentUser(BuildContext context) {
     //implement!
   }
+
+ Future logOutUser(context) async{
+  return showDialog(
+       context: context,
+       builder: (BuildContext context) =>  AlertDialog(
+         title: const Text('Wirklich ausloggen?'),
+         actions: [
+           TextButton(
+               onPressed: () {
+                 FirebaseAuth.instance.signOut(); // Loggedin Abfrage
+                 Navigator.of(context).pop();
+               },
+               child: const Text('Ja', style: TextStyle(
+                 fontSize: 24
+               ),)),
+           TextButton(
+               onPressed: () => Navigator.of(context).pop(),
+               child: const Text('Nein', style: TextStyle(
+                   fontSize: 24
+               ),))
+         ],
+       )
+   );
+  }
+
 }

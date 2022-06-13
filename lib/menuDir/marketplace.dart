@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hfu_app2/marketplace/addEntry.dart';
-import 'package:hfu_app2/marketplace/entry-view.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hfu_app2/marketplace/add_entry.dart';
 import 'package:hfu_app2/marketplace/entry.dart';
+import 'package:hfu_app2/marketplace/entry_view.dart';
+import 'package:path/path.dart';
 
 class Marketplace extends StatefulWidget {
   const Marketplace({Key? key}) : super(key: key);
@@ -14,47 +17,56 @@ class Marketplace extends StatefulWidget {
 class _MarketplaceState extends State<Marketplace> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Marktplatz'),
-      ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          //heroTag
-          child: const Icon(Icons.add),
-          onPressed: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddEntry()))),
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: const [
-              0.1,
-              0.9,
-              1.3,
-            ],
-                colors: [
-              Colors.white,
-              Colors.lightGreen.shade600,
-              Colors.green.shade900,
-            ])),
-        child: StreamBuilder<List<Entry>>(
-            stream: readEntry(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Text('Something went wrong! ${snapshot.error}');
-              } else if (snapshot.hasData) {
-                final entries = snapshot.data!;
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Marktplatz'),
+          ),
+          floatingActionButton: snapshot.hasData? FloatingActionButton(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              child: const FaIcon(FontAwesomeIcons.plus, size: 28),
+              onPressed: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const AddEntry()))
+          ) : null,
+          body: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    stops: const [
+                      0.1,
+                      0.9,
+                      1.3,
+                    ],
+                    colors: [
+                      Colors.white,
+                      Colors.lightGreen.shade600,
+                      Colors.green.shade900,
+                    ])
+            ),
+            child: StreamBuilder<List<Entry>>(
+                stream: readEntry(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(
+                        child: Text('Something went wrong! ${snapshot.error}')
+                    );
+                  } else if (snapshot.hasData) {
+                    final entries = snapshot.data!;
 
-                return ListView(
-                  children: entries.map(buildEntry).toList(),
-                );
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            }),
-      ),
+                    return ListView(
+                      children: entries.map((entry) => buildEntry(context, entry)).toList(),
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                }),
+          ),
+        );
+      }
+
     );
   }
 }
@@ -65,15 +77,22 @@ Stream<List<Entry>> readEntry() => FirebaseFirestore.instance
     .map((snapshot) =>
         snapshot.docs.map((doc) => Entry.fromJson(doc.data())).toList());
 
-Widget buildEntry(Entry entry) => Center(
-      child: Card(
+/*Stream<QuerySnapshot<Map<String, dynamic>>> readUser() =>
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection('entries')
+        .snapshots();
+*/
+Widget buildEntry(BuildContext context, Entry entry) => Center(
+      child: Card( // Hero
         elevation: 5,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
             side: const BorderSide(
               color: Colors.green,
             )),
-        margin: const EdgeInsets.only(top: 8, left: 10, right: 10, bottom: 10),
+        margin: const EdgeInsets.only(top: 5, left: 10, right: 10, bottom: 5),
         clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,12 +125,14 @@ Widget buildEntry(Entry entry) => Center(
                 decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                            'assets/images/hfu_website_adaptive_fore.png')))),
+                            'assets/images/hfu_website_adaptive_fore.png'))
+                )
+            ),
             ButtonBar(
               alignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                    onPressed: () => _clickEntry,
+                    onPressed: () => _clickEntry(context, entry),
                     child: const Text(
                       "Eintrag anschauen",
                       style: TextStyle(
@@ -125,8 +146,7 @@ Widget buildEntry(Entry entry) => Center(
       ),
     );
 
-// Geht nicht
-void _clickEntry(BuildContext context) {
+void _clickEntry(BuildContext context, Entry entry) {
   Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => EntryView()));
+      .push(MaterialPageRoute(builder: (context) => EntryView(entry)));
 }

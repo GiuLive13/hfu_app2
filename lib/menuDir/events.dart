@@ -1,12 +1,11 @@
+import 'package:hfu_app2/event_details.dart';
 import 'package:hfu_app2/websites/hfu_website_news.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as parser;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-/*
-    I-wie anders aufteilen
- */
+import '../websites/hfu_website_events.dart';
 
 class Event extends StatefulWidget {
   const Event({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class Event extends StatefulWidget {
 }
 
 class _EventState extends State<Event> {
-  List<EventArticle> eventArticles = [];
+  List<EventMonth> eventMonths = [];
 
   @override
   void initState() {
@@ -30,8 +29,8 @@ class _EventState extends State<Event> {
     final response = await http.get(url);
     dom.Document html = dom.Document.html(response.body);
 
-    final titles = html
-        .querySelectorAll('h2')
+    final headline = html
+        .querySelectorAll('section > h2')
         .map((element) => element.innerHtml.trim())
         .toList();
 
@@ -45,15 +44,13 @@ class _EventState extends State<Event> {
         .map((element) => 'https://www.hs-furtwangen.de/aktuelles/${element.attributes['href']}')
         .toList();
 
-    print('Count: ${titles.length}');
+    print('Count: ${headline.length}');
 
     setState(() {
-      eventArticles = List.generate(
-        titles.length,
-            (index) => EventArticle(
-          title: titles[index],
-          event: events[index],
-          url: urls[index],
+      eventMonths = List.generate(
+        headline.length,
+            (index) => EventMonth(
+          headline: headline[index],
         ),
       );
     });
@@ -66,54 +63,67 @@ class _EventState extends State<Event> {
         title: const Text('Veranstaltungen'),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(20),
-        itemCount: eventArticles.length,
-        itemBuilder: (context, index) {
-          final eventArticle = eventArticles[index];
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: const [
+                  0.1,
+                  0.9,
+                  1.3,
+                ],
+                colors: [
+                  Colors.white,
+                  Colors.lightGreen.shade600,
+                  Colors.green.shade900,
+                ]
+            )
+        ),
+        child: ListView.builder(
+          padding: const EdgeInsets.all(20),
+          itemCount: eventMonths.length,
+          itemBuilder: (context, index) {
+            final eventMonth = eventMonths[index];
 
-          return Card(
-            child: Column(
-              children: [
-                ListTile(
-                  title: Text(
-                    eventArticle.title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  subtitle: Text(
-                      eventArticle.event
-                  ),
-                ),
-                ButtonBar(
+            return InkWell(
+              onTap: () {
+               // Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetail()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteEvents()));
+              },
+              child: Container(
+                height: 80,
+                child: Card(
+                  color: Theme.of(context).colorScheme.primary,
+                  child: Column(
                     children: [
-                      IconButton(
-                          onPressed: () {
-                            //       Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteNews()));
-                          },
-                          icon: Icon(Icons.arrow_forward_ios)
+                      ListTile(
+                        title: Text(
+                          eventMonth.headline,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ]
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          );
-        },
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 }
 
-class EventArticle {
-  final String event;
-  final String title;
-  final String url;
+class EventMonth {
+  final String headline;
 
-  const EventArticle({
-    required this.event,
-    required this.title,
-    required this.url,
+  const EventMonth({
+    required this.headline,
   });
 }
 

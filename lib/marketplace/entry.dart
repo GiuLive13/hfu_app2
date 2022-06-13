@@ -1,5 +1,6 @@
 class Entry {
   String id;
+  String uid;
   final String title;
   final String userContact;
   final String description;
@@ -7,6 +8,7 @@ class Entry {
 
   Entry({
     this.id = '',
+    this.uid = '',
     required this.title,
     required this.userContact,
     required this.description,
@@ -15,6 +17,7 @@ class Entry {
 
   Map<String, dynamic> toJson() => {
     'id': id,
+    'uid': uid,
     'title': title,
     'userContact': userContact,
     'description': description
@@ -22,6 +25,7 @@ class Entry {
 
   static Entry fromJson(Map<String, dynamic> json) => Entry(
     id: json['id'],
+    uid: json['uid'],
     title: json['title'],
     userContact: json['userContact'],
     description: json['description']

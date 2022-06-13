@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path/path.dart';
 
-
-
 class CampusFurtwangen extends StatefulWidget {
   final File file;
 

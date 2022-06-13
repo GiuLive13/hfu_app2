@@ -22,10 +22,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final sameValueController = TextEditingController();
 
   bool _obscureTextFirst = true;
-  bool _obscureTextSecond = true;
 
   @override
   void dispose() {
@@ -122,38 +120,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         : null,
                   ),
                 ),
-                /* Container(                                        Passwort bestätigen fixen
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Colors.grey,
-              ))),
-              child: TextFormField(
-                controller: sameValueController,
-                textInputAction: TextInputAction.done,
-                obscureText: _obscureTextSecond,
-                decoration: InputDecoration(
-                    hintText: "Passwort bestätigen",
-                    hintStyle: TextStyle(color: Colors.blueGrey.shade200),
-                    border: InputBorder.none,
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _obscureTextSecond = !_obscureTextSecond;
-                        });
-                      },
-                      child: Icon(
-                          _obscureTextSecond ? Icons.visibility : Icons.visibility_off
-                      ),
-                    )
-                ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => value != null && value.length < 6 && value != passwordController
-                    ? 'Passwort muss übereinstimmen'
-                    : null,
-              ),
-            ), */
                 const SizedBox(height: 18),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(

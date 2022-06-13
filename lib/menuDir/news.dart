@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 
 import '../websites/hfu_website_news.dart';
 
-
-
 class News extends StatefulWidget {
   const News({Key? key}) : super(key: key);
 
@@ -17,6 +15,7 @@ class News extends StatefulWidget {
 class _NewsState extends State<News> {
   List<NewsArticle> newsArticles = [];
 
+
   @override
   void initState() {
     super.initState();
@@ -26,8 +25,11 @@ class _NewsState extends State<News> {
   
   Future getWebsiteData() async {
     final url = Uri.parse('https://www.hs-furtwangen.de/aktuelles/?tx_solr%5Bfilter%5D%5B0%5D=publishedBy%3ApressOffice');
+ //   final urlDetail = Uri.parse('https://www.hs-furtwangen.de/aktuelles/detail/');
     final response = await http.get(url);
+  //  final responseDetail = await http.get(urlDetail);
     dom.Document html = dom.Document.html(response.body);
+  //  dom.Document htmlDetail = dom.Document.html(responseDetail.body);
 
     final titles = html
         .querySelectorAll('article > div > h3')
@@ -40,9 +42,11 @@ class _NewsState extends State<News> {
         .toList();
     
     final urls = html
-        .querySelectorAll('a')
-        .map((element) => 'https://www.hs-furtwangen.de/aktuelles/${element.attributes['href']}')
+        .querySelectorAll('#tx-solr-search > ul > li > a')
+        .map((element) => '${element.attributes['href']}')
         .toList();
+    print('');
+   // final urlsDetail = htmlDetail.querySelectorAll('div > div').map((element) => 'https://www.hs-furtwangen.de/aktuelles/detail/${element}').toList();
 
     setState(() {
       newsArticles = List.generate(
@@ -51,9 +55,11 @@ class _NewsState extends State<News> {
                 title: titles[index],
                 subtitle: subtitles[index],
                 url: urls[index],
+             //   urlDetail: urlsDetail[index]
               ),
         );
       });
+    // setState((){});
   }
 
   @override
@@ -108,9 +114,9 @@ class _NewsState extends State<News> {
                     ButtonBar(
                       children: [
                         IconButton(
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteNews()));
-                            },
+                            onPressed: () =>
+                            //  _openDetails,
+                             Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteNews(newsArticle.url))),
                             icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)
                         ),
                       ]
@@ -125,15 +131,19 @@ class _NewsState extends State<News> {
   }
 }
 
+
+
 class NewsArticle {
   final String subtitle;
   final String title;
   final String url;
+ // final String urlDetail;
 
   const NewsArticle({
     required this.subtitle,
     required this.title,
     required this.url,
+  //  required this.urlDetail,
   });
 }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hfu_app2/homeDir/alfaview.dart';
 import 'package:hfu_app2/homeDir/felix.dart';
 import 'package:hfu_app2/homeDir/mail.dart';
-import 'package:hfu_app2/homeDir/studiPortal.dart';
+import 'package:hfu_app2/homeDir/studi_portal.dart';
 import 'package:hfu_app2/homeDir/timetable.dart';
 
 import '../websites/hfu_website.dart';
