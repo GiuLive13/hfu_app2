@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MensaSchwenningen extends StatefulWidget {
+  const MensaSchwenningen({Key? key}) : super(key: key);
+
   @override
   _MensaSchwenningenState createState() => _MensaSchwenningenState();
 }

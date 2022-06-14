@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class XingLink extends StatefulWidget {
-  const XingLink({Key? key}) : super(key: key);
+class FAQ extends StatefulWidget {
+  const FAQ({Key? key}) : super(key: key);
 
   @override
-  _XingLinkState createState() => _XingLinkState();
+  _FAQState createState() => _FAQState();
 }
 
-class _XingLinkState extends State<XingLink> {
+class _FAQState extends State<FAQ> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
   @override
@@ -29,7 +29,7 @@ class _XingLinkState extends State<XingLink> {
         ),
         padding: const EdgeInsets.only(top:25),
         child: WebView(
-            initialUrl: 'https://www.xing.com/pages/hochschulefurtwangenuniversity',
+            initialUrl: 'https://howto.hs-furtwangen.de/faq/',
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (WebViewController webViewController) {
               _webController.complete(webViewController);

@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+
 class Entry {
   String id;
   String uid;
   final String title;
   final String userContact;
   final String description;
-//  final DateTime uploadTime;
+  //final String imagePath;
+  //final Timestamp uploadTime;
 
   Entry({
     this.id = '',
@@ -12,7 +16,8 @@ class Entry {
     required this.title,
     required this.userContact,
     required this.description,
-   // required this.uploadTime
+   // required this.imagePath,
+    //this.uploadTime = FieldValue.serverTimestamp(),
   });
 
   Map<String, dynamic> toJson() => {
@@ -20,7 +25,9 @@ class Entry {
     'uid': uid,
     'title': title,
     'userContact': userContact,
-    'description': description
+    'description': description,
+    //'imagePath' : imagePath,
+    //'uploadTime' : uploadTime,
   };
 
   static Entry fromJson(Map<String, dynamic> json) => Entry(
@@ -28,7 +35,9 @@ class Entry {
     uid: json['uid'],
     title: json['title'],
     userContact: json['userContact'],
-    description: json['description']
+    description: json['description'],
+   // imagePath: json['imagePath'],
+   // uploadTime: json['uploadtimestamp']
   );
 
 }

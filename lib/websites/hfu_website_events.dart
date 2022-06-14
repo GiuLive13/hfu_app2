@@ -14,6 +14,7 @@ class HfuWebsiteEvents extends StatefulWidget {
 class _HfuWebsiteEventsState extends State<HfuWebsiteEvents> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

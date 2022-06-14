@@ -24,10 +24,10 @@ class _InstaLinkState extends State<InstaLink> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Colors.white
         ),
-        padding: EdgeInsets.only(top:25),
+        padding: const EdgeInsets.only(top:25),
         child: WebView(
             initialUrl: 'https://www.instagram.com/hs.furtwangen/?hl=de',
             javascriptMode: JavascriptMode.unrestricted,

@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hfu_app2/marketplace/add_entry.dart';
 import 'package:hfu_app2/marketplace/entry.dart';
 import 'package:hfu_app2/marketplace/entry_view.dart';
+import 'package:hfu_app2/widgets/background_widget.dart';
 import 'package:path/path.dart';
 
 class Marketplace extends StatefulWidget {
@@ -30,23 +31,10 @@ class _MarketplaceState extends State<Marketplace> {
               onPressed: () => Navigator.push(
                   context, MaterialPageRoute(builder: (context) => const AddEntry()))
           ) : null,
-          body: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: const [
-                      0.1,
-                      0.9,
-                      1.3,
-                    ],
-                    colors: [
-                      Colors.white,
-                      Colors.lightGreen.shade600,
-                      Colors.green.shade900,
-                    ])
-            ),
-            child: StreamBuilder<List<Entry>>(
+          body: Stack(
+            children: [
+              const CustomBackground(),
+              StreamBuilder<List<Entry>>(
                 stream: readEntry(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
@@ -62,7 +50,7 @@ class _MarketplaceState extends State<Marketplace> {
                   } else {
                     return const Center(child: CircularProgressIndicator());
                   }
-                }),
+                }),]
           ),
         );
       }
@@ -85,63 +73,57 @@ Stream<List<Entry>> readEntry() => FirebaseFirestore.instance
         .snapshots();
 */
 Widget buildEntry(BuildContext context, Entry entry) => Center(
-      child: Card( // Hero
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(40),
-            side: const BorderSide(
-              color: Colors.green,
-            )),
-        margin: const EdgeInsets.only(top: 5, left: 10, right: 10, bottom: 5),
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.account_circle, size: 32),
-              title: Text(
-                entry.title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+      child: Hero(
+        tag: 'AddEntry',
+        child: Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+              side: const BorderSide(
+                color: Colors.green,
+              )),
+          margin: const EdgeInsets.only(top: 5, left: 10, right: 10, bottom: 5),
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.account_circle, size: 32),
+                title: Text(
+                  entry.title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                subtitle: Text(entry.userContact),
               ),
-              subtitle: Text(entry.userContact),
-            ),
-            Row(children: [
               const SizedBox(
                 width: 30,
               ),
-              Flexible(
-                child: Text(
-                  entry.description,
-                  style: const TextStyle(
-                      fontSize: 17, overflow: TextOverflow.ellipsis),
-                ),
+              Container(
+                  height: 80,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                              'assets/images/hfu_website_adaptive_fore.png'))
+                  )
               ),
-            ]),
-            Container(
-                height: 80,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                            'assets/images/hfu_website_adaptive_fore.png'))
-                )
-            ),
-            ButtonBar(
-              alignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                    onPressed: () => _clickEntry(context, entry),
-                    child: const Text(
-                      "Eintrag anschauen",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    )),
-              ],
-            )
-          ],
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                      onPressed: () => _clickEntry(context, entry),
+                      child: const Text(
+                        "Eintrag anschauen",
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      )),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

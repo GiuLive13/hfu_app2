@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hfu_app2/userController/utils.dart';
+import 'package:hfu_app2/widgets/background_widget.dart';
 
 import '../main.dart';
 import 'new_password.dart';
@@ -47,35 +48,21 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
         ),
         extendBodyBehindAppBar: true,
-        body: Container(
-          padding: const EdgeInsets.only(top: 40),
-          height: double.infinity,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: const [
-                0.1,
-                0.9,
-                1.3,
-              ],
-                  colors: [
-                Colors.white,
-                Colors.lightGreen.shade600,
-                Colors.green.shade900,
-              ])),
-          child: Form(
+        body: Stack(
+          children: [
+            const CustomBackground(),
+            Form(
             key: formKey,
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 15),
+                const SizedBox(height: 40),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(
                       border: Border(
                           bottom: BorderSide(
-                    color: Colors.grey,
-                  ))),
+                            color: Colors.grey,
+                          ))),
                   child: TextField(
                     controller: emailController,
                     textInputAction: TextInputAction.next,
@@ -90,8 +77,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                   decoration: const BoxDecoration(
                       border: Border(
                           bottom: BorderSide(
-                    color: Colors.grey,
-                  ))),
+                            color: Colors.grey,
+                          ))),
                   child: TextField(
                     controller: passwordController,
                     textInputAction: TextInputAction.done,
@@ -134,8 +121,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                             decoration: TextDecoration.underline,
                             color: Theme.of(context).colorScheme.primary)),
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => NewPassword(),
-                        ))
+                      builder: (context) => NewPassword(),
+                    ))
                 ),
                 const SizedBox(height: 13),
                 RichText(
@@ -145,17 +132,17 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                         text: 'Noch keinen Account? ',
                         children: [
-                      TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = widget.clickSignIn,
-                          text: 'Registrieren',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Theme.of(context).colorScheme.primary))
-                    ])),
+                          TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = widget.clickSignIn,
+                              text: 'Registrieren',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Theme.of(context).colorScheme.primary))
+                        ])),
               ],
             ),
-          ),
+          ),]
         ));
   }
 

@@ -81,7 +81,13 @@ class _EventState extends State<Event> {
                 ]
             )
         ),
-        child: ListView.builder(
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 3/2,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20
+          ),
           padding: const EdgeInsets.all(20),
           itemCount: eventMonths.length,
           itemBuilder: (context, index) {
@@ -92,7 +98,7 @@ class _EventState extends State<Event> {
                // Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetail()));
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteEvents()));
               },
-              child: Container(
+              child: SizedBox(
                 height: 80,
                 child: Card(
                   color: Theme.of(context).colorScheme.primary,

@@ -1,5 +1,5 @@
+import 'package:hfu_app2/widgets/background_widget.dart';
 import 'package:html/dom.dart' as dom;
-import 'package:html/parser.dart' as parser;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -45,7 +45,6 @@ class _NewsState extends State<News> {
         .querySelectorAll('#tx-solr-search > ul > li > a')
         .map((element) => '${element.attributes['href']}')
         .toList();
-    print('');
    // final urlsDetail = htmlDetail.querySelectorAll('div > div').map((element) => 'https://www.hs-furtwangen.de/aktuelles/detail/${element}').toList();
 
     setState(() {
@@ -68,64 +67,49 @@ class _NewsState extends State<News> {
       appBar: AppBar(
         title: const Text('Aktuelles'),
       ),
-      body: Container(
-        height: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: const [
-                  0.1,
-                  0.9,
-                  1.3,
-                ],
-                colors: [
-                  Colors.white,
-                  Colors.lightGreen.shade600,
-                  Colors.green.shade900,
-                ]
-            )
-        ),
-        child: ListView.builder(
+      body: Stack(
+        children: [
+          const CustomBackground(),
+          ListView.builder(
           padding: const EdgeInsets.only(top: 6, left: 25, right: 25),
-            itemCount: newsArticles.length,
-            itemBuilder: (context, index) {
-              final newsArticle = newsArticles[index];
+          itemCount: newsArticles.length,
+          itemBuilder: (context, index) {
+            final newsArticle = newsArticles[index];
 
-              return Card(
-                color: Colors.green.shade800,
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text(
-                          newsArticle.title,
-                        style: const TextStyle(
+            return Card(
+              color: Colors.green.shade800,
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(
+                      newsArticle.title,
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white
-                        ),
-                      ),
-                      subtitle: Text(
-                          newsArticle.subtitle,
-                        style: const TextStyle(
-                          color: Colors.white
-                        ),
                       ),
                     ),
-                    ButtonBar(
+                    subtitle: Text(
+                      newsArticle.subtitle,
+                      style: const TextStyle(
+                          color: Colors.white
+                      ),
+                    ),
+                  ),
+                  ButtonBar(
                       children: [
                         IconButton(
                             onPressed: () =>
                             //  _openDetails,
-                             Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteNews(newsArticle.url))),
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteNews(newsArticle.url))),
                             icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)
                         ),
                       ]
-                    ),
-                  ],
-                ),
-              );
-            },
-        ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),]
       ),
     );
   }

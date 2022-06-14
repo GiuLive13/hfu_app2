@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hfu_app2/userController/utils.dart';
+import 'package:hfu_app2/widgets/background_widget.dart';
 
 class NewPassword extends StatefulWidget {
   const NewPassword({Key? key}) : super(key: key);
@@ -35,26 +36,10 @@ class _NewPasswordState extends State<NewPassword> {
             textAlign: TextAlign.center,
           ),
         ),
-        body: Container(
-          padding: const EdgeInsets.only(top: 10),
-          height: double.infinity,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: const [
-                    0.1,
-                    0.9,
-                    1.3,
-                  ],
-                  colors: [
-                    Colors.white,
-                    Colors.lightGreen.shade600,
-                    Colors.green.shade900,
-                  ]
-              )
-          ),
-          child: Form(
+        body: Stack(
+          children: [
+            const CustomBackground(),
+            Form(
             key: formKey,
             child: Column(
               children: <Widget>[
@@ -78,9 +63,9 @@ class _NewPasswordState extends State<NewPassword> {
                     ),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (email) =>
-                        email != null && !EmailValidator.validate(email)
-                              ? 'Inkorrekte E-Mail'
-                              : null,
+                    email != null && !EmailValidator.validate(email)
+                        ? 'Inkorrekte E-Mail'
+                        : null,
                   ),
                 ),
                 const SizedBox(height: 40),
@@ -100,7 +85,7 @@ class _NewPasswordState extends State<NewPassword> {
                 ),
               ],
             ),
-          ),
+          ),]
         ));
   }
 

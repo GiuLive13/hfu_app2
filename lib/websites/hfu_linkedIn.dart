@@ -24,10 +24,10 @@ class _LinkedInLinkState extends State<LinkedInLink> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Colors.white
         ),
-        padding: EdgeInsets.only(top:25),
+        padding: const EdgeInsets.only(top:25),
         child: WebView(
             initialUrl: 'https://www.linkedin.com/school/hochschule-furtwangen-university/?originalSubdomain=de',
             javascriptMode: JavascriptMode.unrestricted,

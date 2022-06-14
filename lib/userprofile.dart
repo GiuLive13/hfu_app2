@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:hfu_app2/marketplace/add_entry.dart';
+import 'package:hfu_app2/widgets/background_widget.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -46,24 +47,10 @@ class _UserProfileState extends State<UserProfile> {
     final user = FirebaseAuth.instance.currentUser!;
 
     return Scaffold(
-      body: Stack(children: [
-        Container(
-          height: double.infinity,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: const [
-                0.4,
-                0.9,
-                1.3,
-              ],
-                  colors: [
-                Colors.green.shade50,
-                Colors.lightGreen.shade600,
-                Colors.green.shade900,
-              ])),
-          child: Column(
+      body: Stack(
+          children: [
+            const CustomBackground(),
+          Column(
             children: <Widget>[
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(80, 30, 0, 15),
@@ -247,7 +234,6 @@ class _UserProfileState extends State<UserProfile> {
               ),
             ],
           ),
-        ),
       ]),
     );
   }

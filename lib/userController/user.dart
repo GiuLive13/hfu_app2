@@ -4,7 +4,12 @@ class User {
   final String email;
   final String entries;
 
-  User(this.uid, this.imagePath, this.email, this.entries);
+  User(
+      this.uid,
+      this.imagePath,
+      this.email,
+      this.entries
+      );
 
 
 }

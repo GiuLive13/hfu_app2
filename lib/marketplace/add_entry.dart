@@ -19,7 +19,8 @@ class AddEntry extends StatefulWidget {
 
   class _AddEntryState extends State<AddEntry> {
   // List<File> _files = []; /// Für Multipicks
-    final user = FirebaseAuth.instance.currentUser?.uid;
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    final userMail = FirebaseAuth.instance.currentUser?.email;
     PlatformFile? selectedFile;
     UploadTask? uploadTask;
 
@@ -35,7 +36,7 @@ class AddEntry extends StatefulWidget {
     }
 
     Future uploadFile() async {
-      final path = 'userFiles/entryFiles/$user/${selectedFile!.name}';
+      final path = 'userFiles/entryFiles/$userID/${selectedFile!.name}';
       final chosenFile = File(selectedFile!.path!);
 
       final ref = FirebaseStorage.instance.ref().child(path);
@@ -48,107 +49,111 @@ class AddEntry extends StatefulWidget {
         appBar: AppBar(
           title: const Text('Ich biete/ suche ... '),
         ),
-        body: Hero(
-          tag: 'AddEntry',
-          child: ListView(
-            padding: const EdgeInsets.all(16),
-            children: <Widget>[
-               TextFormField(
-                controller: titleController,
-                decoration: const InputDecoration(
-                  //  border: InputBorder.none,
-                    hintText: 'Titel',
-                    hintStyle: TextStyle(fontWeight: FontWeight.bold)
-                ),
+        body: ListView(
+          padding: const EdgeInsets.all(16),
+          children: <Widget>[
+             TextFormField(
+              controller: titleController,
+              decoration: const InputDecoration(
+                //  border: InputBorder.none,
+                  hintText: 'Titel',
+                  hintStyle: TextStyle(fontWeight: FontWeight.bold)
               ),
-              const SizedBox(height: 10),
-               TextFormField(
-                controller: userContactController,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.person, size: 25,),
-               //   border: InputBorder.none,
-                  hintText : FirebaseAuth.instance.currentUser?.email,
-                ),
+            ),
+            const SizedBox(height: 10),
+             SizedBox(
+               height: 100,
+
+               child: Text(userMail!),
+             ),
+
+             TextFormField(
+              controller: userContactController,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.person, size: 25,),
+             //   border: InputBorder.none,
+                hintText : FirebaseAuth.instance.currentUser?.email,
               ),
-              const SizedBox(height: 10),
-               TextField(
-                 maxLines: 5,
-                minLines: 1,
-                controller: descriptionController,
-                decoration: const InputDecoration(
-                  fillColor: Colors.white54 ,
-              //    border: InputBorder.none,
-                  hintText: 'Beschreibung',
-                ),
+            ),
+            const SizedBox(height: 10),
+             TextField(
+               maxLines: 5,
+              minLines: 1,
+              controller: descriptionController,
+              decoration: const InputDecoration(
+                fillColor: Colors.white54 ,
+            //    border: InputBorder.none,
+                hintText: 'Beschreibung',
               ),
-              const SizedBox(height: 14),
-              Center(
-                child: Stack(
-                  children: [
-                    IconButton(
-                      onPressed: () => chooseFile(),
-                      icon: const FaIcon(FontAwesomeIcons.images, size: 44)
-                  ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 35.0, top: 20),
-                      child: IconButton(
-                          onPressed: () => chooseFile(),
-                          icon: const FaIcon(FontAwesomeIcons.plus, size: 20,color: Colors.red,)
-                      ),
+            ),
+            const SizedBox(height: 14),
+            Center(
+              child: Stack(
+                children: [
+                  IconButton(
+                    onPressed: () => chooseFile(),
+                    icon: const FaIcon(FontAwesomeIcons.images, size: 44)
+                ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 35.0, top: 20),
+                    child: IconButton(
+                        onPressed: () => chooseFile(),
+                        icon: const FaIcon(FontAwesomeIcons.plus, size: 20,color: Colors.red,)
+                    ),
+                  )
+                ]
+              ),
+            ),
+            const SizedBox(height: 5),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (selectedFile != null)
+                    Row(
+                      children: [
+                        Container(
+                          color: Colors.white,
+                          child: Center(
+                            child: Text(selectedFile!.name),
+                          ),
+                        )
+                      ],
                     )
-                  ]
-                ),
+                ],
               ),
-              const SizedBox(height: 5),
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (selectedFile != null)
-                      Row(
-                        children: [
-                          Container(
-                            color: Colors.white,
-                            child: Center(
-                              child: Text(selectedFile!.name),
-                            ),
-                          )
-                        ],
-                      )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 12),
-              ElevatedButton.icon(
-                  onPressed: () {
-                    final entry = Entry(
-                        title: titleController.text,
-                        userContact: userContactController.text,
-                        description: descriptionController.text,
-                       // imageEntry:
-                    );
-                    createEntry(entry);
-                    Navigator.pop(context);
-                    uploadFile();
-                  },
-                  icon: const FaIcon(Icons.add, size: 25),
-                  label: const Text('Angebot hochladen',
-                  style: TextStyle(fontSize: 20),)
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton.icon(
+                onPressed: () {
+                  final entry = Entry(
+                      title: titleController.text,
+                      userContact: userContactController.text,
+                      description: descriptionController.text,
+                     // uid: ,
+                  );
+                  createEntry(entry);
+                  Navigator.pop(context);
+                  uploadFile();
+                },
+                icon: const FaIcon(Icons.add, size: 25),
+                label: const Text('Angebot hochladen',
+                style: TextStyle(fontSize: 20),)
+            ),
+          ],
         ),
       );
     }
 
     Future createEntry(Entry entry) async {
       final marketEntry = FirebaseFirestore.instance.collection('entries').doc();
-      final userEntry  = FirebaseFirestore.instance.collection('entries').doc(entry.id);
+    //  final userEntry = FirebaseFirestore.instance.collection('entries').doc(marketEntry.id).get(userID);
       entry.id = marketEntry.id;
-      entry.uid = userEntry.id;
+    //  FirebaseAuth.instance.currentUser?.uid = userEntry.id;
 
       final json = entry.toJson();
       await marketEntry.set(json);
+
     }
   }
 

@@ -44,242 +44,243 @@ class Faculty extends StatelessWidget {
                 ]
             )
         ),
-        child: ListView(
+        child: GridView(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 10/8,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20
+          ),
           children: [
-            Card(
-              color: Colors.transparent,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  side: const BorderSide(
-                      color: Colors.white70,
-                      width: 2
-                  )
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const DigitalMedia()));
+                },
+              child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: const BorderSide(
+                        color: Colors.white70,
+                        width: 2
+                    )
+                ),
+                child: const ListTile(
+                  title: Text('DM',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                      ),
+                  ),
+                ),
               ),
-              child: ListTile(
-                title: const Text('Digitale Medien',
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HSS()));
+              },
+              child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: const BorderSide(
+                        color: Colors.white70,
+                        width: 2
+                    )
+                ),
+                child: const ListTile(
+                  title: Text('GSG',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 30,
+                    ),),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => InduTech()));
+              },
+              child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: const BorderSide(
+                        color: Colors.white70,
+                        width: 2
+                    )
+                ),
+                child: const ListTile(
+                  title: Text('ITE',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 30,
+                    ),),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ComScience()));
+              },
+              child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: const BorderSide(
+                        color: Colors.white70,
+                        width: 2
+                    )
+                ),
+                child: const ListTile(
+                  title: Text('IN',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 30,
+                    ),),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MedLifeScience()));
+              },
+              child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: const BorderSide(
+                        color: Colors.white70,
+                        width: 2
+                    )
+                ),
+                child: const ListTile(
+                  title: Text('MLS',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 30,
                     ),
-                ),
-                trailing: IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => DigitalMedia()));
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios, color: Colors.white)
-                ),
-              ),
-            ),
-            Card(
-              color: Colors.transparent,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  side: const BorderSide(
-                      color: Colors.white70,
-                      width: 2
-                  )
-              ),
-              child: ListTile(
-                title: const Text('Gesundheit, Sicherheit, Gesellschaft',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 22,
-                  ),),
-                trailing: IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HSS()));
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios, color: Colors.white)
-                ),
-              ),
-            ),
-            Card(
-              color: Colors.transparent,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  side: const BorderSide(
-                      color: Colors.white70,
-                      width: 2
-                  )
-              ),
-              child: ListTile(
-                title: const Text('Industrial Technologies',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 22,
-                  ),),
-                trailing: IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => InduTech()));
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios, color: Colors.white)
-                ),
-              ),
-            ),
-            Card(
-              color: Colors.transparent,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  side: const BorderSide(
-                      color: Colors.white70,
-                      width: 2
-                  )
-              ),
-              child: ListTile(
-                title: const Text('Informatik',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 22,
-                  ),),
-                trailing: IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ComScience()));
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios, color: Colors.white)
-                ),
-              ),
-            ),
-            Card(
-              color: Colors.transparent,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  side: const BorderSide(
-                      color: Colors.white70,
-                      width: 2
-                  )
-              ),
-              child: ListTile(
-                title: const Text('Medical and Life Sciences',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 22,
                   ),
                 ),
-                trailing: IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MedLifeScience()));
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios, color: Colors.white)
-                ),
               ),
             ),
-            Card(
-              color: Colors.transparent,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                side: const BorderSide(
-                  color: Colors.white70,
-                  width: 2
-                )
-              ),
-              child: ListTile(
-                title: const Text('Mechanical and Medical Engineering',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 22,
-                  ),),
-                trailing: IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MechMediEngineering()));
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios, color: Colors.white)
-                ),
-              ),
-            ),
-            Card(
-              color: Colors.transparent,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
+            InkWell(
+              onTap: () {
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) => MechMediEngineering()));
+              },
+              child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                   side: const BorderSide(
-                      color: Colors.white70,
-                      width: 2
+                    color: Colors.white70,
+                    width: 2
                   )
-              ),
-              child: ListTile(
-                title: const Text('Wirtschaft',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 22,
-                  ),),
-                trailing: IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Business()));
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios, color: Colors.white)
+                ),
+                child: const ListTile(
+                  title: Text('MME',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 30,
+                    ),),
+
                 ),
               ),
             ),
-            Card(
-              color: Colors.transparent,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  side: const BorderSide(
-                      color: Colors.white70,
-                      width: 2
-                  )
-              ),
-              child: ListTile(
-                title: const Text('Wirtschaftsinformatik',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 22,
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Business()));
+              },
+              child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: const BorderSide(
+                        color: Colors.white70,
+                        width: 2
+                    )
+                ),
+                child: const ListTile(
+                  title: Text('W',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 30,
+                    ),
                   ),
                 ),
-                trailing: IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => BusInfo()));
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios, color: Colors.white)
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BusInfo()));
+              },
+              child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: const BorderSide(
+                        color: Colors.white70,
+                        width: 2
+                    )
+                ),
+                child: const ListTile(
+                  title: Text('WIB',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 30,
+                    ),
+                  ),
+
                 ),
               ),
             ),
-            Card(
-              color: Colors.transparent,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  side: const BorderSide(
-                      color: Colors.white70,
-                      width: 2
-                  )
-              ),
-              child: ListTile(
-                title: const Text('Wirtschaftsingenieurwesen',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 22,
-                  ),),
-                trailing: IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => BusAdmin()));
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BusAdmin()));
+              },
+              child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: const BorderSide(
+                        color: Colors.white70,
+                        width: 2
+                    )
+                ),
+                child: const ListTile(
+                  title: Text('WING',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 30,
+                    ),
+                  ),
                 ),
               ),
             ),

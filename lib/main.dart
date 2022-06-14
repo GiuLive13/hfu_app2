@@ -1,19 +1,14 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 import 'package:hfu_app2/bottomNavBar/profile.dart';
 import 'package:hfu_app2/userController/utils.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:hfu_app2/widgets/appbarWidget.dart';
-import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
-
+import 'package:hfu_app2/widgets/appbar_widget.dart';
 import 'bottomNavBar/home.dart';
 import 'bottomNavBar/menu.dart';
-import 'dropdownDir/about.dart';
-import 'dropdownDir/contact.dart';
-import 'dropdownDir/settings.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

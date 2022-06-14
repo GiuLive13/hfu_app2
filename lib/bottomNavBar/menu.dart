@@ -9,6 +9,7 @@ import 'package:hfu_app2/menuDir/faculty.dart';
 import 'package:hfu_app2/menuDir/location.dart';
 import 'package:hfu_app2/menuDir/marketplace.dart';
 import 'package:hfu_app2/menuDir/news.dart';
+import 'package:hfu_app2/widgets/background_widget.dart';
 import '../menuDir/reftreff.dart';
 
 class Menu extends StatefulWidget {
@@ -24,32 +25,17 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: const [
-                  0.1,
-                  0.9,
-                  1.3,
-                ],
-                colors: [
-                  Colors.white,
-                  Colors.lightGreen.shade600,
-                  Colors.green.shade900,
-                ]
-            )
-        ),
-        child: ListView(
+      body: Stack(
+        children: [
+          const CustomBackground(),
+          ListView(
           scrollDirection: Axis.vertical,
           children: [
             InkWell(
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => Document())),
               child: Card(
-                color: Colors.white,
+                  color: Colors.white,
                   elevation: 4.0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)
@@ -75,7 +61,7 @@ class _MenuState extends State<Menu> {
                       ),
                       Container(
                         padding:
-                            const EdgeInsets.only(left: 16, top: 10, bottom: 2),
+                        const EdgeInsets.only(left: 16, top: 10, bottom: 2),
                         alignment: Alignment.centerLeft,
                         child: const Text("Thesisanmeldung und weitere Infos", style: TextStyle(
                             fontSize: 16,
@@ -114,9 +100,9 @@ class _MenuState extends State<Menu> {
                     title: Text(
                       "Termine und Fristen",
                       style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
                       ),
                     ),
                     subtitle: Text("Von Deadlines bis Prüfungsplänen"),
@@ -133,7 +119,7 @@ class _MenuState extends State<Menu> {
                     padding: const EdgeInsets.only(left: 16, top: 10, bottom: 2),
                     alignment: Alignment.centerLeft,
                     child: const Text(
-                        "Das müsst ihr wissen für das aktuelle Semester", style: TextStyle(
+                      "Das müsst ihr wissen für das aktuelle Semester", style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic
                     ),
@@ -186,9 +172,9 @@ class _MenuState extends State<Menu> {
                     padding: const EdgeInsets.only(left: 16, top: 10, bottom: 2),
                     alignment: Alignment.centerLeft,
                     child: const Text(
-                        "Detailansicht der HFU-Fakultäten", style: TextStyle(
+                      "Detailansicht der HFU-Fakultäten", style: TextStyle(
                         fontSize: 16,
-                      fontStyle: FontStyle.italic
+                        fontStyle: FontStyle.italic
                     ),),
                   ),
                   ButtonBar(
@@ -197,7 +183,7 @@ class _MenuState extends State<Menu> {
                         child: const Text(
                           "Jetzt durchschauen",
                           style:
-                              TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                         ),
                         onPressed: () => Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Faculty())),
@@ -239,7 +225,7 @@ class _MenuState extends State<Menu> {
                       padding: const EdgeInsets.only(left: 16, top: 10, bottom: 2),
                       alignment: Alignment.centerLeft,
                       child: const Text(
-                          '"Wo ist eigentlich das O-Gebäude?"', style: TextStyle(
+                        '"Wo ist eigentlich das O-Gebäude?"', style: TextStyle(
                           fontSize: 16,
                           fontStyle: FontStyle.italic
                       ),),
@@ -394,20 +380,20 @@ class _MenuState extends State<Menu> {
                       //  trailing: Icon(Icons.launch),
                     ),
                     const SizedBox(
-                      height: 90.0,
-                      child: FaIcon(
-                        FontAwesomeIcons.newspaper, size: 80, color: Colors.orangeAccent,
+                        height: 90.0,
+                        child: FaIcon(
+                          FontAwesomeIcons.newspaper, size: 80, color: Colors.orangeAccent,
 
-                      )
+                        )
                     ),
                     Container(
                       padding: const EdgeInsets.only(left: 16, top: 10, bottom: 2),
                       alignment: Alignment.centerLeft,
                       child:
-                          const Text("Bleibe up-to-date und informiere dich hier", style: TextStyle(
-                              fontSize: 16,
-                              fontStyle: FontStyle.italic
-                          ),),
+                      const Text("Bleibe up-to-date und informiere dich hier", style: TextStyle(
+                          fontSize: 16,
+                          fontStyle: FontStyle.italic
+                      ),),
                     ),
                     ButtonBar(
                       children: [
@@ -481,7 +467,7 @@ class _MenuState extends State<Menu> {
               ),
             ),
           ],
-        ),
+        ),]
       ),
     );
   }

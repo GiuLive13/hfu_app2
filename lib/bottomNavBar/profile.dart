@@ -18,9 +18,9 @@ class Profile extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return const Center(child: Text("Fehler aufgetreten"));
               } else if (snapshot.hasData) {
-                return UserProfile();
+                return const UserProfile();
               } else {
-                return AuthPage();
+                return const AuthPage();
               }
             }
             )

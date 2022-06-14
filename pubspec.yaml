@@ -47,9 +47,10 @@ dependencies:
 
   # User Interaction
   image_picker: ^0.8.5+3
+  open_file:
 
   # Media Download
-  flutter_downloader: ^1.7.4 # iOS enable Background Mode
+  dio: ^4.0.6
 
   # Location
   google_maps_flutter: ^2.1.5

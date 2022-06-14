@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hfu_app2/userController/utils.dart';
+import 'package:hfu_app2/widgets/background_widget.dart';
 
 import '../main.dart';
 
@@ -47,35 +48,21 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           ),
         ),
         extendBodyBehindAppBar: true,
-        body: Container(
-          padding: const EdgeInsets.only(top: 30),
-          height: double.infinity,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: const [
-                0.1,
-                0.9,
-                1.3,
-              ],
-                  colors: [
-                Colors.white,
-                Colors.lightGreen.shade600,
-                Colors.green.shade900,
-              ])),
-          child: Form(
+        body: Stack(
+          children: [
+            const CustomBackground(),
+            Form(
             key: formKey,
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 9),
+                const SizedBox(height: 40),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(
                       border: Border(
                           bottom: BorderSide(
-                    color: Colors.grey,
-                  ))),
+                            color: Colors.grey,
+                          ))),
                   child: TextFormField(
                       controller: emailController,
                       textInputAction: TextInputAction.next,
@@ -85,7 +72,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                           border: InputBorder.none),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (email) => email != null &&
-                              !EmailValidator.validate(email)
+                          !EmailValidator.validate(email)
                           ? 'Bitte die korrekte E-Mail-Schreibweise verwenden'
                           : null),
                 ),
@@ -94,8 +81,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                   decoration: const BoxDecoration(
                       border: Border(
                           bottom: BorderSide(
-                    color: Colors.grey,
-                  ))),
+                            color: Colors.grey,
+                          ))),
                   child: TextFormField(
                     controller: passwordController,
                     textInputAction: TextInputAction.done,
@@ -143,17 +130,17 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         ),
                         text: 'Account vorhanden? ',
                         children: [
-                      TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = widget.clickSignUp,
-                          text: 'Login',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Theme.of(context).colorScheme.primary))
-                    ]))
+                          TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = widget.clickSignUp,
+                              text: 'Login',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Theme.of(context).colorScheme.primary))
+                        ]))
               ],
             ),
-          ),
+          ),]
         ));
   }
 

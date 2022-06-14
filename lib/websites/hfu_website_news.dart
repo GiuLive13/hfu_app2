@@ -19,6 +19,7 @@ class _HfuWebsiteNewsState extends State<HfuWebsiteNews> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
 
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

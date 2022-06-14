@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hfu_app2/main.dart';
-import 'package:hfu_app2/userController/login.dart';
 import 'package:settings_ui/settings_ui.dart';
 
+import 'package:hfu_app2/userController/login.dart';
 import '../userController/new_password.dart';
 
 class Settings extends StatefulWidget {
@@ -54,20 +53,21 @@ class _SettingsState extends State<Settings> {
                 onPressed: logOutUser,
               ),
               SettingsTile.navigation(
-                  leading: const Icon(Icons.password, color: Colors.blueGrey),
-                  title: const Text("Passwort ändern"),
-                  onPressed: (context) => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NewPassword())),
+                leading: const Icon(Icons.password, color: Colors.blueGrey),
+                title: const Text("Passwort ändern"),
+                onPressed: (context) => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NewPassword())),
               ),
               SettingsTile.navigation(
-                  leading: const Icon(Icons.delete_forever, color: Colors.red),
-                  title: const Text("Account löschen"),
-                  onPressed: deleteCurrentUser,
+                leading: const Icon(Icons.delete_forever, color: Colors.red),
+                title: const Text("Account löschen"),
+                onPressed: deleteCurrentUser,
               ),
             ])
-          ]));
+          ])
+      );
   }
 
   deleteCurrentUser(BuildContext context) {
