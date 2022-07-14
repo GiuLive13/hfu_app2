@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hfu_app2/userController/utils.dart';
@@ -103,7 +104,9 @@ class _NewPasswordState extends State<NewPassword> {
       Utils.showSnackBar('E-Mail zum zurücksetzen wurde gesendet');
       Navigator.of(context).popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
 
       Utils.showSnackBar(e.message);
       Navigator.of(context).pop();

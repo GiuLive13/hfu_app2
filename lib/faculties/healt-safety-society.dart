@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 
 class HSS extends StatefulWidget {
+  const HSS({Key? key}) : super(key: key);
+
   @override
   _HSSState createState() => _HSSState();
 }
@@ -13,6 +15,7 @@ class HSS extends StatefulWidget {
 class _HSSState extends State<HSS> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

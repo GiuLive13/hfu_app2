@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class Timetable extends StatefulWidget {
+  const Timetable({Key? key}) : super(key: key);
+
   @override
   _TimetableState createState() => _TimetableState();
 }
 
 class _TimetableState extends State<Timetable> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
+
   @override
   void initState(){
     super.initState();

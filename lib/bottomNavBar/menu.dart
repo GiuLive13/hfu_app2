@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -33,7 +32,7 @@ class _MenuState extends State<Menu> {
           children: [
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Document())),
+                  MaterialPageRoute(builder: (context) => const Document())),
               child: Card(
                   color: Colors.white,
                   elevation: 4.0,
@@ -79,7 +78,7 @@ class _MenuState extends State<Menu> {
                             onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Document())),
+                                    builder: (context) => const Document())),
                           ),
                         ],
                       )
@@ -88,7 +87,7 @@ class _MenuState extends State<Menu> {
             ),
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DatesAndDeadlines())),
+                  MaterialPageRoute(builder: (context) => const DatesAndDeadlines())),
               child: Card(
                 color: Colors.white,
                 elevation: 4.0,
@@ -134,7 +133,7 @@ class _MenuState extends State<Menu> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                         ),
                         onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => DatesAndDeadlines())),
+                            MaterialPageRoute(builder: (context) => const DatesAndDeadlines())),
                       ),
                     ],
                   ),
@@ -143,7 +142,7 @@ class _MenuState extends State<Menu> {
             ),
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Faculty())),
+                  MaterialPageRoute(builder: (context) => const Faculty())),
               child: Card(
                 color: Colors.white,
                 elevation: 4.0,
@@ -186,7 +185,7 @@ class _MenuState extends State<Menu> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                         ),
                         onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Faculty())),
+                            MaterialPageRoute(builder: (context) => const Faculty())),
                       ),
                     ],
                   ),
@@ -195,7 +194,7 @@ class _MenuState extends State<Menu> {
             ),
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Locations())),
+                  MaterialPageRoute(builder: (context) => const Locations())),
               child: Card(
                 color: Colors.white,
                 elevation: 4.0,
@@ -216,9 +215,10 @@ class _MenuState extends State<Menu> {
                       //  trailing: Icon(Icons.launch),
                     ),
                     SizedBox(
-                      height: 90.0,
+                      height: 100.0,
                       child: Image.asset(
                         'assets/images/locations.jpg',
+                        fit: BoxFit.contain,
                       ),
                     ),
                     Container(
@@ -239,7 +239,7 @@ class _MenuState extends State<Menu> {
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
                           onPressed: () => Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Locations())),
+                              MaterialPageRoute(builder: (context) => const Locations())),
                         ),
                       ],
                     ),
@@ -249,7 +249,7 @@ class _MenuState extends State<Menu> {
             ),
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Marketplace())),
+                  MaterialPageRoute(builder: (context) => const Marketplace())),
               child: Card(
                 color: Colors.white,
                 elevation: 4.0,
@@ -295,7 +295,7 @@ class _MenuState extends State<Menu> {
                           onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Marketplace())),
+                                  builder: (context) => const Marketplace())),
                         ),
                       ],
                     ),
@@ -305,7 +305,7 @@ class _MenuState extends State<Menu> {
             ),
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Event())),
+                  MaterialPageRoute(builder: (context) => const Event())),
               child: Card(
                 color: Colors.white,
                 elevation: 4.0,
@@ -349,7 +349,7 @@ class _MenuState extends State<Menu> {
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
                           onPressed: () => Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Event())),
+                              MaterialPageRoute(builder: (context) => const Event())),
                         ),
                       ],
                     ),
@@ -359,7 +359,7 @@ class _MenuState extends State<Menu> {
             ),
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => News())),
+                  MaterialPageRoute(builder: (context) => const News())),
               child: Card(
                 color: Colors.white,
                 elevation: 4.0,
@@ -404,7 +404,7 @@ class _MenuState extends State<Menu> {
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
                           onPressed: () => Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => News())),
+                              MaterialPageRoute(builder: (context) => const News())),
                         ),
                       ],
                     ),
@@ -414,7 +414,7 @@ class _MenuState extends State<Menu> {
             ),
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Reftreff())),
+                  MaterialPageRoute(builder: (context) => const Reftreff())),
               child: Card(
                 color: Colors.white,
                 elevation: 4.0,
@@ -458,7 +458,7 @@ class _MenuState extends State<Menu> {
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
                           onPressed: () => Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Reftreff())),
+                              MaterialPageRoute(builder: (context) => const Reftreff())),
                         ),
                       ],
                     ),

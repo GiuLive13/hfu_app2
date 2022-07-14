@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:hfu_app2/websites/exams.dart';
 import 'package:hfu_app2/widgets/background_widget.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
@@ -52,27 +53,44 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
         children: [
           const CustomBackground(),
           Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: TextButton(
-                onPressed: () async {
-                  const url =
-                      'documents/dates_deadlines/Kalender_WiSe21-22-SoSe2022.pdf';
-                  final file = await PDFViewer.loadFirebase(url);
+            padding: const EdgeInsets.all(6.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                    onPressed: () async {
+                      const url =
+                          'documents/dates_deadlines/Kalender_WiSe21-22-SoSe2022.pdf';
+                      final file = await PDFViewer.loadFirebase(url);
 
-                  if (file == null) return;
-                  semCalPDF(context, file);
-                },
-                child: const Text(
-                  'Kalenderübersicht',
-                  style: TextStyle(
-                      decoration: TextDecoration.underline,
-                    fontSize: 20
-                  ),
-                )
+                      if (file == null) return;
+                      semCalPDF(context, file);
+                    },
+                    child: const Text(
+                      'Kalenderübersicht',
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                        fontSize: 20
+                      ),
+                    )
+                ),
+                TextButton(
+                    onPressed: () =>
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const ExamsPlan())),
+                    child: const Text(
+                      'Prüfungspläne',
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontSize: 20
+                      ),
+                    )
+                ),
+              ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 50.0, left: 8),
+            padding: const EdgeInsets.only(top: 60.0, ),
             child: Column(
               children: [
                 Row(
@@ -80,8 +98,9 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     SizedBox(width: 8, height: 40,),
                     Text('Semesterdaten', style: TextStyle(
                       fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w900,
+                      decoration: TextDecoration.underline
+
                     ),)
                   ],
                 ),
@@ -90,16 +109,197 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     SizedBox(width: 5, height: 20,),
                     Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text('Semester', style: TextStyle(
-                        fontSize: 18
+                      child: Text('Sommersemester 2022', style: TextStyle(
+                        fontSize: 20,
+                        fontStyle: FontStyle.italic,
                       ),),
                     ),
                   ],
                 ),
-                const Divider(color: Colors.black, thickness: 1, indent: 25, endIndent: 25,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text('Vorlesungen:', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold
+                    ),),
+                    Text('14.März - 01.Juli 2022', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                      fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text('Prüfungen:', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),),
+                    Text('04.Juli - 22.Juli 2022', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text('Vorlesungsfrei:', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),),
+                    Text('19.April & 07.-11.Juni 2022', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
+                const Divider(color: Colors.black, thickness: 1, indent: 55, endIndent: 55,),
+                Row(
+                  children: const [
+                    SizedBox(width: 5, height: 20,),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Wintersemester 2022/23', style: TextStyle(
+                        fontSize: 20,
+                        fontStyle: FontStyle.italic,
+                      ),),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text('Vorlesungen:', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),),
+                    Text('04.Okt. 22 - 27.Jan. 2023', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text('Prüfungen:', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),),
+                    Text('30.Jan. - 15.Feb. 2023', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text('Vorlesungsfrei:', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),),
+                    Text('23.Dez. 22 - 07.Jan. 2023', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
+                const Divider(color: Colors.black, thickness: 1, indent: 55, endIndent: 55,),
+                Row(
+                  children: const [
+                    SizedBox(width: 5, height: 20,),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Sommersemester 2023', style: TextStyle(
+                        fontSize: 20,
+                        fontStyle: FontStyle.italic,
+                      ),),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text('Vorlesungen:', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),),
+                    Text('13.März - 30.Juni 2023', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text('Prüfungen:', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),),
+                    Text('03. - 21.Juli 2023', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Text('Vorlesungsfrei:', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),),
+                    Text('11. April & 30.Mai - 03.Juni 2023', style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
               ],
             ),
+
           ),
+
 
         ],
       ),

@@ -1,15 +1,20 @@
-class User {
-  String uid;
+class Users {
   final String imagePath;
   final String email;
-  final String entries;
 
-  User(
-      this.uid,
-      this.imagePath,
-      this.email,
-      this.entries
-      );
+  Users({
+    this.imagePath = '',
+    required this.email,
+  });
 
+  Map<String, dynamic> toJson() => {
+    'email': email,
+    'imagepath': imagePath,
 
+  };
+
+  static Users fromJson(Map<String, dynamic> json) => Users(
+    email: json['email'],
+    imagePath: json['imagepath'],
+  );
 }

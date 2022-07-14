@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 
 class Business extends StatefulWidget {
+  const Business({Key? key}) : super(key: key);
+
   @override
   _BusinessState createState() => _BusinessState();
 }
@@ -13,6 +15,7 @@ class Business extends StatefulWidget {
 class _BusinessState extends State<Business> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

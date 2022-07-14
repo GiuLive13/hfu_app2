@@ -3,10 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 
 import 'entry.dart';
 
@@ -35,12 +33,15 @@ class AddEntry extends StatefulWidget {
         setState(() { selectedFile = result.files.first;});
     }
 
-    Future uploadFile() async {
+    Future<String> uploadFile() async {
       final path = 'userFiles/entryFiles/$userID/${selectedFile!.name}';
       final chosenFile = File(selectedFile!.path!);
 
       final ref = FirebaseStorage.instance.ref().child(path);
-      uploadTask = ref.putFile(chosenFile);
+      var uploadTask = ref.putFile(chosenFile);
+      var completedTask = await uploadTask;
+      String downloadUrl = await completedTask.ref.getDownloadURL();
+      return downloadUrl;
     }
 
     @override
@@ -60,29 +61,28 @@ class AddEntry extends StatefulWidget {
                   hintStyle: TextStyle(fontWeight: FontWeight.bold)
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
              SizedBox(
-               height: 100,
-
-               child: Text(userMail!),
+               height: 35,
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   Text('Kontakt: ' + userMail!, style: const TextStyle(
+                     fontWeight: FontWeight.w900,
+                     fontSize: 16,
+                       decoration: TextDecoration.underline,
+                     overflow: TextOverflow.ellipsis
+                   )),
+                   Text(userID!, style: const TextStyle(color: Colors.transparent,), ) /// Hidden
+                 ],
+               ),
              ),
-
-             TextFormField(
-              controller: userContactController,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.person, size: 25,),
-             //   border: InputBorder.none,
-                hintText : FirebaseAuth.instance.currentUser?.email,
-              ),
-            ),
-            const SizedBox(height: 10),
              TextField(
-               maxLines: 5,
+               maxLines: 6,
               minLines: 1,
               controller: descriptionController,
               decoration: const InputDecoration(
                 fillColor: Colors.white54 ,
-            //    border: InputBorder.none,
                 hintText: 'Beschreibung',
               ),
             ),
@@ -128,9 +128,9 @@ class AddEntry extends StatefulWidget {
                 onPressed: () {
                   final entry = Entry(
                       title: titleController.text,
-                      userContact: userContactController.text,
+                      userContact: userMail!,
                       description: descriptionController.text,
-                     // uid: ,
+                      uid: userID!,
                   );
                   createEntry(entry);
                   Navigator.pop(context);
@@ -146,10 +146,8 @@ class AddEntry extends StatefulWidget {
     }
 
     Future createEntry(Entry entry) async {
-      final marketEntry = FirebaseFirestore.instance.collection('entries').doc();
-    //  final userEntry = FirebaseFirestore.instance.collection('entries').doc(marketEntry.id).get(userID);
-      entry.id = marketEntry.id;
-    //  FirebaseAuth.instance.currentUser?.uid = userEntry.id;
+      final marketEntry = FirebaseFirestore.instance.collection('entries').doc(userMail);
+     // entry.id = marketEntry.id;
 
       final json = entry.toJson();
       await marketEntry.set(json);

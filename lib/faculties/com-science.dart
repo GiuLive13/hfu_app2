@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 
 class ComScience extends StatefulWidget {
+  const ComScience({Key? key}) : super(key: key);
+
   @override
   _ComScienceState createState() => _ComScienceState();
 }
@@ -13,6 +15,7 @@ class ComScience extends StatefulWidget {
 class _ComScienceState extends State<ComScience> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

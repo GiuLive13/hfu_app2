@@ -6,6 +6,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 
 class HfuWebsite extends StatefulWidget {
+  const HfuWebsite({Key? key}) : super(key: key);
+
   @override
   _HfuWebsiteState createState() => _HfuWebsiteState();
 }

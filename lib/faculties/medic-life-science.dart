@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 
 class MedLifeScience extends StatefulWidget {
+  const MedLifeScience({Key? key}) : super(key: key);
+
   @override
   _MedLifeScienceState createState() => _MedLifeScienceState();
 }
@@ -13,6 +15,7 @@ class MedLifeScience extends StatefulWidget {
 class _MedLifeScienceState extends State<MedLifeScience> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

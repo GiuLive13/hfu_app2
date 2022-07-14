@@ -1,24 +1,24 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
 import 'package:hfu_app2/bottomNavBar/profile.dart';
+import 'package:hfu_app2/userController/userprofile_preferences.dart';
 import 'package:hfu_app2/userController/utils.dart';
-import 'package:flutter/services.dart';
 import 'package:hfu_app2/widgets/appbar_widget.dart';
+import 'appbar/settings_page.dart';
 import 'bottomNavBar/home.dart';
 import 'bottomNavBar/menu.dart';
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
 
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  await Settings.init(cacheProvider: SharePreferenceCache());
+  await UserProfilePreferences.init();
 
   runApp(HfuApp());
 }
@@ -28,52 +28,69 @@ final navigatorKey = GlobalKey<NavigatorState>();
 class HfuApp extends StatelessWidget {
   final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
   HfuApp({Key? key}) : super(key: key);
-  static const keyDarkMode = 'key-dark-mode';
-
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        darkTheme: ThemeData.dark(),
-        scaffoldMessengerKey: Utils.messengerKey,
-        navigatorKey: navigatorKey,
-        title: 'HFU App',
-        theme: //isDarkMode
-         //  ?
-         ThemeData(
-          colorSchemeSeed: Colors.green.shade800,
-          brightness: Brightness.light,
-          // splashColor: Colors.grey,
-                ),
-            //: ThemeData(
-        //  colorSchemeSeed: Colors.green.shade800,
-        //  brightness: Brightness.dark,
-        home: FutureBuilder(
-            future: _fbApp,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                print('You have an error! ${snapshot.error.toString()}');
-                return const Text('Something went wrong!');
-              } else if (snapshot.hasData) {
-                return const HomeScreen();
-              } else {
-                return const Center(
-                    child: SizedBox(
-                  height: 20,
-                  width: 250,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      child: LinearProgressIndicator(
-                        backgroundColor: Colors.white,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                        value: 0.7,
+    const appName = 'HFU App';
+
+    return ValueChangeObserver<bool>(
+      cacheKey: SettingsPage.keyDarkMode,
+      defaultValue: true,
+      builder: (_,isDarkMode,__) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          scaffoldMessengerKey: Utils.messengerKey,
+          navigatorKey: navigatorKey,
+          title: appName,
+          theme: isDarkMode
+          ? ThemeData.dark().copyWith(
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.white
+            ),
+            brightness: Brightness.dark,
+            iconTheme: const IconThemeData(
+              color: Colors.black
+            ),
+
+            colorScheme: ThemeData().colorScheme.copyWith(
+                primary: Colors.black,
+              secondary: Colors.lightGreen,
+            )
+          )
+          : ThemeData.light().copyWith(
+            brightness: Brightness.light,
+            colorScheme: ThemeData().colorScheme.copyWith(
+              primary: Colors.green.shade800,
+              secondary: Colors.green.shade900
+            )
+          ),
+          home: FutureBuilder(
+              future: _fbApp,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  if (kDebugMode) {
+                    print('You have an error! ${snapshot.error.toString()}');
+                  }
+                  return const Text('Something went wrong!');
+                } else if (snapshot.hasData) {
+                  return const HomeScreen();
+                } else {
+                  return const Center(
+                      child: SizedBox(
+                    height: 20,
+                    width: 250,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        child: LinearProgressIndicator(
+                          backgroundColor: Colors.white,
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                          value: 0.7,
+                      ),
                     ),
-                  ),
-                )
-                );
-              }
-            })
+                  )
+                  );
+                }
+              })
+      ),
     );
   }
 }
@@ -87,7 +104,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   int _selectedIndex = 1;
-  static final List<Widget> _pages = <Widget>[Profile(), Home(), const Menu()];
+  static final List<Widget> _pages = <Widget>[const Profile(), const Home(), const Menu()];
 
   @override
   Widget build(BuildContext context) {
@@ -98,9 +115,9 @@ class _HomeScreen extends State<HomeScreen> {
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        height: 50,
+        height: 55,
         backgroundColor: Colors.transparent,
-        color: Colors.white54,
+        color: Colors.white70,
         items: const [
           Icon(Icons.account_circle_rounded, size: 30,),
           Icon(Icons.weekend, size: 30,),

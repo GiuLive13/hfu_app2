@@ -1,7 +1,5 @@
-import 'package:hfu_app2/event_details.dart';
-import 'package:hfu_app2/websites/hfu_website_news.dart';
+import 'package:flutter/foundation.dart';
 import 'package:html/dom.dart' as dom;
-import 'package:html/parser.dart' as parser;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -44,7 +42,9 @@ class _EventState extends State<Event> {
         .map((element) => 'https://www.hs-furtwangen.de/aktuelles/${element.attributes['href']}')
         .toList();
 
-    print('Count: ${headline.length}');
+    if (kDebugMode) {
+      print('Count: ${headline.length}');
+    }
 
     setState(() {
       eventMonths = List.generate(
@@ -96,7 +96,7 @@ class _EventState extends State<Event> {
             return InkWell(
               onTap: () {
                // Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetail()));
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteEvents()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const HfuWebsiteEvents()));
               },
               child: SizedBox(
                 height: 80,

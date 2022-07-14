@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 
 class BusInfo extends StatefulWidget {
+  const BusInfo({Key? key}) : super(key: key);
+
   @override
   _BusInfoState createState() => _BusInfoState();
 }
@@ -13,6 +15,7 @@ class BusInfo extends StatefulWidget {
 class _BusInfoState extends State<BusInfo> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
-import '../dropdownDir/about.dart';
-import '../dropdownDir/contact.dart';
-import '../dropdownDir/settings.dart';
+import '../appbar/about.dart';
+import '../appbar/contact.dart';
+import '../appbar/settings_page.dart';
 
 class CustomMainAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomMainAppBar({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _CustomMainAppBarState extends State<CustomMainAppBar> {
           colors: [
             Colors.green.shade600,
             Colors.lightGreen.shade500,
-            Colors.white30,
+            Theme.of(context).colorScheme.primary
           ]),
       centerTitle: false,
       title: const Text(
@@ -56,7 +56,7 @@ class _CustomMainAppBarState extends State<CustomMainAppBar> {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Settings())),
+                              builder: (context) => const SettingsPage())),
                     ),
                     const SizedBox(
                       width: 1,
@@ -92,7 +92,7 @@ class _CustomMainAppBarState extends State<CustomMainAppBar> {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const AboutProject())),
+                              builder: (context) => AboutProject())),
                     ),
                     const SizedBox(
                       width: 1,
@@ -110,7 +110,7 @@ class _CustomMainAppBarState extends State<CustomMainAppBar> {
     switch (item) {
       case 0:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const Settings()));
+            .push(MaterialPageRoute(builder: (context) => const SettingsPage()));
         break;
       case 1:
         Navigator.of(context)
@@ -119,7 +119,7 @@ class _CustomMainAppBarState extends State<CustomMainAppBar> {
       case 2:
         Navigator.of(context)
             .push(
-            MaterialPageRoute(builder: (context) => const AboutProject()));
+            MaterialPageRoute(builder: (context) => AboutProject()));
         break;
     }
   }

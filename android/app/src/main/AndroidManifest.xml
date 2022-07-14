@@ -4,7 +4,8 @@
    <application
         android:label="HFU Mobile"
         android:name="${applicationName}"
-        android:icon="@mipmap/hfu_app_icon_circle">
+        android:icon="@mipmap/hfu_app_icon_circle"
+       >
         <activity
             android:name=".MainActivity"
             android:exported="true"

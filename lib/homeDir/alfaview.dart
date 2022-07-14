@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class Aview extends StatefulWidget {
+  const Aview({Key? key}) : super(key: key);
+
   @override
   _AviewState createState() => _AviewState();
 }
@@ -13,6 +15,7 @@ class _AviewState extends State<Aview> {
   final Completer<WebViewController> _webController =
       Completer<WebViewController>();
 
+  @override
   void initState() {
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

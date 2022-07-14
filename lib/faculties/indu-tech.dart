@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 
 class InduTech extends StatefulWidget {
+  const InduTech({Key? key}) : super(key: key);
+
   @override
   _InduTechState createState() => _InduTechState();
 }
@@ -13,6 +15,7 @@ class InduTech extends StatefulWidget {
 class _InduTechState extends State<InduTech> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

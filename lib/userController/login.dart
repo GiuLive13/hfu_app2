@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hfu_app2/userController/utils.dart';
@@ -43,8 +44,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           title: const Text(
             "Login",
             style: TextStyle(
-                color: Colors.green, fontSize: 30, fontWeight: FontWeight.w800),
-            textAlign: TextAlign.center,
+                color: Colors.green, fontSize: 40, fontWeight: FontWeight.w800),
           ),
         ),
         extendBodyBehindAppBar: true,
@@ -55,7 +55,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             key: formKey,
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 40),
+                const SizedBox(height: 50),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(
@@ -121,7 +121,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             decoration: TextDecoration.underline,
                             color: Theme.of(context).colorScheme.primary)),
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => NewPassword(),
+                      builder: (context) => const NewPassword(),
                     ))
                 ),
                 const SizedBox(height: 13),
@@ -162,7 +162,9 @@ class _LoginWidgetState extends State<LoginWidget> {
         password: passwordController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
 
       Utils.showSnackBar(e.message);
     }

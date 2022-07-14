@@ -1,7 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:async';
 import 'dart:io';
-import 'package:http/http.dart' as http;
-import 'package:html/dom.dart' as dom;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
 

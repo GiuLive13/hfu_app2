@@ -24,10 +24,10 @@ class _ReftreffState extends State<Reftreff> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
         color: Colors.black87
     ),
-    padding: EdgeInsets.only(top:15),
+    padding: const EdgeInsets.only(top:15),
       child: WebView(
           initialUrl: 'https://reftreff.hs-furtwangen.de/',
           javascriptMode: JavascriptMode.unrestricted,

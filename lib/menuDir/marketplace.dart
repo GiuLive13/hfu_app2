@@ -1,12 +1,14 @@
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:hfu_app2/marketplace/add_entry.dart';
 import 'package:hfu_app2/marketplace/entry.dart';
 import 'package:hfu_app2/marketplace/entry_view.dart';
 import 'package:hfu_app2/widgets/background_widget.dart';
-import 'package:path/path.dart';
+
 
 class Marketplace extends StatefulWidget {
   const Marketplace({Key? key}) : super(key: key);
@@ -54,7 +56,6 @@ class _MarketplaceState extends State<Marketplace> {
           ),
         );
       }
-
     );
   }
 }
@@ -65,65 +66,66 @@ Stream<List<Entry>> readEntry() => FirebaseFirestore.instance
     .map((snapshot) =>
         snapshot.docs.map((doc) => Entry.fromJson(doc.data())).toList());
 
-/*Stream<QuerySnapshot<Map<String, dynamic>>> readUser() =>
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .collection('entries')
-        .snapshots();
-*/
 Widget buildEntry(BuildContext context, Entry entry) => Center(
-      child: Hero(
-        tag: 'AddEntry',
-        child: Card(
-          elevation: 5,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40),
-              side: const BorderSide(
-                color: Colors.green,
-              )),
-          margin: const EdgeInsets.only(top: 5, left: 10, right: 10, bottom: 5),
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.account_circle, size: 32),
-                title: Text(
-                  entry.title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+      child: Card( /// HERO TAG
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
+            side: const BorderSide(
+              color: Colors.green,
+            )),
+        margin: const EdgeInsets.only(top: 5, left: 10, right: 10, bottom: 5),
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
-                subtitle: Text(entry.userContact),
-              ),
-              const SizedBox(
-                width: 30,
-              ),
-              Container(
-                  height: 80,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/hfu_website_adaptive_fore.png'))
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(18),
+                      child: const Icon(Icons.account_circle, color: Colors.white, size:32)
                   )
               ),
-              ButtonBar(
-                alignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                      onPressed: () => _clickEntry(context, entry),
-                      child: const Text(
-                        "Eintrag anschauen",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      )),
-                ],
-              )
-            ],
-          ),
+              title: Text(
+                entry.title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(entry.userContact),
+            ),
+            const SizedBox(
+              width: 30,
+            ),
+            Container(
+                height: 80,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                            'assets/images/hfu_website_adaptive_fore.png'),
+                    fit: BoxFit.fitHeight)
+                )
+            ),
+            ButtonBar(
+              alignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                    onPressed: () => _clickEntry(context, entry),
+                    child: const Text(
+                      "Eintrag anschauen",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    )),
+              ],
+            )
+          ],
         ),
       ),
     );

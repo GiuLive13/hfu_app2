@@ -20,7 +20,7 @@ class CustomBackground extends StatelessWidget {
               colors: [
                 Colors.white,
                 Colors.lightGreen.shade600,
-                Colors.green.shade900,
+                Theme.of(context).colorScheme.primary,
               ])
       ),
     );

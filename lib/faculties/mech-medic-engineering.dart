@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 
 class MechMediEngineering extends StatefulWidget {
+  const MechMediEngineering({Key? key}) : super(key: key);
+
   @override
   _MechMediEngineeringState createState() => _MechMediEngineeringState();
 }
@@ -13,6 +15,7 @@ class MechMediEngineering extends StatefulWidget {
 class _MechMediEngineeringState extends State<MechMediEngineering> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
+  @override
   void initState(){
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

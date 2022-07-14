@@ -86,7 +86,7 @@ class _LocationsState extends State<Locations> {
                                     onPressed: () => Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => MensaFurtwangen())),
+                                            builder: (context) => const MensaFurtwangen())),
                                     child: const Text('Essensplan der Woche', style: TextStyle(fontSize: 16)),
                                   ),
                                 ],),

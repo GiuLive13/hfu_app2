@@ -31,7 +31,7 @@ class Document extends StatelessWidget {
               scrollDirection: Axis.vertical,
               children: <Widget>[
                 Container(
-                  height: 240,
+                  height: 230,
                   decoration: BoxDecoration(
                     color: Colors.white54,
                       border: Border.all(width: 2, color: Colors.black45),
@@ -139,7 +139,7 @@ class Document extends StatelessWidget {
                 ),
                 const Divider(color: Colors.black, thickness: 1, indent: 25, endIndent: 25,),
                 Container(
-                  height: 200,
+                  height: 180,
                   decoration: BoxDecoration(
                       color: Colors.white54,
                       border: Border.all(width: 2, color: Colors.black45),
@@ -254,7 +254,6 @@ class Document extends StatelessWidget {
                                   fontSize: 17
                               ),)
                           ),
-
                         ],
                       ),
                       Row(
@@ -332,7 +331,7 @@ class Document extends StatelessWidget {
                 ),
                 const Divider(color: Colors.black, thickness: 1, indent: 25, endIndent: 25,),
                 Container(
-                  height: 150,
+                  height: 130,
                   decoration: BoxDecoration(
                       color: Colors.white54,
                       border: Border.all(width: 2, color: Colors.black45),
