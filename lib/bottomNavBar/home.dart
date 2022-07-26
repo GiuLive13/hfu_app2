@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hfu_app2/homeDir/alfaview.dart';
-import 'package:hfu_app2/homeDir/felix.dart';
-import 'package:hfu_app2/homeDir/mail.dart';
-import 'package:hfu_app2/homeDir/studi_portal.dart';
-import 'package:hfu_app2/homeDir/timetable.dart';
-import 'package:hfu_app2/widgets/background_widget.dart';
 
-import '../websites/hfu_website.dart';
+import 'package:hfu_app2/widgets/background_widget.dart';
+import '../websites/web_view.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,198 +15,158 @@ class Home extends StatelessWidget {
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const FelixPortal()));
+                  MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://felix.hs-furtwangen.de/dmz/',)));
             },
-            child: Card(
-              margin: const EdgeInsets.only(top: 6, left: 25, right: 25),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              color: Theme.of(context).colorScheme.primary,
-              child: Column(
-                children: [
-                  const ListTile(
-                    title: Text(
-                      'FELIX',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                        color: Colors.white,
+            child: Container(
+              padding: const EdgeInsets.only(top: 20),
+              height: 100,
+              child: Card(
+                margin: const EdgeInsets.only(left: 10, right: 35),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                color: Colors.green.shade800,
+                child: Column(
+                  children: const [
+                    ListTile(
+                      title: Text(
+                        'FELIX',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 40,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  ButtonBar(children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const FelixPortal()));
-                        },
-                        icon: const Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        )),
-                  ]),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const StudiPortal()));
+                  MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://studi-portal.hs-furtwangen.de/')));
             },
-            child: Card(
-              margin: const EdgeInsets.only(top: 4, left: 25, right: 25),
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              color: Theme.of(context).colorScheme.primary,
-              child: Column(
-                children: [
-                  const ListTile(
-                    title: Text(
-                      'Studi-Portal',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40,
-                          color: Colors.white),
+            child: Container(
+              padding:const EdgeInsets.only(top: 20),
+              height: 100,
+              child: Card(
+                margin: const EdgeInsets.only(left: 35, right: 10),
+                shape:
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                color: Colors.green.shade800,
+                child: Column(
+                  children: const [
+                    ListTile(
+                      title: Text(
+                        'Studi-Portal',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white),
+                      ),
                     ),
-                  ),
-                  ButtonBar(children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const StudiPortal()));
-                        },
-                        icon: const Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        )),
-                  ]),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Mail()));
+                  MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://webmail.hs-furtwangen.de/')));
             },
-            child: Card(
-              margin: const EdgeInsets.only(top: 4, left: 25, right: 25),
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              color: Theme.of(context).colorScheme.primary,
-              child: Column(
-                children: [
-                  const ListTile(
-                    title: Text(
-                      'Mail',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40,
-                          color: Colors.white),
+            child: Container(
+              padding:const EdgeInsets.only(top: 20),
+              height: 100,
+              child: Card(
+                margin: const EdgeInsets.only(left: 10, right: 35),
+                shape:
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                color: Colors.green.shade800,
+                child: Column(
+                  children: const [
+                    ListTile(
+                      title: Text(
+                        'Mail',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white),
+                      ),
                     ),
-                  ),
-                  ButtonBar(children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const Mail()));
-                        },
-                        icon: const Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        )),
-                  ]),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Timetable()));
+                  MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://stundenplan.hs-furtwangen.de/splan/')));
             },
-            child: Card(
-              margin: const EdgeInsets.only(top: 4, left: 25, right: 25),
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              color: Theme.of(context).colorScheme.primary,
-              child: Column(
-                children: [
-                  const ListTile(
-                    title: Text(
-                      'Stundenplan',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40,
-                          color: Colors.white),
+            child: Container(
+              padding:const EdgeInsets.only(top: 20),
+              height: 100,
+              child: Card(
+                margin: const EdgeInsets.only(left: 35, right: 10),
+                shape:
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                color: Colors.green.shade800,
+                child: Column(
+                  children: const [
+                    ListTile(
+                      title: Text(
+                        'Stundenplan',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white),
+                      ),
                     ),
-                  ),
-                  ButtonBar(children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Timetable()));
-                        },
-                        icon: const Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        )),
-                  ]),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Aview()));
+                  MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://howto.hs-furtwangen.de/aview/')));
             },
-            child: Card(
-              margin:
-                  const EdgeInsets.only(top: 4, left: 25, right: 25, bottom: 5),
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              color: Theme.of(context).colorScheme.primary,
-              child: Column(
-                children: [
-                  const ListTile(
-                    title: Text(
-                      'Alfaview',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40,
-                          color: Colors.white),
+            child: Container(
+              padding: const EdgeInsets.only(top: 20),
+              height: 100,
+              child: Card(
+                margin:
+                    const EdgeInsets.only(left: 10, right: 35),
+                shape:
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                color: Colors.green.shade800,
+                child: Column(
+                  children: const [
+                    ListTile(
+                      title: Text(
+                        'Alfaview',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white),
+                      ),
                     ),
-                  ),
-                  ButtonBar(children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const Aview()));
-                        },
-                        icon: const Icon(Icons.arrow_forward_ios,
-                            color: Colors.white)),
-                  ]),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           Align(
             alignment: Alignment.bottomRight,
             child: FloatingActionButton(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              foregroundColor: Colors.black,
+              backgroundColor: Colors.green.shade800,
               mini: true,
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const HfuWebsite()));
+                    MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://www.hs-furtwangen.de/')));
               },
               child: const Icon(Icons.house_rounded,
                   color: Colors.white, size: 30),

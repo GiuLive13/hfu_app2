@@ -1,16 +1,15 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:hfu_app2/pdfView/hfu_beitragssatzung.dart';
-import 'package:hfu_app2/pdfView/info_pregnancy.dart';
-import 'package:hfu_app2/pdfView/merkblatt_studieren_mit_kind.dart';
-import 'package:hfu_app2/pdfView/re_registration.dart';
+import 'package:hfu_app2/pdfView/pdf_view.dart';
 import 'package:hfu_app2/widgets/background_widget.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../pdf_viewer.dart';
+import '../pdfView/pdf_viewer.dart';
+import '../widgets/appbar_widget.dart';
 
 
 class Document extends StatelessWidget {
@@ -19,8 +18,8 @@ class Document extends StatelessWidget {
    @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dokumente'),
+      appBar: CustomMainAppBar(
+        pageTitle: 'Dokumente',
       ),
       body: Stack(
         children: [
@@ -33,8 +32,7 @@ class Document extends StatelessWidget {
                 Container(
                   height: 230,
                   decoration: BoxDecoration(
-                    color: Colors.white54,
-                      border: Border.all(width: 2, color: Colors.black45),
+                      border: Border.all(width: 2, color: Theme.of(context).colorScheme.primary),
                     borderRadius: BorderRadius.circular(15)
                   ),
                   child: Column(
@@ -59,9 +57,7 @@ class Document extends StatelessWidget {
                                 url: 'https://www.hs-furtwangen.de/fileadmin/user_upload/ze_iaf/Dokumente/2019.06.01_Regeln_zur_Sicherung_wissenschaftlicher_Praxis.pdf',
                                 fileName: 'Regeln_zur_Sicherung_wissenschaftlicher_Praxis.pdf',
                               ),
-                              child: const Text('Regeln - wissenschaftliches Arbeiten', style: TextStyle(
-                                  fontSize: 17
-                              ),)
+                              child: const AutoSizeText('Regeln - wissenschaftliches Arbeiten')
                           ),
                         ],
                       ),
@@ -99,7 +95,7 @@ class Document extends StatelessWidget {
                                 await PDFViewer.loadFirebase(url);
 
                                 if (file == null) return;
-                                beitragssatzPDF(context, file);
+                                documentView(context, file);
                               },
                               child: const Text(
                                 'Beitragssatzung',
@@ -137,12 +133,11 @@ class Document extends StatelessWidget {
                     ],
                   )
                 ),
-                const Divider(color: Colors.black, thickness: 1, indent: 25, endIndent: 25,),
+                const Divider(thickness: 1, indent: 25, endIndent: 25,),
                 Container(
                   height: 180,
                   decoration: BoxDecoration(
-                      color: Colors.white54,
-                      border: Border.all(width: 2, color: Colors.black45),
+                      border: Border.all(width: 2, color: Theme.of(context).colorScheme.primary),
                       borderRadius: BorderRadius.circular(15)
                   ),
                   child: Column(
@@ -180,18 +175,14 @@ class Document extends StatelessWidget {
                                 url: 'https://www.hs-furtwangen.de/fileadmin/Redaktion/Share/Formulare/Mitteilung_ueber_praktisches_Studiensemester_Furtwangen.pdf',
                                 fileName: 'Mitteilung_Praktisches_Studiensemester.pdf',
                               ),
-                              child: const Text('Praxissemester(Fu)', style: TextStyle(
-                                  fontSize: 17
-                              ),)
+                              child: const AutoSizeText('Praxissemester(Fuwa)', overflow: TextOverflow.fade,)
                           ),
                           TextButton(
                               onPressed: () => openFile(
                                 url: 'https://www.hs-furtwangen.de/fileadmin/Redaktion/Share/Formulare/Mitteilung_ueber_praktisches_Studiensemester_Tuttlingen.pdf',
                                 fileName: 'Mitteilung_Praktisches_Studiensemester.pdf',
                               ),
-                              child: const Text('Praxissemester(Tut)',overflow: TextOverflow.fade, style: TextStyle(
-                                  fontSize: 17
-                              ),)
+                              child: const AutoSizeText('Praxissemester(Tut)', overflow: TextOverflow.fade,)
                           ),
                         ],
                       ),
@@ -203,21 +194,21 @@ class Document extends StatelessWidget {
                                 url: 'https://www.hs-furtwangen.de/fileadmin/Redaktion/Share/Formulare/Mitteilung_ueber_praktisches_Studiensemester_VS.pdf',
                                 fileName: 'Mitteilung_Praktisches_Studiensemester.pdf',
                               ),
-                              child: const Text('Praxissemester(VS)', style: TextStyle(
+                              child: const Text('Praxissemester(VS)', overflow: TextOverflow.fade,
+                                style: TextStyle(
                                   fontSize: 17
-                              ),)
+                                ),)
                           ),
                         ],
                       )
                     ],
                   ),
                 ),
-                const Divider(color: Colors.black, thickness: 1, indent: 25, endIndent: 25,),
+                const Divider(thickness: 1, indent: 25, endIndent: 25,),
                 Container(
                   height: 120,
                   decoration: BoxDecoration(
-                      color: Colors.white54,
-                      border: Border.all(width: 2, color: Colors.black45),
+                      border: Border.all(width: 2, color: Theme.of(context).colorScheme.primary),
                       borderRadius: BorderRadius.circular(15)
                   ),
                   child: Column(
@@ -269,12 +260,11 @@ class Document extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Divider(color: Colors.black, thickness: 1, indent: 25, endIndent: 25,),
+                const Divider(thickness: 1, indent: 25, endIndent: 25,),
                 Container(
-                  height: 130,
+                  height: 131,
                   decoration: BoxDecoration(
-                      color: Colors.white54,
-                      border: Border.all(width: 2, color: Colors.black45),
+                      border: Border.all(width: 2, color: Theme.of(context).colorScheme.primary),
                       borderRadius: BorderRadius.circular(15)
                   ),
                   child: Column(
@@ -316,7 +306,7 @@ class Document extends StatelessWidget {
                                   await PDFViewer.loadFirebase(url);
 
                                   if (file == null) return;
-                                  reRegisterPDF(context, file);
+                                  documentView(context, file);
                                 },
                                 child: const Text(
                                   'Informationen zur Rückmeldung',
@@ -329,12 +319,11 @@ class Document extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Divider(color: Colors.black, thickness: 1, indent: 25, endIndent: 25,),
+                const Divider(thickness: 1, indent: 25, endIndent: 25,),
                 Container(
-                  height: 130,
+                  height: 131,
                   decoration: BoxDecoration(
-                      color: Colors.white54,
-                      border: Border.all(width: 2, color: Colors.black45),
+                      border: Border.all(width: 2, color: Theme.of(context).colorScheme.primary),
                       borderRadius: BorderRadius.circular(15)
                   ),
                   child: Column(
@@ -361,7 +350,7 @@ class Document extends StatelessWidget {
                                 await PDFViewer.loadFirebase(url);
 
                                 if (file == null) return;
-                                infoPregPDF(context, file);
+                                documentView(context, file);
                               },
                               child: const Text(
                                 'Information',
@@ -378,7 +367,7 @@ class Document extends StatelessWidget {
                                 await PDFViewer.loadFirebase(url);
 
                                 if (file == null) return;
-                                merkblattPregPDF(context, file);
+                                documentView(context, file);
                               },
                               child: const Text(
                                 'Merkblatt',
@@ -406,11 +395,10 @@ class Document extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Divider(color: Colors.black, thickness: 3, indent: 25, endIndent: 25,),
+                const Divider(thickness: 3, indent: 25, endIndent: 25,),
                 Container(
                   height: 80,
                   decoration: BoxDecoration(
-                      color: Colors.white54,
                       border: Border.all(width: 2, color: Colors.redAccent),
                       borderRadius: BorderRadius.circular(15)
                   ),
@@ -418,7 +406,7 @@ class Document extends StatelessWidget {
                     children: [
                       Row(
                         children: const [
-                          SizedBox(height: 28, width: 10,),
+                         SizedBox(height: 28, width: 10,),
                           Text('Hinweis', style: TextStyle(
                               fontWeight: FontWeight.w900,
                               fontSize: 22,
@@ -427,7 +415,7 @@ class Document extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Text('Prüfungsan- und abmeldungen nur über Studi-Portal möglich!', textAlign: TextAlign.center,
+                      const AutoSizeText('Prüfungsan- und abmeldungen nur über Studi-Portal möglich!', textAlign: TextAlign.center,
                         style: TextStyle(
                           fontStyle: FontStyle.italic
                         ),
@@ -443,25 +431,9 @@ class Document extends StatelessWidget {
     );
   }
 
-  void beitragssatzPDF(BuildContext context, File file) {
+  void documentView(BuildContext context, File file) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => Beitragssatzung(file: file)),
-    );
-  }
-  void reRegisterPDF(BuildContext context, File file) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => ReRegistration(file: file)),
-    );
-  }
-
-  void infoPregPDF(BuildContext context, File file) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => InfoPregnancy(file: file)),
-    );
-  }
-  void merkblattPregPDF(BuildContext context, File file) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => MerkblattPregnancy(file: file)),
+      MaterialPageRoute(builder: (context) => DocumentViewer(file: file)),
     );
   }
 

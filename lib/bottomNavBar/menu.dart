@@ -8,8 +8,9 @@ import 'package:hfu_app2/menuDir/faculty.dart';
 import 'package:hfu_app2/menuDir/location.dart';
 import 'package:hfu_app2/menuDir/marketplace.dart';
 import 'package:hfu_app2/menuDir/news.dart';
+import 'package:hfu_app2/websites/web_view.dart';
 import 'package:hfu_app2/widgets/background_widget.dart';
-import '../menuDir/reftreff.dart';
+
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -34,7 +35,6 @@ class _MenuState extends State<Menu> {
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const Document())),
               child: Card(
-                  color: Colors.white,
                   elevation: 4.0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)
@@ -89,7 +89,6 @@ class _MenuState extends State<Menu> {
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const DatesAndDeadlines())),
               child: Card(
-                color: Colors.white,
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
@@ -142,9 +141,8 @@ class _MenuState extends State<Menu> {
             ),
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Faculty())),
+                  MaterialPageRoute(builder: (context) => const FacultyView())),
               child: Card(
-                color: Colors.white,
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
@@ -164,7 +162,7 @@ class _MenuState extends State<Menu> {
                   SizedBox(
                     height: 95.0,
                     child: Image.asset(
-                      'assets/images/Logo_HFU_42x15mm.jpg',
+                      'assets/images/Logo_HFU_transparent.png',
                     ),
                   ),
                   Container(
@@ -185,7 +183,7 @@ class _MenuState extends State<Menu> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                         ),
                         onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const Faculty())),
+                            MaterialPageRoute(builder: (context) => const FacultyView())),
                       ),
                     ],
                   ),
@@ -196,7 +194,6 @@ class _MenuState extends State<Menu> {
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const Locations())),
               child: Card(
-                color: Colors.white,
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
@@ -251,7 +248,6 @@ class _MenuState extends State<Menu> {
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const Marketplace())),
               child: Card(
-                color: Colors.white,
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
@@ -307,7 +303,6 @@ class _MenuState extends State<Menu> {
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const Event())),
               child: Card(
-                color: Colors.white,
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
@@ -361,7 +356,6 @@ class _MenuState extends State<Menu> {
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const News())),
               child: Card(
-                color: Colors.white,
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
@@ -383,7 +377,6 @@ class _MenuState extends State<Menu> {
                         height: 90.0,
                         child: FaIcon(
                           FontAwesomeIcons.newspaper, size: 80, color: Colors.orangeAccent,
-
                         )
                     ),
                     Container(
@@ -414,9 +407,8 @@ class _MenuState extends State<Menu> {
             ),
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Reftreff())),
+                  MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://reftreff.hs-furtwangen.de/'))),
               child: Card(
-                color: Colors.white,
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
@@ -437,7 +429,7 @@ class _MenuState extends State<Menu> {
                     SizedBox(
                       height: 100.0,
                       child: Image.asset(
-                        'assets/images/reftreff.jpg', // Alert Icon
+                        'assets/images/reftreff.png', // Alert Icon
                       ),
                     ),
                     Container(
@@ -458,7 +450,7 @@ class _MenuState extends State<Menu> {
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
                           onPressed: () => Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const Reftreff())),
+                              MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://reftreff.hs-furtwangen.de/'))),
                         ),
                       ],
                     ),

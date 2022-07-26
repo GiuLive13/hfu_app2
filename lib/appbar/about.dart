@@ -3,12 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:hfu_app2/websites/hfu_faq.dart';
-import 'package:hfu_app2/websites/hfu_instagram.dart';
-import 'package:hfu_app2/websites/hfu_linkedIn.dart';
-import 'package:hfu_app2/websites/hfu_twitter.dart';
+import 'package:hfu_app2/websites/web_view.dart';
 import 'package:hfu_app2/widgets/background_widget.dart';
-import '../websites/hfu_xing.dart';
+
+import '../widgets/appbar_widget.dart';
 
 class AboutProject extends StatelessWidget {
     AboutProject({Key? key}) : super(key: key);
@@ -16,14 +14,10 @@ class AboutProject extends StatelessWidget {
   final userID = FirebaseAuth.instance.currentUser?.uid;
   final String appVersion = 'Version 0.0.1';
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('About HFU'),
-      ),
+      appBar: CustomMainAppBar(pageTitle: 'About',),
       body: Stack(children: [
         const CustomBackground(),
         Column(
@@ -47,7 +41,7 @@ class AboutProject extends StatelessWidget {
                   ),
                   TextButton(
                       onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const FAQ())),
+                          MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://howto.hs-furtwangen.de/faq/'))),
                       child: const Text(
                         'FAQ',
                         style: TextStyle(
@@ -99,7 +93,7 @@ class AboutProject extends StatelessWidget {
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const InstaLink())),
+                                builder: (context) => WebsiteView(initialUrl: 'https://www.instagram.com/hs.furtwangen/?hl=de'))),
                         icon: const FaIcon(
                           FontAwesomeIcons.instagram,
                           semanticLabel: "Instagram",
@@ -108,7 +102,7 @@ class AboutProject extends StatelessWidget {
                         )),
                     IconButton(
                         onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const Twitter())),
+                            MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://twitter.com/hs_furtwangen?lang=de'))),
                         icon: const FaIcon(
                           FontAwesomeIcons.twitter,
                           semanticLabel: "Twitter",
@@ -119,7 +113,7 @@ class AboutProject extends StatelessWidget {
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const LinkedInLink())),
+                                builder: (context) => WebsiteView(initialUrl: 'https://www.linkedin.com/school/hochschule-furtwangen-university/?originalSubdomain=de'))),
                         icon: const FaIcon(
                           FontAwesomeIcons.linkedin,
                           semanticLabel: "LinkedIn",
@@ -130,7 +124,7 @@ class AboutProject extends StatelessWidget {
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const XingLink())),
+                                builder: (context) => WebsiteView(initialUrl: 'https://www.xing.com/pages/hochschulefurtwangenuniversity'))),
                         icon: const FaIcon(
                           FontAwesomeIcons.xing,
                           semanticLabel: "XING",

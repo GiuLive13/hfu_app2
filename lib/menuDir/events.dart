@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:hfu_app2/websites/web_view.dart';
+import 'package:hfu_app2/widgets/appbar_widget.dart';
+import 'package:hfu_app2/widgets/background_widget.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-import '../websites/hfu_website_events.dart';
 
 class Event extends StatefulWidget {
   const Event({Key? key}) : super(key: key);
@@ -59,68 +61,52 @@ class _EventState extends State<Event> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Veranstaltungen'),
-        centerTitle: true,
+      appBar: CustomMainAppBar(pageTitle: 'Veranstaltungen',
       ),
-      body: Container(
-        height: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: const [
-                  0.1,
-                  0.9,
-                  1.3,
-                ],
-                colors: [
-                  Colors.white,
-                  Colors.lightGreen.shade600,
-                  Colors.green.shade900,
-                ]
-            )
-        ),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              childAspectRatio: 3/2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20
-          ),
-          padding: const EdgeInsets.all(20),
-          itemCount: eventMonths.length,
-          itemBuilder: (context, index) {
-            final eventMonth = eventMonths[index];
-
-            return InkWell(
-              onTap: () {
-               // Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetail()));
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const HfuWebsiteEvents()));
-              },
-              child: SizedBox(
-                height: 80,
-                child: Card(
-                  color: Theme.of(context).colorScheme.primary,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text(
-                          eventMonth.headline,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+      body: Stack(
+        children: [
+          const CustomBackground(),
+            GridView.builder(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  childAspectRatio: 3/2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20
               ),
-            );
-          },
-        ),
-      ),
+              padding: const EdgeInsets.all(20),
+              itemCount: eventMonths.length,
+              itemBuilder: (context, index) {
+                final eventMonth = eventMonths[index];
+
+                return InkWell(
+                  onTap: () {
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetail()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://www.hs-furtwangen.de/veranstaltungen/?tx_solr%5Bfilter%5D%5B0%5D=publishedBy%3ApressOffice')));
+                  },
+                  child: SizedBox(
+                    height: 80,
+                    child: Card(
+                      color: Colors.green.shade800,
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(
+                              eventMonth.headline,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+        ],
+      )
     );
   }
 }

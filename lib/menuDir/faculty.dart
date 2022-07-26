@@ -1,295 +1,71 @@
 import 'package:flutter/material.dart';
 
-import 'package:hfu_app2/faculties/business-administration.dart';
-import 'package:hfu_app2/faculties/business-information.dart';
-import 'package:hfu_app2/faculties/business.dart';
-import 'package:hfu_app2/faculties/com-science.dart';
-import 'package:hfu_app2/faculties/digital-media.dart';
-import 'package:hfu_app2/faculties/healt-safety-society.dart';
-import 'package:hfu_app2/faculties/indu-tech.dart';
-import 'package:hfu_app2/faculties/mech-medic-engineering.dart';
-import 'package:hfu_app2/faculties/medic-life-science.dart';
+import 'package:hfu_app2/widgets/appbar_widget.dart';
+import 'package:hfu_app2/widgets/background_widget.dart';
+import 'package:hfu_app2/faculties/facultyStructure.dart';
+import 'package:hfu_app2/widgets/faculty_widget.dart';
 
-class Faculty extends StatelessWidget {
-  const Faculty({Key? key}) : super(key: key);
+List<Faculty> faculties = [
+  Faculty(
+      'Digitale Medien',
+      'https://www.hs-furtwangen.de/fakultaeten/digitale-medien/',
+      'assets/images/dm.png'),
+  Faculty(
+      'Gesundheit, Sicherheit, Gesellschaft',
+      'https://www.hs-furtwangen.de/fakultaeten/gesundheit-sicherheit-gesellschaft/',
+      'assets/images/gsg.png'),
+  Faculty(
+      'Industrial Technologies',
+      'https://www.hs-furtwangen.de/fakultaeten/industrial-technologies/',
+      'assets/images/Logo_HFU_transparent.png'),
+  Faculty('Informatik', 'https://www.hs-furtwangen.de/fakultaeten/informatik/',
+      'assets/images/in.png'),
+  Faculty(
+      'Medical and Life Sciences',
+      'https://www.hs-furtwangen.de/fakultaeten/medical-and-life-sciences/',
+      'assets/images/mls.png'),
+  Faculty(
+      'Mechanical & Medical Engineering',
+      'https://www.hs-furtwangen.de/fakultaeten/mechanical-and-medical-engineering/',
+      'assets/images/mme.png'),
+  Faculty('Wirtschaft', 'https://www.hs-furtwangen.de/fakultaeten/wirtschaft/',
+      'assets/images/w.png'),
+  Faculty(
+      'Wirtschaftsinformatik',
+      'https://www.hs-furtwangen.de/fakultaeten/wirtschaftsinformatik/',
+      'assets/images/wib.png'),
+  Faculty(
+      'Wirtschaftsingenieurwesen',
+      'https://www.hs-furtwangen.de/fakultaeten/wirtschaftsingenieurwesen/',
+      'assets/images/wing.png'),
+];
+
+class FacultyView extends StatelessWidget {
+  const FacultyView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text('Fakultäten',
-        style: TextStyle(
-          fontWeight: FontWeight.w900
-          ),
+        appBar: CustomMainAppBar(
+          pageTitle: 'Fakultäten',
         ),
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container( /// anderer Hintergrund
-        padding: const EdgeInsets.only(top: 10,),
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: const [
-                  0.1,
-                  0.2,
-                  0.9,
-                ],
-                colors: [
-                  Colors.green.shade500,
-                  Colors.green.shade600,
-                  Colors.green.shade900,
-                ]
-            )
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: GridView(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 10/8,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20
+        extendBodyBehindAppBar: true,
+        body: Stack(children: [
+          const CustomBackground(),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  childAspectRatio: 10 / 8 ,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20),
+              itemCount: faculties.length,
+              itemBuilder: (BuildContext context, int index) {
+                return FacultyWidget(faculty: faculties[index]);
+              },
             ),
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const DigitalMedia()));
-                  },
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      side: const BorderSide(
-                          color: Colors.white70,
-                          width: 2
-                      )
-                  ),
-                  child: const ListTile(
-                    title: Text('DM',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                        ),
-                    ),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const HSS()));
-                },
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      side: const BorderSide(
-                          color: Colors.white70,
-                          width: 2
-                      )
-                  ),
-                  child: const ListTile(
-                    title: Text('GSG',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 30,
-                      ),),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const InduTech()));
-                },
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      side: const BorderSide(
-                          color: Colors.white70,
-                          width: 2
-                      )
-                  ),
-                  child: const ListTile(
-                    title: Text('ITE',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 30,
-                      ),),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const ComScience()));
-                },
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      side: const BorderSide(
-                          color: Colors.white70,
-                          width: 2
-                      )
-                  ),
-                  child: const ListTile(
-                    title: Text('IN',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 30,
-                      ),),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const MedLifeScience()));
-                },
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      side: const BorderSide(
-                          color: Colors.white70,
-                          width: 2
-                      )
-                  ),
-                  child: const ListTile(
-                    title: Text('MLS',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const MechMediEngineering()));
-                },
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    side: const BorderSide(
-                      color: Colors.white70,
-                      width: 2
-                    )
-                  ),
-                  child: const ListTile(
-                    title: Text('MME',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 30,
-                      ),),
-
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Business()));
-                },
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      side: const BorderSide(
-                          color: Colors.white70,
-                          width: 2
-                      )
-                  ),
-                  child: const ListTile(
-                    title: Text('W',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const BusInfo()));
-                },
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      side: const BorderSide(
-                          color: Colors.white70,
-                          width: 2
-                      )
-                  ),
-                  child: const ListTile(
-                    title: Text('WIB',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 30,
-                      ),
-                    ),
-
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const BusAdmin()));
-                },
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      side: const BorderSide(
-                          color: Colors.white70,
-                          width: 2
-                      )
-                  ),
-                  child: const ListTile(
-                    title: Text('WING',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
           ),
-        ),
-      )
-    );
+        ]));
   }
 }

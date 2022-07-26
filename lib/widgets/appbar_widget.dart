@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
@@ -6,7 +7,9 @@ import '../appbar/contact.dart';
 import '../appbar/settings_page.dart';
 
 class CustomMainAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomMainAppBar({Key? key}) : super(key: key);
+        CustomMainAppBar({Key? key, required this.pageTitle}) : super(key: key);
+
+  String pageTitle;
 
   @override
   State<CustomMainAppBar> createState() => _CustomMainAppBarState();
@@ -25,92 +28,55 @@ class _CustomMainAppBarState extends State<CustomMainAppBar> {
           end: Alignment.topRight,
           stops: const [
             0.3,
-            0.4,
-            1
+            1.3,
           ],
           colors: [
             Colors.green.shade600,
-            Colors.lightGreen.shade500,
-            Theme.of(context).colorScheme.primary
+            Colors.lightGreen.shade300,
           ]),
       centerTitle: false,
-      title: const Text(
-        'HFU Mobile',
-        style: TextStyle(
-          fontSize: 40,
+      title: AutoSizeText(
+        widget.pageTitle,
+        maxFontSize: 30,
+        minFontSize: 24,
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),
       actions: [
         PopupMenuButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           icon: const Icon(Icons.menu_rounded),
           itemBuilder: (context) => [
-            PopupMenuItem<int>(
+             PopupMenuItem<int>(
                 value: 0,
-                child: Row(
-                  children: [
-                    const Text('Settings      ', textAlign: TextAlign.left),
-                    IconButton(
-                      icon: const Icon(Icons.settings),
-                      color: Colors.black,
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SettingsPage())),
-                    ),
-                    const SizedBox(
-                      width: 1,
-                    ),
-                  ],
-                )),
-            PopupMenuItem<int>(
+                child: ListTile(
+                  contentPadding: const EdgeInsets.only(left: 8, right: 8),
+                    title: const Text('Settings'), trailing: Icon(Icons.settings, color: Theme.of(context).iconTheme.color,))),
+             PopupMenuItem<int>(
                 value: 1,
-                child: Row(
-                  children: [
-                    const Text('Kontakt      ', textAlign: TextAlign.left),
-                    IconButton(
-                      alignment: Alignment.centerRight,
-                      icon: const Icon(Icons.mail),
-                      color: Colors.black,
-                      onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const Contact())),
-                    ),
-                    const SizedBox(
-                      width: 1,
-                    ),
-                  ],
-                )),
-            PopupMenuItem<int>(
+                child: ListTile(
+                    contentPadding: const EdgeInsets.only(left: 8, right: 8),
+                    title: const Text('Kontakt'), trailing: Icon(Icons.mail, color: Theme.of(context).iconTheme.color))),
+             PopupMenuItem<int>(
                 value: 2,
-                child: Row(
-                  children: [
-                    const Text('About         ', textAlign: TextAlign.left),
-                    IconButton(
-                      alignment: Alignment.centerRight,
-                      icon: const Icon(Icons.announcement),
-                      color: Colors.black,
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AboutProject())),
-                    ),
-                    const SizedBox(
-                      width: 1,
-                    ),
-                  ],
-                )
-            ),
+                child: ListTile(
+                    contentPadding: const EdgeInsets.only(left: 8, right: 8),
+                    title: const Text('About'), trailing: Icon(Icons.announcement, color: Theme.of(context).iconTheme.color))),
           ],
           onSelected: (item) => _selectedItem(context, item),
         ),
       ],
     );
   }
+
   void _selectedItem(BuildContext context, item) {
     switch (item) {
       case 0:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const SettingsPage()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const SettingsPage()));
         break;
       case 1:
         Navigator.of(context)
@@ -118,8 +84,7 @@ class _CustomMainAppBarState extends State<CustomMainAppBar> {
         break;
       case 2:
         Navigator.of(context)
-            .push(
-            MaterialPageRoute(builder: (context) => AboutProject()));
+            .push(MaterialPageRoute(builder: (context) => AboutProject()));
         break;
     }
   }

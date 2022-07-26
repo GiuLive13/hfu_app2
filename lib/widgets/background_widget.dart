@@ -13,14 +13,14 @@ class CustomBackground extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               stops: const [
-                0.1,
+                0.0,
                 0.9,
-                1.3,
+                1,
               ],
               colors: [
-                Colors.white,
-                Colors.lightGreen.shade600,
-                Theme.of(context).colorScheme.primary,
+                Theme.of(context).canvasColor,
+                Colors.lightGreen.shade800,
+                Theme.of(context).colorScheme.primary
               ])
       ),
     );

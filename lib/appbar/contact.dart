@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/appbar_widget.dart';
 import '../widgets/background_widget.dart';
 
 class Contact extends StatelessWidget {
@@ -8,9 +9,7 @@ class Contact extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Kontakt'),
-      ),
+      appBar: CustomMainAppBar(pageTitle: 'Kontakt',),
       body: Stack(
         children: const [
           CustomBackground(),

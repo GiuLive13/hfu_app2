@@ -6,7 +6,7 @@ class Entry {
   final String title;
   final String userContact;
   final String description;
- // final String imagePath;
+  final String imagePath;
  /* var categories = <int, String> { Kategorien
     1: 'Dienstleistung',
     2: 'Wohnung/ Zimmer',
@@ -20,7 +20,7 @@ class Entry {
     required this.title,
     required this.userContact,
     required this.description,
-    //required this.imagePath,
+    required this.imagePath,
     //this.uploadTime = FieldValue.serverTimestamp(),
   });
 
@@ -30,7 +30,7 @@ class Entry {
         'title': title,
         'userContact': userContact,
         'description': description,
-      //  'imagePath' : imagePath,
+        'imagePath' : imagePath,
         //'uploadTime' : uploadTime,
       };
 
@@ -40,7 +40,7 @@ class Entry {
         title: json['title'],
         userContact: json['userContact'],
         description: json['description'],
-     //   imagePath: json['imagePath'],
+        imagePath: json['imagePath'],
         // uploadTime: json['uploadtimestamp']
       );
 
@@ -51,7 +51,7 @@ class Entry {
         title: snapshot['title'],
         userContact: snapshot['userContact'],
         description: snapshot['description'],
-       // imagePath: snapshot['imagePath'],
+        imagePath: snapshot['imagePath'],
     );
   }
 }

@@ -36,7 +36,7 @@ class SettingsPage extends StatelessWidget {
             ),
             SettingsGroup(
                 title: 'Account',
-               // titleTextStyle: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w800),
+                // titleTextStyle: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w800),
                 children: <Widget>[
                   buildLogIn(context),
                   buildLogOut(context),
@@ -66,7 +66,6 @@ class SettingsPage extends StatelessWidget {
         settingKey: keyDarkMode,
         leading: const FaIcon(
           FontAwesomeIcons.solidMoon,
-          color: Colors.grey,
         ),
         onChange: (_) {},
       );

@@ -1,9 +1,11 @@
+import 'package:hfu_app2/websites/web_view.dart';
 import 'package:hfu_app2/widgets/background_widget.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import '../websites/hfu_website_news.dart';
+import '../widgets/appbar_widget.dart';
 
 class News extends StatefulWidget {
   const News({Key? key}) : super(key: key);
@@ -64,9 +66,7 @@ class _NewsState extends State<News> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Aktuelles'),
-      ),
+      appBar: CustomMainAppBar(pageTitle: 'Aktuelles',),
       body: Stack(
         children: [
           const CustomBackground(),
@@ -100,7 +100,7 @@ class _NewsState extends State<News> {
                         IconButton(
                             onPressed: () =>
                             //  _openDetails,
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteNews(newsArticle.url))),
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: '',))),
                             icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)
                         ),
                       ]

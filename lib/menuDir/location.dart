@@ -1,17 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hfu_app2/pdf_viewer.dart';
+import 'package:hfu_app2/pdfView/pdf_view.dart';
+import 'package:hfu_app2/pdfView/pdf_viewer.dart';
 
-import 'package:hfu_app2/pdfView/campus_furtwangen.dart';
-import 'package:hfu_app2/pdfView/campus_tuttlingen.dart';
-import 'package:hfu_app2/pdfView/campus_vs_schwenningen.dart';
-import 'package:hfu_app2/websites/mensa_furtwangen.dart';
-import 'package:hfu_app2/websites/mensa_schwenningen.dart';
-import 'package:hfu_app2/widgets/background_widget.dart';
-
-import '../pdfView/sz_freiburg.dart';
-import '../pdfView/sz_rottweil.dart';
+import 'package:hfu_app2/websites/web_view.dart';
+import '../widgets/appbar_widget.dart';
 
 
 class Locations extends StatefulWidget {
@@ -26,12 +20,10 @@ class _LocationsState extends State<Locations> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Standorte'),
-      ),
+      appBar: CustomMainAppBar(pageTitle: 'Standorte',),
       body: Stack(
         children: [
-          const CustomBackground(),
+        //  const CustomBackground(),
           ListView(
             scrollDirection: Axis.vertical,
             children: [
@@ -46,7 +38,7 @@ class _LocationsState extends State<Locations> {
                             Row(
                               children: const [
                                 SizedBox(
-                                  width: 8, height: 25,
+                                  width: 8, height: 30,
                                 ),
                                 Text(
                                   'Furtwangen',
@@ -86,7 +78,7 @@ class _LocationsState extends State<Locations> {
                                     onPressed: () => Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => const MensaFurtwangen())),
+                                            builder: (context) => WebsiteView(initialUrl: 'https://www.swfr.de/essen-trinken/speiseplaene/mensa-furtwangen/'))),
                                     child: const Text('Essensplan der Woche', style: TextStyle(fontSize: 16)),
                                   ),
                                 ],),
@@ -108,7 +100,7 @@ class _LocationsState extends State<Locations> {
                                           await PDFViewer.loadFirebase(url);
 
                                           if (file == null) return;
-                                          fuwaPDF(context, file);
+                                          documentView(context, file);
                                         },
                                         child: const Text(
                                           'Campusplan Furtwangen',
@@ -120,7 +112,7 @@ class _LocationsState extends State<Locations> {
                                 ),
                               ],
                             ),
-                            const Divider(color: Colors.black, thickness: 1, indent: 25, endIndent: 25,),
+                            const Divider(thickness: 1, indent: 25, endIndent: 25,),
                           ],
                         ),
                       ),
@@ -129,7 +121,7 @@ class _LocationsState extends State<Locations> {
                           Row(
                             children: const [
                               SizedBox(
-                                width: 8, height: 20,
+                                width: 8, height: 30,
                               ),
                               Text(
                                 'Tuttlingen',
@@ -179,7 +171,7 @@ class _LocationsState extends State<Locations> {
                                         await PDFViewer.loadFirebase(url);
 
                                         if (file == null) return;
-                                        tutPDF(context, file);
+                                        documentView(context, file);
                                       },
                                       child: const Text(
                                         'Campusplan Tuttlingen',
@@ -190,7 +182,7 @@ class _LocationsState extends State<Locations> {
                               ),
                             ],
                           ),
-                          const Divider(color: Colors.black, thickness: 1, indent: 25, endIndent: 25,),
+                          const Divider(thickness: 1, indent: 25, endIndent: 25,),
                         ],
                       ),
                       Column(
@@ -198,7 +190,7 @@ class _LocationsState extends State<Locations> {
                           Row(
                             children: const [
                               SizedBox(
-                                width: 8, height: 20,
+                                width: 8, height: 30,
                               ),
                               Text(
                                 'VS-Schwenningen',
@@ -237,7 +229,7 @@ class _LocationsState extends State<Locations> {
                                   onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const MensaSchwenningen())),
+                                          builder: (context) => WebsiteView(initialUrl: 'https://www.swfr.de/essen-trinken/speiseplaene/mensa-schwenningen/'))),
                                   child: const Text('Essensplan der Woche', style: TextStyle(fontSize: 16)),
                                 ),
                               ],
@@ -262,7 +254,7 @@ class _LocationsState extends State<Locations> {
                                     await PDFViewer.loadFirebase(url);
 
                                     if (file == null) return;
-                                    vsPDF(context, file);
+                                    documentView(context, file);
                                   },
                                   child: const Text(
                                     'Campusplan VS-Schwenningen',
@@ -273,7 +265,7 @@ class _LocationsState extends State<Locations> {
                           ),
                         ],
                       ),
-                      const Divider(color: Colors.black, thickness: 1, indent: 25, endIndent: 25,),
+                      const Divider(thickness: 1, indent: 25, endIndent: 25,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -293,7 +285,7 @@ class _LocationsState extends State<Locations> {
                                 await PDFViewer.loadFirebase(url);
 
                                 if (file == null) return;
-                                rwPDF(context, file);
+                                documentView(context, file);
                               },
                               child: const Text(
                                 'Studienzentrum Rottweil',
@@ -321,7 +313,7 @@ class _LocationsState extends State<Locations> {
                                 await PDFViewer.loadFirebase(url);
 
                                 if (file == null) return;
-                                frPDF(context, file);
+                                documentView(context, file);
                               },
                               child: const Text(
                                 'Studienzentrum Freiburg',
@@ -337,34 +329,9 @@ class _LocationsState extends State<Locations> {
       ),
     );
   }
-
-  void fuwaPDF(BuildContext context, File file) {
+  void documentView(BuildContext context, File file) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => CampusFurtwangen(file: file)),
-    );
-  }
-
-  void tutPDF(BuildContext context, File file) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => CampusTuttlingen(file: file)),
-    );
-  }
-
-  void vsPDF(BuildContext context, File file) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => CampusSchwenningen(file: file)),
-    );
-  }
-
-  void rwPDF(BuildContext context, File file) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => SZRottweil(file: file)),
-    );
-  }
-
-  void frPDF(BuildContext context, File file) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => SZFreiburg(file: file)),
+      MaterialPageRoute(builder: (context) => DocumentViewer(file: file)),
     );
   }
 }

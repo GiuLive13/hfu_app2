@@ -3,27 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path/path.dart';
 
-class CampusFurtwangen extends StatefulWidget {
+import '../widgets/appbar_widget.dart';
+
+class DocumentViewer extends StatefulWidget {
   final File file;
 
-  const CampusFurtwangen({
+  const DocumentViewer({
     Key? key,
     required this.file,
   }) : super(key: key);
 
   @override
-  _CampusFurtwangenState createState() => _CampusFurtwangenState();
+  _DocumentViewerState createState() => _DocumentViewerState();
 }
 
-class _CampusFurtwangenState extends State<CampusFurtwangen> {
+class _DocumentViewerState extends State<DocumentViewer> {
   @override
   Widget build(BuildContext context) {
     final name = basename(widget.file.path);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(name),
-      ),
+      appBar: CustomMainAppBar(pageTitle: name,),
       body: PDFView(
         filePath: widget.file.path,
       ),

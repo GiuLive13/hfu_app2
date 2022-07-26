@@ -9,12 +9,11 @@ class Users {
 
   Map<String, dynamic> toJson() => {
     'email': email,
-    'imagepath': imagePath,
-
+    'imagePath': imagePath,
   };
 
   static Users fromJson(Map<String, dynamic> json) => Users(
     email: json['email'],
-    imagePath: json['imagepath'],
+    imagePath: json['imagePath'],
   );
 }

@@ -48,6 +48,7 @@ dependencies:
   # User Interaction
   image_picker: ^0.8.5+3
   open_file:
+  cached_network_image: ^3.2.1
 
   # Media Download
   dio: ^4.0.6
@@ -59,12 +60,14 @@ dependencies:
   new_gradient_app_bar: ^0.2.0
   flutter_native_splash: ^2.2.1
   curved_navigation_bar: ^1.0.3
+  auto_size_text: ^3.0.0
 
   # Web
   webview_flutter: ^3.0.2
   http: ^0.13.4
   html: ^0.15.0
   flutter_pdfview: ^1.2.2
+  url_launcher: ^6.1.5
 
   # Path
   file_picker: ^4.6.1

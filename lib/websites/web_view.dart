@@ -1,20 +1,26 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'dart:io';
 
-class MensaFurtwangen extends StatefulWidget {
-  const MensaFurtwangen({Key? key}) : super(key: key);
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter/material.dart';
+
+
+class WebsiteView extends StatefulWidget {
+  WebsiteView({Key? key, required this.initialUrl}) : super(key: key);
+
+  String initialUrl;
 
   @override
-  _MensaFurtwangenState createState() => _MensaFurtwangenState();
+  _WebsiteViewState createState() => _WebsiteViewState();
 }
 
-class _MensaFurtwangenState extends State<MensaFurtwangen> {
+class _WebsiteViewState extends State<WebsiteView> {
   final Completer<WebViewController> _webController = Completer<WebViewController>();
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
   @override
@@ -22,8 +28,10 @@ class _MensaFurtwangenState extends State<MensaFurtwangen> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         body: Container(
-          decoration: const BoxDecoration(color: Colors.white),
-          padding: const EdgeInsets.only(top: 25),
+          decoration: const BoxDecoration(
+              color: Colors.white
+          ),
+          padding: const EdgeInsets.only(top:25),
           child: WebView(
               navigationDelegate: (NavigationRequest request) {
                 if (request.url.endsWith('.pdf')) {
@@ -31,11 +39,13 @@ class _MensaFurtwangenState extends State<MensaFurtwangen> {
                 }
                 return NavigationDecision.navigate;
               },
-              initialUrl: 'https://www.swfr.de/essen-trinken/speiseplaene/mensa-furtwangen/',
+              initialUrl: widget.initialUrl,
               javascriptMode: JavascriptMode.unrestricted,
               onWebViewCreated: (WebViewController webViewController) {
                 _webController.complete(webViewController);
-              }),
-        ));
+              }
+          ),
+        )
+    );
   }
 }

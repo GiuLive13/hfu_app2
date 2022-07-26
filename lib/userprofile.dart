@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,7 +13,6 @@ import 'package:hfu_app2/marketplace/entry.dart';
 import 'package:hfu_app2/userController/userprofile_preferences.dart';
 import 'package:hfu_app2/userController/utils.dart';
 import 'package:hfu_app2/widgets/background_widget.dart';
-import 'package:path_provider/path_provider.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -33,8 +34,9 @@ class _UserProfileState extends State<UserProfile> {
     // userStatus = UserProfilePreferences.getUserStatus() ?? [];
     notes = UserProfilePreferences.getNotes() ?? '';
   }
-  final userMail = FirebaseAuth.instance.currentUser?.email;
-  final userID = FirebaseAuth.instance.currentUser?.uid;
+
+  final user = FirebaseAuth.instance.currentUser;
+  String? _userImageUrl = FirebaseAuth.instance.currentUser?.photoURL;
   PlatformFile? selectedFile;
   UploadTask? uploadTask;
 
@@ -45,27 +47,30 @@ class _UserProfileState extends State<UserProfile> {
     setState(() {
       selectedFile = result.files.first;
     });
+
+    uploadFile();
   }
 
   Future<String> uploadFile() async {
-    final path = 'userFiles/profileImages/$userID/profilepicture';
+    final path = 'userFiles/profileImages/${user?.uid}/profilepicture';
     final chosenFile = File(selectedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
     var uploadTask = ref.putFile(chosenFile);
     var completedTask = await uploadTask;
     String downloadUrl = await completedTask.ref.getDownloadURL();
+
+    setState(() => _userImageUrl = downloadUrl);
+
     return downloadUrl;
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
-
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: Stack(children: [
-        const CustomBackground(),
+        // const CustomBackground(),
         Column(
           children: <Widget>[
             Row(
@@ -74,30 +79,26 @@ class _UserProfileState extends State<UserProfile> {
                 SizedBox(height: 50),
                 Text(
                   'Willkommen auf deinem Profil,',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-            Text(
-              user.email! + '!',
-              style: const TextStyle(
-                  fontSize: 24,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
+            AutoSizeText(
+              user!.email! + '!',
+              minFontSize: 20,
+              style: const TextStyle(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            Text(userID!, style: const TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: 10
-            ),
+            Text(
+              user!.uid,
+              style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
             ),
             const SizedBox(
               height: 20,
             ),
-            SizedBox(height: 90, width: 90,
+            SizedBox(
+              height: 90,
+              width: 90,
               child: Stack(children: [
                 InkWell(
                   onTap: chooseFile,
@@ -105,14 +106,16 @@ class _UserProfileState extends State<UserProfile> {
                     child: Container(
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(20)
-                      ),
+                          color: Colors.green.shade800,
+                          borderRadius: BorderRadius.circular(20)),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(18),
-                        child: (selectedFile != null)
-                            ? Image.file(
-                                File(selectedFile!.path!),
+                        child: _userImageUrl != null
+                            ? CachedNetworkImage(
+                                imageUrl: _userImageUrl!,
+                                placeholder:(context, url) => const CircularProgressIndicator(),
+                                width: 100,
+                                height: 100,
                                 fit: BoxFit.fill,
                               )
                             : const Icon(
@@ -120,13 +123,17 @@ class _UserProfileState extends State<UserProfile> {
                                 color: Colors.white,
                                 size: 80,
                               ),
-                      ), /// Update Query & referenzieren auf Firestorage
+                      ),
+
+                      /// Update Query & referenzieren auf Firestorage
                     ),
                   ),
                 ),
               ]),
             ),
-            const SizedBox(height: 5,),
+            const SizedBox(
+              height: 5,
+            ),
             /* DropdownButton<String>(
                   value: dropdownValue,
                   hint: const Text('Status'),
@@ -152,23 +159,12 @@ class _UserProfileState extends State<UserProfile> {
               child: Container(
                 height: double.infinity,
                 decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
-                    ),
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        stops: const [
-                          0.5,
-                          0.9,
-                          1.3,
-                        ],
-                        colors: [
-                          Colors.green.shade200,
-                          Colors.lightGreen.shade600,
-                          Colors.green.shade900,
-                        ])),
+                  color: Theme.of(context).hintColor.withRed(600),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
+                  ),
+                ),
                 child: Stack(children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -182,27 +178,23 @@ class _UserProfileState extends State<UserProfile> {
                           padding: const EdgeInsets.only(left: 25, top: 5),
                           child: const Icon(
                             Icons.add_shopping_cart,
-                            color: Colors.black,
                             size: 30,
                           ),
                         ),
                       ),
                       Container(
                         height: 60,
-                        width: 220,
+                        width: 200,
                         decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(8)),
-                          color: Colors.white24,
+                          color: Colors.white38,
                         ),
                         child: TextFormField(
                           maxLines: 10,
                           initialValue: notes,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: "Notizen",
-                            hintStyle: TextStyle(
-                                color: Colors.blueGrey.shade400, fontSize: 13),
+                            hintStyle:
+                                TextStyle(color: Colors.black, fontSize: 8),
                           ),
                           onChanged: (notes) =>
                               setState(() => this.notes = notes),
@@ -228,18 +220,21 @@ class _UserProfileState extends State<UserProfile> {
                       children: [
                         Container(
                           margin: const EdgeInsets.all(5),
-                          decoration:  BoxDecoration(
-                            color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.circular(12)
-                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.green.shade800,
+                              borderRadius: BorderRadius.circular(12)),
                           child: IconButton(
-                              onPressed: () async {
-                                //  await UserProfilePreferences.setUserStatus(userStatus);
-                                await UserProfilePreferences.setNotes(notes);
-                                uploadFile();
-                                FocusScope.of(context).unfocus(); /// Keyboard pop
-                              },
-                              icon: const FaIcon(FontAwesomeIcons.floppyDisk, size: 30, color: Colors.white,),
+                            onPressed: () async {
+                              await UserProfilePreferences.setNotes(notes);
+                              FocusScope.of(context).unfocus();
+
+                              /// Keyboard pop
+                            },
+                            icon: const FaIcon(
+                              FontAwesomeIcons.floppyDisk,
+                              color: Colors.white,
+                              size: 30,
+                            ),
                           ),
                         ),
                       ],
@@ -255,8 +250,7 @@ class _UserProfileState extends State<UserProfile> {
                           style: TextStyle(
                               decoration: TextDecoration.underline,
                               fontSize: 22,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w900),
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -265,23 +259,26 @@ class _UserProfileState extends State<UserProfile> {
                     padding: const EdgeInsets.only(top: 180, left: 8),
                     child: Column(
                       children: [
-                       StreamBuilder <QuerySnapshot<Map<String, dynamic>>>(
-                         stream: readUserEntry(user),
-                           builder: (context, snapshot) {
-                            if(snapshot.hasData) {
-                              final userEntries = snapshot.data!.docs;
+                        StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                            stream: readUserEntry(user!),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                final userEntries = snapshot.data!.docs;
 
-                              return SizedBox(
-                                height: 100,
-                                child: ListView(
-                                  children: userEntries.map((entry) => buildUserEntry(context, Entry.fromSnapshot(entry))).toList(),
-                                ),
-                              );
-                            } else {
-                              return const Center(child: CircularProgressIndicator());
-                            }
-                           }
-                       )
+                                return SizedBox(
+                                  height: 100,
+                                  child: ListView(
+                                    children: userEntries
+                                        .map((entry) => buildUserEntry(
+                                            context, Entry.fromSnapshot(entry)))
+                                        .toList(),
+                                  ),
+                                );
+                              } else {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                            })
                       ],
                     ),
                   )
@@ -294,25 +291,34 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 
- Stream<QuerySnapshot<Map<String, dynamic>>> readUserEntry(User user) => FirebaseFirestore.instance.collection('entries').where("userContact", isEqualTo: user.email).snapshots();
+  Stream<QuerySnapshot<Map<String, dynamic>>> readUserEntry(User user) =>
+      FirebaseFirestore.instance
+          .collection('entries')
+          .where("userContact", isEqualTo: user.email)
+          .snapshots();
 
- Widget buildUserEntry(BuildContext context, Entry entry) => Row(
-      children: [
-        const SizedBox(width: 25,),
-        Text(entry.title, style: const TextStyle(
-          fontStyle: FontStyle.italic,
-          fontSize: 18
-          ),
+  Widget buildUserEntry(BuildContext context, Entry entry) => Row(children: [
+        const SizedBox(
+          width: 25,
+        ),
+        Text(
+          entry.title,
+          style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
         ),
         IconButton(
-          onPressed: _deleteUserEntry,
-           icon: const FaIcon(FontAwesomeIcons.deleteLeft, color: Colors.red, size: 17,)
-        )
-      ] 
- );
+            onPressed: _deleteUserEntry,
+            icon: const FaIcon(
+              FontAwesomeIcons.deleteLeft,
+              color: Colors.red,
+              size: 17,
+            ))
+      ]);
 
-  Future <void> _deleteUserEntry() async {
-    FirebaseFirestore.instance.collection('entries').doc(FirebaseAuth.instance.currentUser!.email).delete();
+  Future<void> _deleteUserEntry() async {
+    FirebaseFirestore.instance
+        .collection('entries')
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .delete();
     Utils.showSnackBar('Eintrag gelöscht');
   }
 }

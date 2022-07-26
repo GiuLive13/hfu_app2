@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hfu_app2/websites/exams.dart';
-import 'package:hfu_app2/widgets/background_widget.dart';
+import 'package:hfu_app2/pdfView/pdf_view.dart';
+import 'package:hfu_app2/websites/web_view.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 
-import '../pdfView/semesterkalender.dart';
-import '../pdf_viewer.dart';
+import '../pdfView/pdf_viewer.dart';
+import '../widgets/appbar_widget.dart';
 
 class DatesAndDeadlines extends StatefulWidget {
   const DatesAndDeadlines({Key? key}) : super(key: key);
@@ -46,12 +46,12 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Termine und Fristen'),
+      appBar: CustomMainAppBar(
+        pageTitle: 'Termine und Fristen',
       ),
       body: Stack(
         children: [
-          const CustomBackground(),
+         // const CustomBackground(),
           Padding(
             padding: const EdgeInsets.all(6.0),
             child: Row(
@@ -64,7 +64,7 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                       final file = await PDFViewer.loadFirebase(url);
 
                       if (file == null) return;
-                      semCalPDF(context, file);
+                      documentView(context, file);
                     },
                     child: const Text(
                       'Kalenderübersicht',
@@ -77,7 +77,9 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                 TextButton(
                     onPressed: () =>
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const ExamsPlan())),
+                            MaterialPageRoute(builder: (context) => WebsiteView(
+                                initialUrl: 'https://www.hs-furtwangen.de/studium/studienablauf/pruefungsplaene/'))
+                        ),
                     child: const Text(
                       'Prüfungspläne',
                       style: TextStyle(
@@ -97,7 +99,7 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                   children: const [
                     SizedBox(width: 8, height: 40,),
                     Text('Semesterdaten', style: TextStyle(
-                      fontSize: 25,
+                        fontSize: 25,
                       fontWeight: FontWeight.w900,
                       decoration: TextDecoration.underline
 
@@ -122,13 +124,11 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     Text('Vorlesungen:', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                      color: Colors.black,
                       fontWeight: FontWeight.bold
                     ),),
                     Text('14.März - 01.Juli 2022', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                       fontWeight: FontWeight.bold
                     ),)
                   ],
@@ -139,13 +139,11 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     Text('Prüfungen:', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),),
                     Text('04.Juli - 22.Juli 2022', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),)
                   ],
@@ -156,18 +154,16 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     Text('Vorlesungsfrei:', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),),
                     Text('19.April & 07.-11.Juni 2022', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),)
                   ],
                 ),
-                const Divider(color: Colors.black, thickness: 1, indent: 55, endIndent: 55,),
+                const Divider( thickness: 1, indent: 55, endIndent: 55,),
                 Row(
                   children: const [
                     SizedBox(width: 5, height: 20,),
@@ -186,13 +182,11 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     Text('Vorlesungen:', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),),
                     Text('04.Okt. 22 - 27.Jan. 2023', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),)
                   ],
@@ -203,13 +197,11 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     Text('Prüfungen:', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),),
                     Text('30.Jan. - 15.Feb. 2023', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),)
                   ],
@@ -220,18 +212,16 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     Text('Vorlesungsfrei:', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),),
                     Text('23.Dez. 22 - 07.Jan. 2023', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),)
                   ],
                 ),
-                const Divider(color: Colors.black, thickness: 1, indent: 55, endIndent: 55,),
+                const Divider(thickness: 1, indent: 55, endIndent: 55,),
                 Row(
                   children: const [
                     SizedBox(width: 5, height: 20,),
@@ -250,13 +240,11 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     Text('Vorlesungen:', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),),
                     Text('13.März - 30.Juni 2023', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),)
                   ],
@@ -267,13 +255,11 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     Text('Prüfungen:', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),),
                     Text('03. - 21.Juli 2023', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),)
                   ],
@@ -284,29 +270,24 @@ class _DatesAndDeadlinesState extends State<DatesAndDeadlines> {
                     Text('Vorlesungsfrei:', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),),
                     Text('11. April & 30.Mai - 03.Juni 2023', style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold
                     ),)
                   ],
                 ),
               ],
             ),
-
           ),
-
-
         ],
       ),
     );
   }
-  void semCalPDF(BuildContext context, File file) {
+  void documentView(BuildContext context, File file) {
     Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => SemesterCalender(file: file)));
+        MaterialPageRoute(builder: (context) => DocumentViewer(file: file)));
   }
 }

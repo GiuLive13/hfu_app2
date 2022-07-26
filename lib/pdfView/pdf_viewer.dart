@@ -23,5 +23,4 @@ class PDFViewer {
     await file.writeAsBytes(bytes, flush: true);
     return file;
   }
-
 }

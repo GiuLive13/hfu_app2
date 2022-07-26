@@ -42,26 +42,16 @@ class HfuApp extends StatelessWidget {
           navigatorKey: navigatorKey,
           title: appName,
           theme: isDarkMode
-          ? ThemeData.dark().copyWith(
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.white
-            ),
+          ? ThemeData(
+            colorSchemeSeed: Colors.green.shade800,
             brightness: Brightness.dark,
-            iconTheme: const IconThemeData(
-              color: Colors.black
-            ),
+            useMaterial3: true,
 
-            colorScheme: ThemeData().colorScheme.copyWith(
-                primary: Colors.black,
-              secondary: Colors.lightGreen,
-            )
           )
-          : ThemeData.light().copyWith(
+          : ThemeData(
+            colorSchemeSeed: Colors.green.shade800,
             brightness: Brightness.light,
-            colorScheme: ThemeData().colorScheme.copyWith(
-              primary: Colors.green.shade800,
-              secondary: Colors.green.shade900
-            )
+            useMaterial3: true,
           ),
           home: FutureBuilder(
               future: _fbApp,
@@ -110,14 +100,14 @@ class _HomeScreen extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: const CustomMainAppBar(),
+      appBar: CustomMainAppBar(pageTitle: 'HFU Mobile', ),
       body: Center(
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: CurvedNavigationBar(
         height: 55,
         backgroundColor: Colors.transparent,
-        color: Colors.white70,
+        color: Theme.of(context).colorScheme.background.withAlpha(200),
         items: const [
           Icon(Icons.account_circle_rounded, size: 30,),
           Icon(Icons.weekend, size: 30,),
