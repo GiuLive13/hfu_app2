@@ -17,7 +17,7 @@ List<Faculty> faculties = [
   Faculty(
       'Industrial Technologies',
       'https://www.hs-furtwangen.de/fakultaeten/industrial-technologies/',
-      'assets/images/Logo_HFU_transparent.png'),
+      'assets/images/ite.png'),
   Faculty('Informatik', 'https://www.hs-furtwangen.de/fakultaeten/informatik/',
       'assets/images/in.png'),
   Faculty(

@@ -3,15 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hfu_app2/userController/auth_page.dart';
 import 'package:hfu_app2/userController/login.dart';
 
 import '../userController/new_password.dart';
 import '../userController/utils.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+   const SettingsPage({Key? key}) : super(key: key);
   static const keyDarkMode = 'key-dark-mode';
   static const keyLanguage = 'key-language';
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,7 @@ class SettingsPage extends StatelessWidget {
         onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => LoginWidget(clickSignIn: () {}))),
+                builder: (context) => const AuthPage())),
       );
 
   Widget buildLogOut(BuildContext context) => SimpleSettingsTile(

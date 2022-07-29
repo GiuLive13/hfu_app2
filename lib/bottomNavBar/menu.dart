@@ -301,7 +301,10 @@ class _MenuState extends State<Menu> {
             ),
             InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Event())),
+                  MaterialPageRoute(builder: (context) =>
+                      WebsiteView(initialUrl: 'https://www.hs-furtwangen.de/veranstaltungen/?tx_solr%5Bfilter%5D%5B0%5D=publishedBy%3ApressOffice'))),
+                  //const Event())),
+
               child: Card(
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(

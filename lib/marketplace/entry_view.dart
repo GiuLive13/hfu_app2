@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hfu_app2/marketplace/entry.dart';
@@ -36,7 +37,35 @@ class EntryView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListTile(
-                      leading: const Icon(Icons.account_circle, size: 32),
+                      leading: Container(
+                          padding: const EdgeInsets.all(1),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primary,
+                              borderRadius: BorderRadius.circular(23),
+                              border: Border.all(
+                                color: Theme.of(context).colorScheme.primary,
+                              )),
+                          child: FutureBuilder(
+                            future: getUserProfileImagePath(entry),
+                            builder:
+                                (BuildContext context, AsyncSnapshot<String> snapshot) {
+                              if (snapshot.hasError) {
+                                return Center(
+                                    child: Text(
+                                        'Die Profilbilder konnten nicht geladen werden. ${snapshot.error}'));
+                              } else if (snapshot.hasData) {
+                                return CircleAvatar(
+                                    radius: 22,
+                                    backgroundColor: Colors.transparent,
+                                    backgroundImage: CachedNetworkImageProvider(
+                                      snapshot.data ?? '',
+                                    )
+                                );
+                              } else {
+                                return const Center(child: CircularProgressIndicator());
+                              }
+                            },
+                          )),
                       title: Text(
                         entry.title,
                         style: const TextStyle(
@@ -63,7 +92,6 @@ class EntryView extends StatelessWidget {
                             )
                         ) : const Center(child: CircularProgressIndicator());
                       },
-
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top:15, left: 15, right: 15, bottom: 5),

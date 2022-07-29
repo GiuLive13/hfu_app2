@@ -12,7 +12,6 @@ import 'package:hfu_app2/marketplace/add_entry.dart';
 import 'package:hfu_app2/marketplace/entry.dart';
 import 'package:hfu_app2/userController/userprofile_preferences.dart';
 import 'package:hfu_app2/userController/utils.dart';
-import 'package:hfu_app2/widgets/background_widget.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -49,6 +48,8 @@ class _UserProfileState extends State<UserProfile> {
     });
 
     uploadFile();
+    var uf = await uploadFile();
+    await user?.updatePhotoURL(uf);
   }
 
   Future<String> uploadFile() async {
@@ -91,7 +92,7 @@ class _UserProfileState extends State<UserProfile> {
             ),
             Text(
               user!.uid,
-              style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
+              style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 9),
             ),
             const SizedBox(
               height: 20,
@@ -113,7 +114,7 @@ class _UserProfileState extends State<UserProfile> {
                         child: _userImageUrl != null
                             ? CachedNetworkImage(
                                 imageUrl: _userImageUrl!,
-                                placeholder:(context, url) => const CircularProgressIndicator(),
+                                placeholder:(context, url) => const CircularProgressIndicator(color: Colors.white, strokeWidth: 1,),
                                 width: 100,
                                 height: 100,
                                 fit: BoxFit.fill,
@@ -124,8 +125,6 @@ class _UserProfileState extends State<UserProfile> {
                                 size: 80,
                               ),
                       ),
-
-                      /// Update Query & referenzieren auf Firestorage
                     ),
                   ),
                 ),
@@ -194,7 +193,7 @@ class _UserProfileState extends State<UserProfile> {
                           decoration: const InputDecoration(
                             hintText: "Notizen",
                             hintStyle:
-                                TextStyle(color: Colors.black, fontSize: 8),
+                                TextStyle(color: Colors.black, fontSize: 10),
                           ),
                           onChanged: (notes) =>
                               setState(() => this.notes = notes),
@@ -219,7 +218,7 @@ class _UserProfileState extends State<UserProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: const EdgeInsets.all(5),
+                          margin: const EdgeInsets.all(15),
                           decoration: BoxDecoration(
                               color: Colors.green.shade800,
                               borderRadius: BorderRadius.circular(12)),
@@ -256,7 +255,7 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 180, left: 8),
+                    padding: const EdgeInsets.only(top: 180, left: 40, right: 40),
                     child: Column(
                       children: [
                         StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -265,8 +264,11 @@ class _UserProfileState extends State<UserProfile> {
                               if (snapshot.hasData) {
                                 final userEntries = snapshot.data!.docs;
 
-                                return SizedBox(
-                                  height: 100,
+                                return Container(
+                                  height: 50,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white38,
+                                  ),
                                   child: ListView(
                                     children: userEntries
                                         .map((entry) => buildUserEntry(
@@ -297,10 +299,9 @@ class _UserProfileState extends State<UserProfile> {
           .where("userContact", isEqualTo: user.email)
           .snapshots();
 
-  Widget buildUserEntry(BuildContext context, Entry entry) => Row(children: [
-        const SizedBox(
-          width: 25,
-        ),
+  Widget buildUserEntry(BuildContext context, Entry entry) => Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+      children: [
         Text(
           entry.title,
           style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
@@ -314,11 +315,31 @@ class _UserProfileState extends State<UserProfile> {
             ))
       ]);
 
+
+
   Future<void> _deleteUserEntry() async {
-    FirebaseFirestore.instance
-        .collection('entries')
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .delete();
-    Utils.showSnackBar('Eintrag gelöscht');
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Inserat wirklich entfernen?'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  FirebaseFirestore.instance
+                      .collection('entries')
+                      .doc(FirebaseAuth.instance.currentUser!.email)
+                      .delete();
+                  Navigator.of(context).pop();
+                  Utils.showSnackBar('Eintrag gelöscht');
+                },
+                child: const Text('Ja', style: TextStyle(fontSize: 24),
+                )),
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Nein', style: TextStyle(fontSize: 24),
+                )),
+          ],
+        )
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hfu_app2/menuDir/marketplace.dart';
 
 import '../widgets/appbar_widget.dart';
 import 'entry.dart';
@@ -35,7 +36,7 @@ class AddEntry extends StatefulWidget {
     }
 
     Future<String> uploadFile() async {
-      final path = 'userFiles/entryFiles/$userID/${selectedFile!.name}';
+      final path = 'userFiles/entryFiles/$userID/${selectedFile?.name}';
       final chosenFile = File(selectedFile!.path!);
 
       final ref = FirebaseStorage.instance.ref().child(path);
@@ -135,6 +136,7 @@ class AddEntry extends StatefulWidget {
                   );
                   createEntry(entry);
                   Navigator.pop(context);
+                 // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Marketplace())).then((value) => { setState((){})});
                   uploadFile();
                 },
                 icon: const FaIcon(Icons.add, size: 25),

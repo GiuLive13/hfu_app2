@@ -68,8 +68,8 @@ class _EventState extends State<Event> {
           const CustomBackground(),
             GridView.builder(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  childAspectRatio: 3/2,
+                  maxCrossAxisExtent: 150,
+                  childAspectRatio: 5/3,
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20
               ),
@@ -80,7 +80,6 @@ class _EventState extends State<Event> {
 
                 return InkWell(
                   onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetail()));
                     Navigator.push(context, MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: 'https://www.hs-furtwangen.de/veranstaltungen/?tx_solr%5Bfilter%5D%5B0%5D=publishedBy%3ApressOffice')));
                   },
                   child: SizedBox(

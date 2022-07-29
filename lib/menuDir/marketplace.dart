@@ -49,10 +49,8 @@ class _MarketplaceState extends State<Marketplace> {
                           child:
                               Text('Something went wrong! ${snapshot.error}'));
                     } else if (snapshot.hasData) {
-                      final entries = snapshot.data!;
-
                       return ListView(
-                        children: entries
+                        children: snapshot.data!
                             .map((entry) => buildEntry(context, entry))
                             .toList(),
                       );
@@ -83,83 +81,95 @@ Future<String> getImagePath(Entry entry) async {
   return url;
 }
 
-Widget buildEntry(BuildContext context, Entry entry) => Center(
-      child: Card(
-        /// HERO TAG
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(40),
-            side: const BorderSide(
-              color: Colors.green,
-            )),
-        margin: const EdgeInsets.only(top: 5, left: 10, right: 10, bottom: 5),
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ListTile(
-              leading: Container(
-                  padding: const EdgeInsets.all(1),
-                  decoration: BoxDecoration(
+Widget buildEntry(BuildContext context, Entry entry) => Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40),
+          side: const BorderSide(
+            color: Colors.green,
+          )),
+      margin: const EdgeInsets.only(top: 5, left: 10, right: 10, bottom: 5),
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            leading: Container(
+                padding: const EdgeInsets.all(1),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
+                    borderRadius: BorderRadius.circular(23),
+                    border: Border.all(
                       color: Theme.of(context).colorScheme.primary,
-                      borderRadius: BorderRadius.circular(23),
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.primary,
-                      )),
-                  child: FutureBuilder(
-                    future: getUserProfileImagePath(entry),
-                    builder:
-                        (BuildContext context, AsyncSnapshot<String> snapshot) {
-                      return snapshot.hasData
-                          ? CircleAvatar(
-                              radius: 18,
-                              backgroundColor: Colors.transparent,
-                              backgroundImage: CachedNetworkImageProvider(
-                                snapshot.data ?? '',
-                              ))
-                          : const Center(child: CircularProgressIndicator());
-                    },
-                  )),
-              title: Text(
-                entry.title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              subtitle: Text(entry.userContact),
-            ),
-            const SizedBox(
-              width: 30,
-            ),
-            FutureBuilder(
-              future: getImagePath(entry),
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                return snapshot.hasData
-                    ? Container(
-                        height: 100,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(snapshot.data),
-                                fit: BoxFit.fitHeight)))
-                    : const Center(child: CircularProgressIndicator());
-              },
-            ),
-            ButtonBar(
-              alignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                    onPressed: () => _clickEntry(context, entry),
-                    child: const Text(
-                      "Eintrag anschauen",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
                     )),
-              ],
-            )
-          ],
-        ),
+                child: FutureBuilder(
+                  future: getUserProfileImagePath(entry),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(
+                          child: Text(
+                              'Die Profilbilder konnten nicht geladen werden. ${snapshot.error}'));
+                    } else if (snapshot.hasData) {
+                      return CircleAvatar(
+                          radius: 18,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: CachedNetworkImageProvider(
+                            snapshot.data ?? '',
+                          )
+                      );
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                )),
+            title: Text(
+              entry.title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: Text(entry.userContact),
+          ),
+          const SizedBox(
+            width: 30,
+          ),
+          FutureBuilder(
+            future: getImagePath(entry),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                    child: Text(
+                        'Die Inseratbilder konnten nicht geladen werden. ${snapshot.error}', style: const TextStyle(
+                      fontSize: 8, color: Colors.red
+                    ),));
+              } else if (snapshot.hasData) {
+                return Container(
+                    height: 130,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(snapshot.data),
+                            fit: BoxFit.fitHeight)));
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+          ButtonBar(
+            alignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                  onPressed: () => _clickEntry(context, entry),
+                  child: const Text(
+                    "Eintrag anschauen",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  )),
+            ],
+          )
+        ],
       ),
     );
 
