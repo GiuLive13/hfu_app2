@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -28,9 +29,9 @@ class _NewPasswordState extends State<NewPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Passwort zurücksetzen",
+          backgroundColor: Colors.green.shade800,
+          title: const AutoSizeText("Passwort zurücksetzen",
             style: TextStyle(
-                color: Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.w800
             ),

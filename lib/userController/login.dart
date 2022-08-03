@@ -55,7 +55,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             key: formKey,
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 50),
+                const SizedBox(height: 45),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(

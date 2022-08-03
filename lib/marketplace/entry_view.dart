@@ -16,13 +16,12 @@ class EntryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomMainAppBar(
-          pageTitle: entry.title,
+          pageTitle: 'Marktplatz',
         ),
         body: Stack(
           children: [
             const CustomBackground(),
             SizedBox(
-              /// HERO TAG
               height: 540,
               child: Card(
                 elevation: 5,

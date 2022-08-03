@@ -99,8 +99,7 @@ class _NewsState extends State<News> {
                       children: [
                         IconButton(
                             onPressed: () =>
-                            //  _openDetails,
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => WebsiteView(initialUrl: '',))),
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HfuWebsiteNews(newsArticle.url))),
                             icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)
                         ),
                       ]

@@ -117,7 +117,7 @@ class _UserProfileState extends State<UserProfile> {
                                 placeholder:(context, url) => const CircularProgressIndicator(color: Colors.white, strokeWidth: 1,),
                                 width: 100,
                                 height: 100,
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : const Icon(
                                 Icons.account_circle,
@@ -133,6 +133,8 @@ class _UserProfileState extends State<UserProfile> {
             const SizedBox(
               height: 5,
             ),
+            /// Option für ein Dropdownmenu, welchen Status man hinsichtlich zur HFU hat.
+            /// SharedPreferences-Methode
             /* DropdownButton<String>(
                   value: dropdownValue,
                   hint: const Text('Status'),
@@ -182,7 +184,7 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                       ),
                       Container(
-                        height: 60,
+                        height: 70,
                         width: 200,
                         decoration: const BoxDecoration(
                           color: Colors.white38,

@@ -58,7 +58,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 key: formKey,
                 child: Column(
                   children: <Widget>[
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 45),
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: const BoxDecoration(
@@ -95,7 +95,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         decoration: InputDecoration(
                             hintText: "Passwort",
                             hintStyle: TextStyle(
-                                color: Colors.blueGrey.shade200),
+                                color: Colors.blueGrey.shade400),
                             border: InputBorder.none,
                             suffixIcon: GestureDetector(
                               onTap: () {
